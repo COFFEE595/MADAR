@@ -162,6 +162,20 @@
             color: var(--header-color);
             letter-spacing: 2px;
         }
+        .main-title .glow-icon {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gold-accent);
+            text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        .main-title .glow-icon:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
+        }
         .subtitle {
             text-align: center;
             color: var(--text-secondary);
@@ -308,7 +322,7 @@
             opacity: 0.8;
             transform: scale(1.05);
         }
-        .glow-icon {
+        .footer-note .glow-icon {
             display: inline-block;
             cursor: pointer;
             font-size: 1.2rem;
@@ -318,7 +332,7 @@
             vertical-align: middle;
             margin: 0 4px;
         }
-        .glow-icon:hover {
+        .footer-note .glow-icon:hover {
             transform: scale(1.1);
             text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
         }
@@ -344,7 +358,7 @@
         </div>
 
         <div class="main-title">
-            <h1>منصة اختبارات</h1>
+            <h1><span class="glow-icon" onclick="showCacheInfo()" title="تحديثات المنصة">ⓘ</span> منصة اختبارات</h1>
         </div>
         <div class="subtitle">الفرقة الأولى · حقوق المنصورة</div>
         <div class="date-info">أسئلة واختبارات للترم الثاني · مايو - يونيو 2026</div>
@@ -415,6 +429,7 @@
         </div>
 
         <div class="footer-note">
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/13 - 7:33 م</div>
             <span>⭐</span> أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
@@ -426,6 +441,10 @@
 </div>
 
 <script>
+    function showCacheInfo() {
+        alert("ننصحك بمسح البيانات المؤقتة للمتصفح الخاص بك بشكل دوري لضمان رؤية آخر التحديثات على المنصة.");
+    }
+
     function showInfo() {
         alert("في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.\n\nونود التوضيح أن المصدر الأصلي للأسئلة هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.");
     }
@@ -476,4 +495,4 @@
     });
 </script>
 </body>
-</html>
+    </html>
