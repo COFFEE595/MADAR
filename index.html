@@ -197,110 +197,35 @@
             flex-direction: column;
             gap: 12px;
         }
-        .nav-section {
+
+        /* ===== رسالة الإغلاق المؤقت ===== */
+        .lock-message {
             background: var(--card-bg);
             border-radius: 28px;
             border: 1px solid var(--card-border);
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            box-shadow: 0 2px 8px var(--shadow-soft);
-        }
-        .nav-section:hover {
-            box-shadow: 0 4px 16px var(--shadow-hover);
-        }
-        .nav-section-header {
-            background: var(--nav-gradient);
-            padding: 16px 22px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--btn-text);
-            transition: all var(--transition-smooth);
-            user-select: none;
-            position: relative;
-        }
-        .nav-section-header::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--gold-accent), var(--badge-bg));
-            opacity: 0;
-            transition: opacity var(--transition-smooth);
-        }
-        .nav-section-header:hover {
-            background: var(--nav-hover-gradient);
-        }
-        .nav-section-header:hover::before {
-            opacity: 1;
-        }
-        .nav-section-header.active {
-            background: var(--nav-active-gradient);
-        }
-        .nav-section-header.active::before {
-            opacity: 1;
-        }
-        .nav-section-header .arrow {
+            padding: 30px 24px;
+            text-align: center;
+            color: var(--text);
             font-size: 1.1rem;
-            transition: transform var(--transition-bounce);
+            font-weight: 600;
+            box-shadow: 0 2px 8px var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+        .lock-message i {
+            display: block;
+            font-size: 2.5rem;
             color: var(--gold-accent);
+            margin-bottom: 12px;
         }
-        .nav-section-header.active .arrow {
-            transform: rotate(180deg);
+        .lock-message span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 8px;
         }
-        .nav-section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition-smooth), padding 0.3s ease, opacity 0.3s ease;
-            padding: 0 18px;
-            opacity: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .nav-section-content.open {
-            max-height: 800px;
-            padding: 18px 18px 14px;
-            opacity: 1;
-        }
-
-        .nav-link {
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            border-radius: 60px;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--btn-text);
-            text-decoration: none;
-            transition: all var(--transition-smooth);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
-            transform: translateY(0);
-        }
-        .nav-link i {
-            color: var(--gold-accent);
-            transition: transform var(--transition-smooth);
-        }
-        .nav-link:hover {
-            transform: translateY(-3px) scale(1.02);
+        .lock-message:hover {
             box-shadow: 0 4px 16px var(--shadow-hover);
-            border-color: var(--gold-accent);
-            background: var(--nav-hover-gradient);
-        }
-        .nav-link:hover i {
-            transform: translateX(-4px) scale(1.1);
-        }
-        .nav-link:active {
-            transform: translateY(1px) scale(0.97);
-            transition-duration: 0.1s;
         }
 
         .footer-note {
@@ -340,8 +265,7 @@
         @media (max-width: 550px) {
             .content-inner { padding: 18px 14px; }
             .main-title h1 { font-size: 1.8rem; }
-            .nav-section-header { font-size: 1rem; padding: 14px 16px; }
-            .nav-link { font-size: 0.9rem; padding: 8px 16px; }
+            .lock-message { padding: 20px 16px; font-size: 1rem; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -363,69 +287,13 @@
         <div class="subtitle">الفرقة الأولى · حقوق المنصورة</div>
         <div class="date-info">أسئلة واختبارات للترم الثاني · مايو - يونيو 2026</div>
 
+        <!-- المحتوى مقفول -->
         <div class="main-nav">
-
-            <!-- القانون الدستوري -->
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-balance-scale" style="margin-left: 10px; color: var(--gold-accent);"></i> القانون الدستوري</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="nav-link"><i class="fas fa-file-alt"></i> القيمة القانونية والقوانين الأساسية</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> العرف الدستوري</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> سمو القاعدة والرقابة</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات)</a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة</a>
-                </div>
+            <div class="lock-message">
+                <i class="fas fa-lock"></i>
+                المنصة مقفولة مؤقتاً لحماية المحتوى
+                <span>نعتذر عن الإزعاج، جاري العمل على استعادة الخدمة قريباً</span>
             </div>
-
-            <!-- النظم السياسية -->
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-globe-americas" style="margin-left: 10px; color: var(--gold-accent);"></i> النظم السياسية</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم)</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> أشكال الدول والاتحادات</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> نظم الحكم: أشكال الديمقراطية</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام الملكي</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي</a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب</a>
-                </div>
-            </div>
-
-            <!-- عناصر هامة -->
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-star" style="margin-left: 10px; color: var(--gold-accent);"></i> عناصر هامة</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5</a>
-                    <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4</a>
-                    <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023</a>
-                </div>
-            </div>
-
-            <!-- إجابات مقالي نموذجيه -->
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-pencil" style="margin-left: 10px; color: var(--gold-accent);"></i> إجابات مقالي نموذجيه</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم</a>
-                </div>
-            </div>
-
         </div>
 
         <div class="footer-note">
@@ -449,40 +317,6 @@
         alert("في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.\n\nونود التوضيح أن المصدر الأصلي للأسئلة هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.");
     }
 
-    function toggleSection(header) {
-        const content = header.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-
-        document.querySelectorAll('.nav-section-content').forEach(el => {
-            el.classList.remove('open');
-            el.style.maxHeight = null;
-            el.style.opacity = '0';
-        });
-        document.querySelectorAll('.nav-section-header').forEach(el => {
-            el.classList.remove('active');
-        });
-
-        if (!isOpen) {
-            content.classList.add('open');
-            header.classList.add('active');
-            requestAnimationFrame(() => {
-                content.style.maxHeight = content.scrollHeight + 30 + 'px';
-                content.style.opacity = '1';
-            });
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-        const firstHeader = document.querySelector('.nav-section-header');
-        if (firstHeader) firstHeader.click();
-    });
-
-    window.addEventListener('resize', function() {
-        document.querySelectorAll('.nav-section-content.open').forEach(el => {
-            el.style.maxHeight = el.scrollHeight + 30 + 'px';
-        });
-    });
-
     const themeToggle = document.getElementById('toggleThemeBtn');
     if (localStorage.getItem('madar_theme') === 'dark') {
         document.body.classList.add('dark');
@@ -495,4 +329,4 @@
     });
 </script>
 </body>
-    </html>
+</html>
