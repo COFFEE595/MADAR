@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>النظم السياسية | المحاضرة الأخيرة (11) | Madar</title>
+    <style>
+        :root {
+            --bg: #e8ddcf;
+            --container-bg: #fdf9f3;
+            --text: #1f1a14;
+            --text-secondary: #5c4a37;
+            --border: #d4c5b2;
+            --card-bg: #ffffff;
+            --card-border: #ccbbaa;
+            --option-bg: #f5efe6;
+            --option-border: #d6c6b4;
+            --option-hover-bg: #e9d9c8;
+            --option-hover-border: #a89070;
+            --correct-bg: #c8e6c9;
+            --correct-border: #388e3c;
+            --wrong-bg: #f1cfcf;
+            --wrong-border: #c62828;
+            --badge-bg: #9b7b5c;
+            --badge-text: #fef7f0;
+            --btn-bg: #d6c4ae;
+            --btn-text: #2b2016;
+            --btn-border: #b0977c;
+            --btn-shadow: #8b6f55;
+            --finish-btn-bg: #7d6046;
+            --finish-btn-text: #fef7f0;
+            --counter-bg: #e2d2be;
+            --timer-bg: #cfbb9f;
+            --score-badge-bg: #d4c0a6;
+            --qnum-bg: #a3886d;
+            --qnum-text: #fef7f0;
+            --header-color: #3e2c1c;
+            --toggle-bg: #d4c0a6;
+            --toggle-text: #3e2c1c;
+            --result-bg: #e7d7c0;
+            --result-text: #3e2c1c;
+            --result-border: #b3946e;
+            --restart-bg: #9b7b5c;
+            --footer-color: #5c4a37;
+            --brand-gradient: linear-gradient(135deg, #7d6046, #3e2c1c);
+            --brand-text: #fdf9f3;
+        }
+
+        body.dark {
+            --bg: #12161f;
+            --container-bg: #1b1f2a;
+            --text: #d4d8e0;
+            --text-secondary: #9aa0b0;
+            --border: #2d3340;
+            --card-bg: #212531;
+            --card-border: #333b4a;
+            --option-bg: #1a1f2b;
+            --option-border: #3a4252;
+            --option-hover-bg: #262d3a;
+            --option-hover-border: #d4a94e;
+            --correct-bg: #1e3b2a;
+            --correct-border: #4caf50;
+            --wrong-bg: #3d2020;
+            --wrong-border: #ef5350;
+            --badge-bg: #d4a94e33;
+            --badge-text: #d4a94e;
+            --btn-bg: #333b4a;
+            --btn-text: #d4d8e0;
+            --btn-border: #4a5568;
+            --btn-shadow: #161a22;
+            --finish-btn-bg: #d4a94e;
+            --finish-btn-text: #12161f;
+            --counter-bg: #212531;
+            --timer-bg: #212531;
+            --score-badge-bg: #212531;
+            --qnum-bg: #d4a94e;
+            --qnum-text: #12161f;
+            --header-color: #e8cc8a;
+            --toggle-bg: #333b4a;
+            --toggle-text: #d4d8e0;
+            --result-bg: #212531;
+            --result-text: #d4a94e;
+            --result-border: #d4a94e;
+            --restart-bg: #d4a94e;
+            --footer-color: #6b7280;
+            --brand-gradient: linear-gradient(135deg, #d4a94e, #e8cc8a);
+            --brand-text: #12161f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            font-family: 'Cairo', 'Segoe UI', 'Amiri', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            direction: rtl;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+        .platform-wrapper {
+            width: 100%;
+            max-width: 850px;
+            background: var(--container-bg);
+            border-radius: 40px;
+            box-shadow: 0 18px 40px -8px rgba(60,40,20,0.18);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .brand-bar { background: var(--brand-gradient); text-align: center; padding: 12px 20px; }
+        .brand-name { font-family: 'Poppins','Cairo',sans-serif; font-size: 1.8rem; font-weight: 700; letter-spacing: 3px; color: var(--brand-text); text-transform: uppercase; }
+        .content-inner { padding: 28px 24px 32px; }
+        .top-actions { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+        .toggle-theme-btn { background: var(--toggle-bg); border: 1px solid var(--btn-border); color: var(--toggle-text); font-size: 1.2rem; padding: 7px 12px; border-radius: 50%; cursor: pointer; }
+        h1 { font-size: 1.8rem; font-weight: 700; color: var(--header-color); text-align: center; margin-bottom: 4px; }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 1rem; }
+        .progress-area { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+        .q-counter, .timer-display, .badge-score { background: var(--counter-bg); padding: 8px 22px; border-radius: 40px; font-weight: 600; border: 1px solid var(--btn-border); }
+        .timer-display { background: var(--timer-bg); font-family: monospace; }
+        .badge-score { background: var(--score-badge-bg); }
+        .question-card { background: var(--card-bg); border-radius: 28px; padding: 26px 24px; margin: 12px 0 18px; border: 1px solid var(--card-border); }
+        .q-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+        .q-num { background: var(--qnum-bg); color: var(--qnum-text); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 30px; font-weight: 700; }
+        .q-text { font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
+        .options-container { margin: 20px 0 6px; }
+        .option-row { display: flex; align-items: center; margin-bottom: 10px; background: var(--option-bg); border: 1.5px solid var(--option-border); border-radius: 60px; padding: 12px 18px; cursor: pointer; transition: all 0.2s; position: relative; }
+        .option-row:hover:not(.disabled-opt) { background: var(--option-hover-bg); border-color: var(--option-hover-border); }
+        .option-row.disabled-opt { cursor: default; opacity: 0.9; }
+        .option-row.correct-highlight { background: var(--correct-bg); border-color: var(--correct-border); }
+        .option-row.wrong-highlight { background: var(--wrong-bg); border-color: var(--wrong-border); }
+        .option-row input[type="radio"] { margin-left: 16px; accent-color: #7e6953; width: 20px; height: 20px; }
+        .option-row label { font-size: 1.05rem; width: 100%; cursor: pointer; color: var(--text); }
+        .result-indicator { display: none; margin-right: auto; font-size: 1.4rem; font-weight: bold; }
+        .option-row.correct-highlight .result-indicator { display: block; color: #2e7d32; }
+        .option-row.wrong-highlight .result-indicator { display: block; color: #b71c1c; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 14px; gap: 12px; }
+        .nav-btn { background: var(--btn-bg); border: none; padding: 12px 28px; font-weight: 600; border-radius: 50px; cursor: pointer; border: 1px solid var(--btn-border); box-shadow: 0 3px 0 var(--btn-shadow); transition: 0.1s; min-width: 110px; }
+        .nav-btn:active { transform: translateY(3px); box-shadow: none; }
+        .nav-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .finish-btn { background: var(--finish-btn-bg); color: var(--finish-btn-text); }
+        #resultSection { display: none; }
+        .result-screen { text-align: center; padding: 10px 0; }
+        .final-score { font-size: 2.6rem; font-weight: 800; background: var(--result-bg); display: inline-block; padding: 16px 44px; border-radius: 80px; margin: 20px 0; color: var(--result-text); border: 2px solid var(--result-border); }
+        .time-final { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-secondary); }
+        .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+        .restart-btn { background: var(--restart-bg); color: white; border: none; font-size: 1.1rem; padding: 14px 32px; border-radius: 50px; cursor: pointer; font-weight: 600; }
+        .flex-center { display: flex; justify-content: center; }
+        .footer-note { text-align: center; color: var(--footer-color); margin-top: 20px; font-size: 0.85rem; }
+        .footer-note a { color: var(--badge-text); text-decoration: none; background: var(--badge-bg); padding: 4px 12px; border-radius: 20px; }
+        @media (max-width: 550px) { .content-inner { padding: 18px 14px; } .q-text { font-size: 1.1rem; } .nav-btn { padding: 10px 16px; min-width: 80px; } }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="platform-wrapper">
+    <div class="brand-bar"><span class="brand-name">Madar</span></div>
+    <div class="content-inner">
+        <div class="top-actions"><button class="toggle-theme-btn" id="toggleThemeBtn">🌓</button></div>
+        <h1>🗳️ النظم السياسية</h1>
+        <div class="subtitle">المحاضرة الأخيرة (11): الانتخاب – الأحزاب – الاقتراع (أسئلة 131–159)</div>
+
+        <div id="quizSection">
+            <div class="progress-area">
+                <span class="q-counter" id="questionCounter">السؤال 1 / 28</span>
+                <span class="timer-display" id="timerDisplay">⏱️ 00:00</span>
+                <span class="badge-score" id="miniScore">✨ تقدمك</span>
+            </div>
+            <div class="question-card">
+                <div class="q-header"><span class="q-num" id="qNumDisplay">1</span><span class="q-text" id="qTextDisplay">تحميل...</span></div>
+                <div id="mcOptions" class="options-container"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prevBtn" disabled>← السابق</button>
+                <button class="nav-btn" id="nextBtn">التالي →</button>
+            </div>
+            <div class="flex-center" style="margin-top:12px;"><button class="nav-btn finish-btn" id="finishBtn" style="display:none;">📋 إنهاء وعرض النتيجة</button></div>
+        </div>
+
+        <div id="resultSection">
+            <div class="result-screen">
+                <h2 style="color:var(--header-color);">📊 نتيجتك</h2>
+                <div class="final-score" id="finalScoreDisplay">0 / 28</div>
+                <div id="percentageDisplay" style="font-size:1.5rem;margin-bottom:4px;"></div>
+                <div class="time-final" id="finalTimeDisplay"></div>
+                <div class="btn-group"><button class="restart-btn" id="restartQuizBtn">🔄 إعادة الاختبار</button></div>
+                <div class="footer-note">شكر خاص لـ <strong>ثري أكاديمي</strong> · تواصل عبر تيليجرام: <a href="https://t.me/GIX37" target="_blank">@GIX37</a></div>
+            </div>
+        </div>
+        <div class="footer-note" id="quizFooter">شكر خاص لـ <strong>ثري أكاديمي</strong> · تواصل عبر تيليجرام: <a href="https://t.me/GIX37" target="_blank">@GIX37</a></div>
+    </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ============ أسئلة المحاضرة الأخيرة (131-159) حسب التصحيح المعتمد ============
+const rawQuestions = [
+    { text: '........ عندما يستطيع أن يمارسه كل فرد من أفراد الشعب ممن توافرت فيهم بعض الشروط مما لا يتعارض مع العمومية', options: ['الاقتراع العام', 'الاقتراع المقيد'], correct: 0 }, // 131-أ
+    { text: 'يكفي في الاقتراع العام أن يكون الشخص مواطناً ورشيداً', options: ['صح', 'غلط'], correct: 0 }, // 132-صح
+    { text: 'من شروط الاقتراع المقيد أن يكون مثلاً على قدر من التعليم أو الثروة', options: ['صح', 'غلط'], correct: 0 }, // 133-صح
+    { text: 'وفقاً لنظرية سيادة الأمة فالاقتراع مقيد', options: ['صح', 'غلط'], correct: 0 }, // 134-صح
+    { text: 'وفقاً لنظرية سيادة الشعب فالاقتراع عام', options: ['صح', 'غلط'], correct: 0 }, // 135-صح
+    { text: 'القيد في قاعدة بيانات المقترعين يكون ........', options: ['تلقائياً', 'بطلب من الشخص', 'بحسب نظام كل دولة'], correct: 2 }, // 136-ج
+    { text: 'من ضمانات سلامة الاقتراع ........', options: ['استقلال الهيئات القائمة به', 'التنقيح الدوري للكشوف', 'جعل التصويت سراً', 'كل ما سبق صحيح'], correct: 3 }, // 137-د
+    { text: 'استطلاعات الرأي ........', options: ['بالضرورة لها دور إيجابي', 'بالضرورة لها دور مضلل', 'قد يكون لها دور إيجابي أو مضلل'], correct: 2 }, // 138-ج
+    { text: 'تجيز بعض الدول التصويت بالوكالة بضوابط معينة', options: ['صح', 'غلط'], correct: 0 }, // 139-صح
+    { text: 'يكون الانتخاب ........ في حال قيام الناخب باختيار نوابه دون وسيط', options: ['مباشر', 'غير مباشر'], correct: 0 }, // 140-أ
+    { text: 'يكون الانتخاب ........ في حال اختيار مندوبين يتولون اختيار النواب', options: ['مباشر', 'غير مباشر'], correct: 1 }, // 141-ب
+    { text: 'يعاب على الانتخاب غير المباشر أنه ........', options: ['يمثل قيداً على حرية الناخب', 'يكون من السهل التأثير على المندوبين', 'كلاهما'], correct: 2 }, // 142-ج
+    { text: 'تأخذ أغلب الدول بنظام الانتخاب ........', options: ['المباشر', 'غير المباشر'], correct: 0 }, // 143-أ
+    { text: 'نظام الانتخاب بالقائمة تتسم فيه الدوائر ........... نطاقها', options: ['بصغر', 'باتساع'], correct: 1 }, // 144-ب
+    { text: 'يتميز نظام الانتخاب الفردي بـ ........', options: ['سهولة تعرف الناخب على المرشحين', 'يضمن تمثيل الأقليات', 'كل ما سبق', 'لا شيء مما سبق'], correct: 2 }, // 145-ج
+    { text: 'يساهم الانتخاب الفردي في تقوية دور الأحزاب السياسية', options: ['صح', 'غلط'], correct: 1 }, // 146-غلط
+    { text: 'يساهم الانتخاب الفردي في إضعاف دور الأحزاب السياسية', options: ['صح', 'غلط'], correct: 0 }, // 147-صح
+    { text: 'يساعد نظام القائمة المفتوحة على الأخذ بنظام الكوتة', options: ['صح', 'غلط'], correct: 1 }, // 148-غلط
+    { text: 'يساعد نظام القائمة المغلقة على الأخذ بنظام الكوتة', options: ['صح', 'غلط'], correct: 0 }, // 149-صح
+    { text: 'تأخذ الكثير من الدول بنظام ........', options: ['الحزب الواحد', 'تعدد الأحزاب'], correct: 1 }, // 151-ب
+    { text: 'يعني نظام الحزبين أن يوجد حزبان سياسيان فقط', options: ['صح', 'غلط'], correct: 1 }, // 152-غلط
+    { text: 'ينص الدستور المصري أن للمواطنين الحق في تكوين الأحزاب السياسية بـ ........ ينظمه القانون', options: ['تصريح', 'بإخطار'], correct: 1 }, // 153-ب
+    { text: 'تنتهي الأحزاب السياسية اختيارياً بإرادة مؤسسيها أو بالاندماج وإجبارياً عن طريق حله', options: ['صح', 'غلط'], correct: 0 }, // 154-صح
+    { text: 'نظام الحزب الواحد يوجد عادة في الدول الشمولية', options: ['صح', 'غلط'], correct: 0 }, // 155-صح
+    { text: 'تنشأ الأحزاب السياسية وفقاً لأساس أيديولوجي فقط', options: ['صح', 'غلط'], correct: 1 }, // 156-غلط
+    { text: 'يمكن إنشاء الأحزاب السياسية على أساس ديني أو طائفي', options: ['صح', 'غلط'], correct: 1 }, // 157-غلط
+    { text: 'وفقاً للدستور المصري يقوم النظام السياسي على أساس ........', options: ['نظام الحزب الواحد', 'نظام الحزبين', 'نظام التعددية الحزبية'], correct: 2 }, // 158-ج
+    { text: 'تتكون موارد الحزب من ........', options: ['اشتراكات أعضائه', 'تبرعات الأشخاص الطبيعيين المصريين', 'حصيلة استثمار أمواله في الأوجه غير التجارية', 'كل ما سبق'], correct: 3 } // 159-د
+];
+
+let questions = [...rawQuestions];
+const TOTAL = questions.length;
+let currentIndex = 0;
+let userAnswers = new Array(TOTAL).fill(null);
+let timerSeconds = 0;
+let timerInterval = null;
+let quizFinished = false;
+
+// DOM elements
+const quizSection = document.getElementById('quizSection');
+const resultSection = document.getElementById('resultSection');
+const timerDisplay = document.getElementById('timerDisplay');
+const qCounter = document.getElementById('questionCounter');
+const qNumDisplay = document.getElementById('qNumDisplay');
+const qTextDisplay = document.getElementById('qTextDisplay');
+const mcOptionsDiv = document.getElementById('mcOptions');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const finishBtn = document.getElementById('finishBtn');
+const miniScore = document.getElementById('miniScore');
+const quizFooter = document.getElementById('quizFooter');
+
+const STORAGE_KEY = 'pol_sys_lec11_v1_corrected';
+const THEME_KEY = 'pol_quiz_theme';
+
+// helper functions
+function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentIndex, userAnswers, timerSeconds }));
+}
+function loadState() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        try { const s = JSON.parse(saved); currentIndex = s.currentIndex; userAnswers = s.userAnswers; timerSeconds = s.timerSeconds; return true; }
+        catch(e) { return false; }
+    }
+    return false;
+}
+function clearState() { localStorage.removeItem(STORAGE_KEY); }
+
+function formatTime(secs) { const m = Math.floor(secs/60).toString().padStart(2,'0'); const s = (secs%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => { if (!quizFinished) { timerSeconds++; timerDisplay.textContent = `⏱️ ${formatTime(timerSeconds)}`; saveState(); } }, 1000);
+}
+function stopTimer() { quizFinished = true; if (timerInterval) clearInterval(timerInterval); }
+
+function applyVisualFeedback(index) {
+    const q = questions[index], userAns = userAnswers[index];
+    if (userAns === null) return;
+    const rows = document.querySelectorAll('.option-row');
+    rows.forEach((row, optIdx) => {
+        const oldIndicator = row.querySelector('.result-indicator');
+        if (oldIndicator) oldIndicator.remove();
+        row.classList.remove('correct-highlight','wrong-highlight','disabled-opt');
+        if (optIdx === q.correct) {
+            row.classList.add('correct-highlight');
+            const ind = document.createElement('span');
+            ind.className = 'result-indicator';
+            ind.textContent = '✓';
+            row.appendChild(ind);
+        }
+        if (optIdx === userAns && userAns !== q.correct) {
+            row.classList.add('wrong-highlight');
+            const ind = document.createElement('span');
+            ind.className = 'result-indicator';
+            ind.textContent = '✗';
+            row.appendChild(ind);
+        }
+        row.classList.add('disabled-opt');
+    });
+    document.querySelectorAll(`input[name="q${index}"]`).forEach(r => r.disabled = true);
+}
+
+function renderQuestion(index) {
+    const q = questions[index];
+    qNumDisplay.textContent = index + 1;
+    qTextDisplay.textContent = q.text;
+    qCounter.textContent = `السؤال ${index+1} / ${TOTAL}`;
+    let html = '';
+    q.options.forEach((opt, optIdx) => {
+        const chk = userAnswers[index]===optIdx ? 'checked' : '';
+        const dis = userAnswers[index]!==null ? 'disabled' : '';
+        html += `<div class="option-row" onclick="${userAnswers[index]===null ? `window.selectRadio(${index},${optIdx})` : ''}"><input type="radio" name="q${index}" value="${optIdx}" ${chk} ${dis}><label>${String.fromCharCode(65+optIdx)}) ${opt}</label></div>`;
+    });
+    mcOptionsDiv.innerHTML = html;
+    if (userAnswers[index] !== null) applyVisualFeedback(index);
+    updateNavButtons();
+    updateMiniScore();
+}
+
+window.selectRadio = function(qIdx, optIdx) {
+    if (userAnswers[qIdx] !== null) return;
+    userAnswers[qIdx] = optIdx;
+    renderQuestion(qIdx);
+    saveState();
+};
+
+function updateNavButtons() {
+    prevBtn.disabled = (currentIndex === 0);
+    const isLast = (currentIndex === TOTAL - 1);
+    nextBtn.style.display = isLast ? 'none' : 'inline-block';
+    finishBtn.style.display = isLast ? 'inline-block' : 'none';
+}
+
+function updateMiniScore() {
+    const answered = userAnswers.filter(a => a!==null).length;
+    const correct = userAnswers.reduce((acc, ans, i) => {
+        if (ans===null) return acc;
+        return acc + (ans === questions[i].correct ? 1 : 0);
+    }, 0);
+    miniScore.textContent = `📊 ${correct} / ${answered} صحيحة`;
+}
+
+function goPrev() { if (currentIndex > 0) { currentIndex--; renderQuestion(currentIndex); saveState(); } }
+function goNext() { if (currentIndex < TOTAL - 1) { currentIndex++; renderQuestion(currentIndex); saveState(); } }
+
+function finishQuiz() {
+    stopTimer();
+    const correctCount = userAnswers.reduce((acc, ans, i) => {
+        if (ans===null) return acc;
+        return acc + (ans === questions[i].correct ? 1 : 0);
+    }, 0);
+    const percent = Math.round((correctCount / TOTAL) * 100);
+    quizSection.style.display = 'none';
+    resultSection.style.display = 'block';
+    quizFooter.style.display = 'none';
+    document.getElementById('finalScoreDisplay').textContent = `${correctCount} / ${TOTAL}`;
+    document.getElementById('percentageDisplay').textContent = `${percent}%`;
+    document.getElementById('finalTimeDisplay').textContent = `⏱️ الوقت المستغرق: ${formatTime(timerSeconds)}`;
+    clearState();
+}
+
+function restartQuiz() {
+    stopTimer(); clearState();
+    userAnswers = new Array(TOTAL).fill(null); currentIndex = 0; timerSeconds = 0;
+    timerDisplay.textContent = '⏱️ 00:00'; quizFinished = false;
+    resultSection.style.display = 'none'; quizSection.style.display = 'block'; quizFooter.style.display = 'block';
+    renderQuestion(0); startTimer();
+}
+
+// Theme
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark');
+        document.getElementById('toggleThemeBtn').textContent = '☀️';
+    } else {
+        document.body.classList.remove('dark');
+        document.getElementById('toggleThemeBtn').textContent = '🌙';
+    }
+    localStorage.setItem(THEME_KEY, theme);
+}
+
+document.getElementById('toggleThemeBtn').addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark');
+    applyTheme(isDark ? 'light' : 'dark');
+});
+
+prevBtn.addEventListener('click', goPrev);
+nextBtn.addEventListener('click', goNext);
+finishBtn.addEventListener('click', finishQuiz);
+document.getElementById('restartQuizBtn').addEventListener('click', restartQuiz);
+
+const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+applyTheme(savedTheme);
+
+const hasState = loadState();
+if (!hasState) { currentIndex = 0; userAnswers = new Array(TOTAL).fill(null); timerSeconds = 0; }
+timerDisplay.textContent = `⏱️ ${formatTime(timerSeconds)}`;
+renderQuestion(currentIndex);
+startTimer();
+
+})();
+</script>
+</body>
+</html>
