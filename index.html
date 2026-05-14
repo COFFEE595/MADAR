@@ -436,6 +436,9 @@
             <div style="margin-top: 8px; font-size: 0.9rem; opacity: 0.8;">
                 شكر خاص لـ <strong>ثري أكاديمي</strong>
             </div>
+            <div style="margin-top: 15px; font-size: 0.75rem; color: #888; border-top: 1px solid #ddd; padding-top: 10px;">
+                © 2026 منصة مدار. جميع الحقوق محفوظة.
+            </div>
         </div>
     </div>
 </div>
@@ -493,6 +496,50 @@
         themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌓';
         localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
+
+    // ================= طبقة الحماية فقط =================
+    (function() {
+        // منع النقر بزر الماوس الأيمن
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // منع اختصارات النسخ والقص واللصق وعرض المصدر والحفظ
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || 
+                              e.key === 'x' || e.key === 'X' || 
+                              e.key === 'v' || e.key === 'V' || 
+                              e.key === 'u' || e.key === 'U' || 
+                              e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                return false;
+            }
+            // منع F12 (أدوات المطور)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // منع تحديد النص بالماوس
+        document.querySelectorAll('*').forEach(element => {
+            element.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            element.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+        });
+
+        // منع نسخ النص
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    })();
 </script>
 </body>
 </html>
