@@ -1,362 +1,500 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>النظم السياسية | منصة اختبارات</title>
-  
-  <!-- Google tag (gtag.js) - الكود القديم -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9YE8DKCYD5');
-  </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9YE8DKCYD5');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MADAR - منصة اختبارات</title>
+    <style>
+        :root {
+            --bg: #e8ddcf;
+            --container-bg: #fdf9f3;
+            --text: #1f1a14;
+            --text-secondary: #5c4a37;
+            --border: #d4c5b2;
+            --card-bg: #ffffff;
+            --card-border: #ccbbaa;
+            --btn-bg: #d6c4ae;
+            --btn-text: #2b2016;
+            --btn-border: #b0977c;
+            --btn-shadow: #8b6f55;
+            --badge-bg: #9b7b5c;
+            --badge-text: #fef7f0;
+            --header-color: #3e2c1c;
+            --toggle-bg: #d4c0a6;
+            --toggle-text: #3e2c1c;
+            --footer-color: #5c4a37;
+            --brand-gradient: linear-gradient(135deg, #7d6046, #3e2c1c);
+            --brand-text: #fdf9f3;
+            --nav-gradient: linear-gradient(145deg, #f5efe6, #e8ddcf);
+            --nav-hover-gradient: linear-gradient(145deg, #efe4d6, #e0d3c4);
+            --nav-active-gradient: linear-gradient(145deg, #e8dccf, #d8c9b7);
+            --gold-accent: #c4a87a;
+            --shadow-soft: rgba(60, 40, 20, 0.08);
+            --shadow-hover: rgba(60, 40, 20, 0.16);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-  <style>
-    /* التنسيقات الكاملة كما هي من الملف الأصلي (لضمان الاتساق) */
-    :root {
-      --bg: #e8ddcf; --container-bg: #fdf9f3; --text: #1f1a14; --text-secondary: #5c4a37;
-      --border: #d4c5b2; --card-bg: #ffffff; --card-border: #ccbbaa; --option-bg: #f5efe6;
-      --option-border: #d6c6b4; --option-hover-bg: #e9d9c8; --option-hover-border: #a89070;
-      --correct-bg: #c8e6c9; --correct-border: #388e3c; --wrong-bg: #f1cfcf; --wrong-border: #c62828;
-      --badge-bg: #9b7b5c; --badge-text: #fef7f0; --btn-bg: #d6c4ae; --btn-text: #2b2016;
-      --btn-border: #b0977c; --btn-shadow: #8b6f55; --finish-btn-bg: #7d6046; --finish-btn-text: #fef7f0;
-      --counter-bg: #e2d2be; --timer-bg: #cfbb9f; --score-badge-bg: #d4c0a6; --qnum-bg: #a3886d;
-      --qnum-text: #fef7f0; --header-color: #3e2c1c; --toggle-bg: #d4c0a6; --toggle-text: #3e2c1c;
-      --result-bg: #e7d7c0; --result-text: #3e2c1c; --result-border: #b3946e; --restart-bg: #9b7b5c;
-      --footer-color: #5c4a37; --brand-gradient: linear-gradient(135deg, #7d6046, #3e2c1c);
-      --brand-text: #fdf9f3; --section-card-bg: #f5efe6; --section-card-border: #d6c6b4;
-      --section-card-hover: #e9d9c8; --feedback-correct-bg: #ecf3e8; --feedback-correct-border: #4f7a5c;
-      --feedback-wrong-bg: #f9efed; --feedback-wrong-border: #b57070; --analysis-bg: #f3ede5;
-      --analysis-border: #7a6852;
-    }
-    body.dark {
-      --bg: #12161f; --container-bg: #1b1f2a; --text: #d4d8e0; --text-secondary: #9aa0b0;
-      --border: #2d3340; --card-bg: #212531; --card-border: #333b4a; --option-bg: #1a1f2b;
-      --option-border: #3a4252; --option-hover-bg: #262d3a; --option-hover-border: #d4a94e;
-      --correct-bg: #1e3b2a; --correct-border: #4caf50; --wrong-bg: #3d2020; --wrong-border: #ef5350;
-      --badge-bg: #d4a94e33; --badge-text: #d4a94e; --btn-bg: #333b4a; --btn-text: #d4d8e0;
-      --btn-border: #4a5568; --btn-shadow: #161a22; --finish-btn-bg: #d4a94e; --finish-btn-text: #12161f;
-      --counter-bg: #212531; --timer-bg: #212531; --score-badge-bg: #212531; --qnum-bg: #d4a94e;
-      --qnum-text: #12161f; --header-color: #e8cc8a; --toggle-bg: #333b4a; --toggle-text: #d4d8e0;
-      --result-bg: #212531; --result-text: #d4a94e; --result-border: #d4a94e; --restart-bg: #d4a94e;
-      --footer-color: #6b7280; --brand-gradient: linear-gradient(135deg, #d4a94e, #e8cc8a);
-      --brand-text: #12161f; --section-card-bg: #1e2532; --section-card-border: #3a4252;
-      --section-card-hover: #262d3a; --feedback-correct-bg: #1e3b2a; --feedback-correct-border: #4caf50;
-      --feedback-wrong-bg: #3d2020; --feedback-wrong-border: #ef5350; --analysis-bg: #212531;
-      --analysis-border: #d4a94e;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; direction: rtl; color: var(--text); }
-    .platform-wrapper { width: 100%; max-width: 960px; background: var(--container-bg); border-radius: 40px; box-shadow: 0 18px 40px -8px rgba(0,0,0,0.1); border: 1px solid var(--border); overflow: hidden; }
-    .brand-bar { background: var(--brand-gradient); text-align: center; padding: 14px; }
-    .brand-name { font-size: 1.8rem; font-weight: 700; color: var(--brand-text); letter-spacing: 2px; }
-    .content-inner { padding: 24px; }
-    .top-actions { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-    .toggle-theme-btn { background: var(--toggle-bg); border: 1px solid var(--btn-border); color: var(--toggle-text); font-size: 1.2rem; padding: 8px; border-radius: 50%; cursor: pointer; }
-    h1 { font-size: 1.8rem; text-align: center; color: var(--header-color); }
-    .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 20px; border-bottom: 1px dashed var(--border); padding-bottom: 16px; }
-    .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
-    .section-card { background: var(--section-card-bg); border: 1.5px solid var(--section-card-border); border-radius: 20px; padding: 24px; text-align: center; cursor: pointer; transition: 0.2s; }
-    .section-card:hover { transform: translateY(-3px); border-color: var(--option-hover-border); }
-    .card-icon { font-size: 2.5rem; }
-    .card-title { font-weight: 700; font-size: 1.2rem; margin: 8px 0; }
-    .card-count { font-size: 0.85rem; color: var(--badge-text); background: var(--badge-bg); padding: 4px 12px; border-radius: 20px; }
-    #quizSection, #resultSection { display: none; }
-    .progress-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-    .q-counter, .timer-display, .badge-score { background: var(--counter-bg); padding: 8px 16px; border-radius: 40px; border: 1px solid var(--btn-border); font-weight: 600; }
-    .question-card { background: var(--card-bg); border-radius: 28px; padding: 24px; border: 1px solid var(--card-border); }
-    .q-header { display: flex; gap: 14px; margin-bottom: 20px; align-items: baseline; }
-    .q-num { background: var(--qnum-bg); color: var(--qnum-text); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800; flex-shrink: 0; }
-    .q-text { font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
-    .option-row { display: flex; align-items: center; margin-bottom: 10px; background: var(--option-bg); border: 1.5px solid var(--option-border); border-radius: 60px; padding: 12px 18px; cursor: pointer; transition: 0.2s; }
-    .option-row:hover:not(.disabled-opt) { background: var(--option-hover-bg); }
-    .option-row.correct-highlight { background: var(--correct-bg); border-color: var(--correct-border); }
-    .option-row.wrong-highlight { background: var(--wrong-bg); border-color: var(--wrong-border); }
-    .option-row input { margin-left: 12px; width: 18px; height: 18px; }
-    .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
-    .nav-btn { background: var(--btn-bg); color: var(--btn-text); padding: 12px 24px; border-radius: 50px; cursor: pointer; border: 1px solid var(--btn-border); font-weight: 600; font-family: 'Cairo'; }
-    .finish-btn { background: var(--finish-btn-bg); color: var(--finish-btn-text); }
-    .result-screen { text-align: center; }
-    .final-score { font-size: 2.5rem; font-weight: 800; background: var(--result-bg); padding: 16px 40px; border-radius: 80px; color: var(--result-text); border: 2px solid var(--result-border); margin: 20px 0; display: inline-block; }
-    .footer-note { text-align: center; margin-top: 24px; font-size: 0.85rem; border-top: 1px dashed var(--border); padding-top: 12px; color: var(--footer-color); }
-    .home-link-icon { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; background: var(--badge-bg); padding: 6px 16px; border-radius: 30px; color: var(--badge-text); font-weight: bold; }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+        body.dark {
+            --bg: #12161f;
+            --container-bg: #1b1f2a;
+            --text: #d4d8e0;
+            --text-secondary: #9aa0b0;
+            --border: #2d3340;
+            --card-bg: #212531;
+            --card-border: #333b4a;
+            --btn-bg: #333b4a;
+            --btn-text: #d4d8e0;
+            --btn-border: #4a5568;
+            --btn-shadow: #161a22;
+            --badge-bg: #d4a94e33;
+            --badge-text: #d4a94e;
+            --header-color: #e8cc8a;
+            --toggle-bg: #333b4a;
+            --toggle-text: #d4d8e0;
+            --footer-color: #6b7280;
+            --brand-gradient: linear-gradient(135deg, #d4a94e, #e8cc8a);
+            --brand-text: #12161f;
+            --nav-gradient: linear-gradient(145deg, #2d3340, #212531);
+            --nav-hover-gradient: linear-gradient(145deg, #3a4252, #2d3340);
+            --nav-active-gradient: linear-gradient(145deg, #3a4252, #212531);
+            --gold-accent: #c4a87a;
+            --shadow-soft: rgba(0, 0, 0, 0.2);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            font-family: 'Cairo', 'Segoe UI', 'Amiri', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            direction: rtl;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+
+        .platform-wrapper {
+            width: 100%;
+            max-width: 850px;
+            background: var(--container-bg);
+            border-radius: 40px;
+            box-shadow: 0 18px 40px -8px rgba(60, 40, 20, 0.18);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .brand-bar {
+            background: var(--brand-gradient);
+            text-align: center;
+            padding: 12px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .brand-bar::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+            opacity: 0.5;
+        }
+        .brand-bar .brand-name {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--brand-text);
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-inner {
+            padding: 28px 24px 32px;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .toggle-theme-btn {
+            background: var(--toggle-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--toggle-text);
+            font-size: 1.2rem;
+            padding: 7px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+        .toggle-theme-btn:hover {
+            transform: rotate(20deg) scale(1.05);
+            background: var(--btn-bg);
+        }
+        .toggle-theme-btn:active { transform: scale(0.95); }
+
+        .main-title {
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .main-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--header-color);
+            letter-spacing: 2px;
+        }
+        .main-title .glow-icon {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gold-accent);
+            text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        .main-title .glow-icon:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .date-info {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 12px;
+        }
+
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nav-section {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            box-shadow: 0 2px 8px var(--shadow-soft);
+        }
+        .nav-section:hover {
+            box-shadow: 0 4px 16px var(--shadow-hover);
+        }
+        .nav-section-header {
+            background: var(--nav-gradient);
+            padding: 16px 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--btn-text);
+            transition: all var(--transition-smooth);
+            user-select: none;
+            position: relative;
+        }
+        .nav-section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--gold-accent), var(--badge-bg));
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+        .nav-section-header:hover {
+            background: var(--nav-hover-gradient);
+        }
+        .nav-section-header:hover::before {
+            opacity: 1;
+        }
+        .nav-section-header.active {
+            background: var(--nav-active-gradient);
+        }
+        .nav-section-header.active::before {
+            opacity: 1;
+        }
+        .nav-section-header .arrow {
+            font-size: 1.1rem;
+            transition: transform var(--transition-bounce);
+            color: var(--gold-accent);
+        }
+        .nav-section-header.active .arrow {
+            transform: rotate(180deg);
+        }
+        .nav-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-smooth), padding 0.3s ease, opacity 0.3s ease;
+            padding: 0 18px;
+            opacity: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .nav-section-content.open {
+            max-height: 800px;
+            padding: 18px 18px 14px;
+            opacity: 1;
+        }
+
+        .nav-link {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 60px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--btn-text);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            transform: translateY(0);
+        }
+        .nav-link i {
+            color: var(--gold-accent);
+            transition: transform var(--transition-smooth);
+        }
+        .nav-link:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 4px 16px var(--shadow-hover);
+            border-color: var(--gold-accent);
+            background: var(--nav-hover-gradient);
+        }
+        .nav-link:hover i {
+            transform: translateX(-4px) scale(1.1);
+        }
+        .nav-link:active {
+            transform: translateY(1px) scale(0.97);
+            transition-duration: 0.1s;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: var(--footer-color);
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .footer-note a {
+            color: var(--badge-text);
+            text-decoration: none;
+            font-weight: 600;
+            background: var(--badge-bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .footer-note a:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        .footer-note .glow-icon {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--badge-text);
+            text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+        .footer-note .glow-icon:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
+        }
+
+        @media (max-width: 550px) {
+            .content-inner { padding: 18px 14px; }
+            .main-title h1 { font-size: 1.8rem; }
+            .nav-section-header { font-size: 1rem; padding: 14px 16px; }
+            .nav-link { font-size: 0.9rem; padding: 8px 16px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div class="platform-wrapper">
-  <div class="brand-bar"><span class="brand-name">Madar</span></div>
-  <div class="content-inner">
-    <div class="top-actions"><button class="toggle-theme-btn" id="toggleThemeBtn">🌓</button></div>
-    
-    <!-- Home Section -->
-    <div id="homeSection">
-      <h1>🏛️ النظم السياسية</h1>
-      <div class="subtitle">الترم الثاني · مايو - يونيو 2026</div>
-      <div class="section-grid">
-        <div class="section-card" data-section="1">
-          <div class="card-icon">🌍</div><div class="card-title">المبحث الأول</div>
-          <div class="card-count">33 سؤالاً</div>
-        </div>
-        <div class="section-card" data-section="2">
-          <div class="card-icon">⚖️</div><div class="card-title">المبحث الثاني</div>
-          <div class="card-count">32 سؤالاً</div>
-        </div>
-        <div class="section-card" data-section="3">
-          <div class="card-icon">🏴</div><div class="card-title">المبحث الثالث</div>
-          <div class="card-count">27 سؤالاً</div>
-        </div>
-        <!-- الرابط الجديد المطلوب -->
-        <div class="section-card" onclick="window.location.href='https://COFFEE595.github.io/const-quiz/tbbbbext.html';">
-          <div class="card-icon">📋</div>
-          <div class="card-title">اختبار توجيهي</div>
-          <div class="card-count">الباب الأول</div>
-        </div>
-      </div>
+<div class="platform-wrapper" id="platformWrapper">
+    <div class="brand-bar">
+        <span class="brand-name">Madar</span>
     </div>
 
-    <!-- Quiz Section -->
-    <div id="quizSection">
-      <div class="progress-area">
-        <span class="q-counter" id="questionCounter">السؤال 1 / --</span>
-        <span class="timer-display" id="timerDisplay">⏱️ 00:00</span>
-        <span class="badge-score" id="miniScore">📊 النتيجة</span>
-      </div>
-      <div class="question-card">
-        <div class="q-header"><span class="q-num" id="qNumDisplay">1</span><span class="q-text" id="qTextDisplay"></span></div>
-        <div id="mcOptions"></div>
-      </div>
-      <div class="nav-buttons">
-        <button class="nav-btn" id="prevBtn">← السابق</button>
-        <button class="nav-btn" id="nextBtn">التالي →</button>
-        <button class="nav-btn finish-btn" id="finishBtn" style="display:none;">📋 إنهاء</button>
-      </div>
-    </div>
-
-    <!-- Result Section -->
-    <div id="resultSection">
-      <div class="result-screen">
-        <h2>📊 ملخص النتيجة</h2>
-        <div class="final-score" id="finalScoreDisplay">0 / 0</div>
-        <div id="percentageDisplay" style="font-weight:bold; font-size:1.2rem;"></div>
-        <div style="margin-top:20px;">
-          <button class="nav-btn" onclick="location.reload()">🔄 إعادة</button>
+    <div class="content-inner">
+        <div class="top-actions">
+            <button class="toggle-theme-btn" id="toggleThemeBtn" title="تبديل المظهر">🌓</button>
         </div>
-      </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer-note">
-      <div class="home-link-icon" id="mainPageLinkBtn">
-        🏠 العودة للواجهة الرئيسية (MADAR)
-      </div>
-      <p style="margin-top:10px;">تواصل عبر تيليجرام: <a href="https://t.me/GIX37" style="color:inherit;">@GIX37</a></p>
+        <div class="main-title">
+            <h1><span class="glow-icon" onclick="showCacheInfo()" title="تحديثات المنصة">ⓘ</span> منصة اختبارات</h1>
+        </div>
+        <div class="subtitle">الفرقة الأولى · حقوق المنصورة</div>
+        <div class="date-info">أسئلة واختبارات للترم الثاني · مايو - يونيو 2026</div>
+
+        <div class="main-nav">
+
+            <!-- القانون الدستوري -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-balance-scale" style="margin-left: 10px; color: var(--gold-accent);"></i> القانون الدستوري</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="nav-link"><i class="fas fa-file-alt"></i> القيمة القانونية والقوانين الأساسية</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> العرف الدستوري</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> سمو القاعدة والرقابة</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات)</a>
+                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة</a>
+                </div>
+            </div>
+
+            <!-- النظم السياسية -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-globe-americas" style="margin-left: 10px; color: var(--gold-accent);"></i> النظم السياسية</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم)</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> أشكال الدول والاتحادات</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> نظم الحكم: أشكال الديمقراطية</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام الملكي</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي</a>
+                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب</a>
+                    <!-- الرابط الجديد -->
+                    <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link"><i class="fas fa-clipboard-list"></i> اختبار توجيهي / الباب الاول</a>
+                </div>
+            </div>
+
+            <!-- عناصر هامة -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-star" style="margin-left: 10px; color: var(--gold-accent);"></i> عناصر هامة</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5</a>
+                    <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4</a>
+                    <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023</a>
+                </div>
+            </div>
+
+            <!-- إجابات مقالي نموذجيه -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-pencil" style="margin-left: 10px; color: var(--gold-accent);"></i> إجابات مقالي نموذجيه</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/15 12:30AM</div>
+            <span>⭐</span> أبلغنا برأيك
+            <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
+            <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
+            <div style="margin-top: 8px; font-size: 0.9rem; opacity: 0.8;">
+                شكر خاص لـ <strong>ثري أكاديمي</strong>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
-// بيانات الأسئلة الثلاثة المباحث (نفس البيانات الأصلية مع الأسئلة الحقيقية)
-const sectionsData = {
-  "1": { name: "المبحث الأول", questions: [
-    { text:'يهتم علم النظم السياسية في جوهره بـ:', options:['صياغة النصوص.','فلسفة الحكم.','تفسير القواعد.'], correct:1 },
-    { text:'الوظيفة "التكاملية" لعلم النظم السياسية تظهر في:', options:['وضع البدائل.','تطبيق العقوبات.','إلغاء الدستور.'], correct:0 },
-    { text:'الرابطة التي تمنح الفرد صفة "المواطن" هي رابطة:', options:['جغرافية.','سياسية وقانونية.','اقتصادية.'], correct:1 },
-    { text:'الفرق الجوهري بين "الشعب" و"السكان" يكمن في:', options:['العدد.','الحقوق السياسية.','مدة البقاء.'], correct:1 },
-    { text:'أي من المفاهيم التالية يعبر عن رغبة جماعة في العيش معاً بناءً على "وحدة المصير"؟', options:['الشعب.','الأمة.','السكان.'], correct:1 },
-    { text:'فيما يتعلق بركن "عدد الشعب" ، يعتبر العدد شرطاً:', options:['للقوة والنفوذ.','للاعتراف الدولي.','لوجود الدولة.'], correct:0 },
-    { text:'"الاتصال الجغرافي" لليابسة في الإقليم البري يعتبر:', options:['شرطاً جوهرياً.','غير ملزم قانوناً.','أساس السيادة.'], correct:1 },
-    { text:'تمارس الدولة سيادة "كاملة" مع قيد "المرور البريء" في:', options:['المياه الداخلية.','البحر الإقليمي.','المنطقة الاقتصادية.'], correct:1 },
-    { text:'تبدأ السيادة "الرقابية" (جمركياً وأمنياً) للدولة بعد مسافة:', options:['12 ميلاً.','24 ميلاً.','200 ميل.'], correct:0 },
-    { text:'"المنطقة الاقتصادية الخالصة" تمنح الدولة حقوقاً:', options:['سيادية مطلقة.','وظيفية استغلالية.','تشريعية كاملة.'], correct:1 },
-    { text:'ينتهي الإقليم الجوي للدولة عند:', options:['طبقة الأوزون.','خط كارمان.','الغلاف الجوي.'], correct:1 },
-    { text:'"احتكار القوة المادية" هو مظهر لسيادة السلطة في:', options:['الداخل فقط.','الخارج فقط.','الداخل والخارج.'], correct:0 },
-    { text:'"تآكل الشرعية وعجز المؤسسات" يشير تقنياً إلى الدولة:', options:['الناشئة.','الفاشلة.','الديمقراطية.'], correct:1 },
-    { text:'وفقاً للاتجاه "المنشئ"، تعتبر الدولة موجودة بمجرد:', options:['اكتمال الأركان.','صدور الاعتراف.','إعلان الدستور.'], correct:1 },
-    { text:'"الاعتراف لا يخلق الدولة بل يقر بوجودها" هو جوهر الاتجاه:', options:['المنشئ.','المقرر.','الفقهي.'], correct:1 },
-    { text:'حظر سحب الاعتراف بالدولة هو مبدأ استقر عليه العمل في:', options:['اتفاقية شيكاغو.','اتفاقية مونتيفيديو.','ميثاق الأمم المتحدة.'], correct:1 }
-  ]},
-  "2": { name: "المبحث الثاني", questions: [
-    { text:'تكتسب الدولة الشخصية القانونية بمجرد:', options:['النص عليها في الدستور.','اكتمال أركانها المادية.','اعتراف الدول الأخرى.'], correct:1 },
-    { text:'تتميز الشخصية المعنوية للدولة عن الشركات الخاصة بأنها:', options:['ذات ذمة مالية مستقلة.','لا تتقيد بقاعدة التخصص.','تنتهي بتغير نظام الحكم.'], correct:1 },
-    { text:'إذا تغير نظام الحكم من ملكي إلى جمهوري، فإن المعاهدات الدولية:', options:['تصبح باطلة.','تستمر في النفاذ.','تحتاج لإعادة توقيع.'], correct:1 },
-    { text:'الحاكم في ظل الشخصية المعنوية للدولة يعتبر:', options:['مالكاً للسيادة.','نائباً عن الكيان القانوني.','فوق القانون.'], correct:1 },
-    { text:'الاستثناء الوارد على "قاعدة المصدر" بالنسبة للدولة هو:', options:['حاجتها لنص دستوري.','ثبوتها بمجرد الميلاد.','خضوعها للقانون العام.'], correct:1 },
-    { text:'الشق الخارجي للسيادة يعني بالضرورة:', options:['السيطرة على الإقليم.','الاستقلال عن التوجيه الأجنبي.','التفوق العسكري.'], correct:1 },
-    { text:'مبدأ "المساواة في السيادة" أمام القانون الدولي يعني:', options:['تماثل القوة العسكرية.','التمتع بذات الحقوق القانونية.','تساوي المساحة.'], correct:1 },
-    { text:'في نظرية "سيادة الأمة"، يعتبر النائب ممثلاً لـ:', options:['دائرته الانتخابية.','الأمة ككيان مجرد.','جيل الأحياء.'], correct:1 },
-    { text:'وفقاً لنظرية "سيادة الشعب"، يعتبر الانتخاب:', options:['وظيفة وتكليفاً.','حقاً شخصياً للمواطن.','منحة من السلطة.'], correct:1 },
-    { text:'النتيجة المترتبة على الأخذ بنظرية "سيادة الشعب" هي:', options:['تقييد حق الانتخاب.','مسؤولية النائب أمام ناخبيه.','استقلال النائب.'], correct:1 },
-    { text:'القيد الذي يجعل حقوق الإنسان ليست "شأناً داخلياً" خالصاً هو:', options:['ضغوط جماعات المصالح.','التنظيم الدولي والمعاهدات.','قوة الدستور الوطني.'], correct:1 },
-    { text:'يظهر خطر "السيادة الرقمية" بشكل أساسي من خلال:', options:['الحروب التقليدية.','سيطرة الشركات التكنولوجية.','ضعف القوة العسكرية.'], correct:1 }
-  ]},
-  "3": { name: "المبحث الثالث", questions: [
-    { text:'المظلة التي ظهر تحتها مفهوم "السيادة الرقمية" تتعلق بـ:', options:['حماية الحدود الجغرافية.','سرية البيانات ومكانها.','التحالفات العسكرية.'], correct:1 },
-    { text:'تقسيم الدول بناءً على "الكثافة" و"التجانس العرقي" يندرج تحت:', options:['المعيار الديموغرافي.','المعيار الإقليمي.','المعيار السلطوي.'], correct:0 },
-    { text:'التزام دولة تركمانستان بالحياد الدائم يترتب عليه:', options:['فقدان شخصيتها الدولية.','تقييد سيادتها الخارجية.','خضوعها لوصاية دولية.'], correct:1 },
-    { text:'الفارق الجوهري بين "الانتداب" و"الوصاية" يكمن في:', options:['الهدف الاستقلال.','المظلة الدولية المنشئة.','نقل الثروات.'], correct:1 },
-    { text:'انتهاء الدور الفعلي لمجلس الوصاية كان بسبب:', options:['تعديل الميثاق.','استنفاد الغرض من إنشائه.','إلغاء النظام.'], correct:1 },
-    { text:'إذا قامت دولة موحدة بتفويض بعض الصلاحيات للمحافظات، فهذا يمس:', options:['الوظيفة التشريعية.','الوظيفة الإدارية.','الوظيفة السياسية.'], correct:1 },
-    { text:'الاستثناء التاريخي لوحدة تطبيق القوانين داخل الدولة البسيطة تحقق في:', options:['فرنسا.','السودان تحت الحكم الإنجليزي.','مصر.'], correct:1 },
-    { text:'الأثر الفوري لدخول دولتين في اتحاد فيدرالي على معاهداتهما السابقة:', options:['تظل سارية.','تنقضي تلقائياً.','تحال للولايات.'], correct:1 },
-    { text:'النزاع المسلح بين ولايتين في دولة فيدرالية يكيف كـ:', options:['حرب دولية.','تمرد داخلي (حرب أهلية).','نزاع كونفدرالي.'], correct:1 },
-    { text:'مشاركة الولايات في تعديل الدستور الاتحادي هو تطبيق لمبدأ:', options:['اللامركزية.','المشاركة.','الاستقلالية.'], correct:1 }
-  ]}
-};
-
-let currentQuestions = [];
-let currentIndex = 0;
-let userAnswers = [];
-let timerSeconds = 0;
-let timerInterval;
-let quizFinished = false;
-
-function startQuiz(id) {
-  currentQuestions = sectionsData[id].questions;
-  currentIndex = 0;
-  userAnswers = new Array(currentQuestions.length).fill(null);
-  timerSeconds = 0;
-  quizFinished = false;
-  document.getElementById('homeSection').style.display = 'none';
-  document.getElementById('quizSection').style.display = 'block';
-  renderQuestion();
-  startTimer();
-}
-
-function renderQuestion() {
-  const q = currentQuestions[currentIndex];
-  document.getElementById('qNumDisplay').textContent = currentIndex + 1;
-  document.getElementById('qTextDisplay').textContent = q.text;
-  document.getElementById('questionCounter').textContent = `السؤال ${currentIndex+1} / ${currentQuestions.length}`;
-  let html = '';
-  q.options.forEach((opt, i) => {
-    const checked = (userAnswers[currentIndex] === i) ? 'checked' : '';
-    html += `<div class="option-row" data-optidx="${i}">
-               <input type="radio" name="q" value="${i}" ${checked}>
-               <label>${String.fromCharCode(65+i)}) ${opt}</label>
-             </div>`;
-  });
-  document.getElementById('mcOptions').innerHTML = html;
-  updateButtons();
-}
-
-function selectOption(optIdx) {
-  if (userAnswers[currentIndex] !== null) return;
-  userAnswers[currentIndex] = optIdx;
-  // تحديث واجهة الاختيار
-  const rows = document.querySelectorAll('.option-row');
-  rows.forEach((row, idx) => {
-    const radio = row.querySelector('input');
-    if (idx === optIdx) {
-      radio.checked = true;
-    } else {
-      radio.checked = false;
+    function showCacheInfo() {
+        alert("ننصحك بمسح البيانات المؤقتة للمتصفح الخاص بك بشكل دوري لضمان رؤية آخر التحديثات على المنصة.");
     }
-  });
-  // الانتقال للسؤال التالي إذا لم يكن الأخير
-  if (currentIndex < currentQuestions.length - 1) {
-    currentIndex++;
-    renderQuestion();
-  } else {
-    // إذا كان آخر سؤال، ننتهي
-    updateButtons();
-  }
-}
 
-function updateButtons() {
-  const isLast = (currentIndex === currentQuestions.length - 1);
-  document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
-  document.getElementById('finishBtn').style.display = isLast ? 'inline-block' : 'none';
-}
-
-function startTimer() {
-  if (timerInterval) clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    if (!quizFinished) {
-      timerSeconds++;
-      const m = Math.floor(timerSeconds / 60);
-      const s = timerSeconds % 60;
-      document.getElementById('timerDisplay').textContent = `⏱️ ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    function showInfo() {
+        alert("في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.\n\nونود التوضيح أن المصدر الأصلي للأسئلة هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.");
     }
-  }, 1000);
-}
 
-function stopTimer() {
-  quizFinished = true;
-  if (timerInterval) clearInterval(timerInterval);
-}
+    function toggleSection(header) {
+        const content = header.nextElementSibling;
+        const isOpen = content.classList.contains('open');
 
-function finishQuiz() {
-  stopTimer();
-  let correct = 0;
-  for (let i = 0; i < currentQuestions.length; i++) {
-    if (userAnswers[i] !== null && userAnswers[i] === currentQuestions[i].correct) correct++;
-  }
-  document.getElementById('quizSection').style.display = 'none';
-  document.getElementById('resultSection').style.display = 'block';
-  document.getElementById('finalScoreDisplay').textContent = `${correct} / ${currentQuestions.length}`;
-  const percent = Math.round((correct / currentQuestions.length) * 100);
-  document.getElementById('percentageDisplay').textContent = `${percent}%`;
-}
+        document.querySelectorAll('.nav-section-content').forEach(el => {
+            el.classList.remove('open');
+            el.style.maxHeight = null;
+            el.style.opacity = '0';
+        });
+        document.querySelectorAll('.nav-section-header').forEach(el => {
+            el.classList.remove('active');
+        });
 
-function goPrev() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    renderQuestion();
-  }
-}
+        if (!isOpen) {
+            content.classList.add('open');
+            header.classList.add('active');
+            requestAnimationFrame(() => {
+                content.style.maxHeight = content.scrollHeight + 30 + 'px';
+                content.style.opacity = '1';
+            });
+        }
+    }
 
-function goNext() {
-  if (currentIndex < currentQuestions.length - 1) {
-    currentIndex++;
-    renderQuestion();
-  }
-}
+    window.addEventListener('DOMContentLoaded', function() {
+        const firstHeader = document.querySelector('.nav-section-header');
+        if (firstHeader) firstHeader.click();
+    });
 
-// ربط الأحداث
-document.querySelectorAll('.section-card[data-section]').forEach(card => {
-  card.addEventListener('click', () => startQuiz(card.dataset.section));
-});
-document.getElementById('prevBtn').addEventListener('click', goPrev);
-document.getElementById('nextBtn').addEventListener('click', goNext);
-document.getElementById('finishBtn').addEventListener('click', finishQuiz);
-document.getElementById('mainPageLinkBtn').addEventListener('click', () => {
-  window.location.href = "https://COFFEE595.github.io/MADAR/index.html";
-});
+    window.addEventListener('resize', function() {
+        document.querySelectorAll('.nav-section-content.open').forEach(el => {
+            el.style.maxHeight = el.scrollHeight + 30 + 'px';
+        });
+    });
 
-// تفويض أحداث خيارات الأسئلة (لأنها تُنشأ ديناميكياً)
-document.getElementById('mcOptions').addEventListener('click', (e) => {
-  const optionRow = e.target.closest('.option-row');
-  if (optionRow) {
-    const optIdx = parseInt(optionRow.dataset.optidx);
-    if (!isNaN(optIdx)) selectOption(optIdx);
-  }
-});
-
-// الوضع الليلي
-const savedTheme = localStorage.getItem('pol_theme') || 'light';
-if (savedTheme === 'dark') {
-  document.body.classList.add('dark');
-  document.getElementById('toggleThemeBtn').textContent = '☀️';
-} else {
-  document.getElementById('toggleThemeBtn').textContent = '🌙';
-}
-document.getElementById('toggleThemeBtn').addEventListener('click', () => {
-  const isDark = document.body.classList.contains('dark');
-  if (isDark) {
-    document.body.classList.remove('dark');
-    localStorage.setItem('pol_theme', 'light');
-    document.getElementById('toggleThemeBtn').textContent = '🌙';
-  } else {
-    document.body.classList.add('dark');
-    localStorage.setItem('pol_theme', 'dark');
-    document.getElementById('toggleThemeBtn').textContent = '☀️';
-  }
-});
+    const themeToggle = document.getElementById('toggleThemeBtn');
+    if (localStorage.getItem('madar_theme') === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.textContent = '☀️';
+    }
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark');
+        themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌓';
+        localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
 </script>
 </body>
-    </html>
+                                                                                                                    </html>
