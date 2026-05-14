@@ -1,231 +1,240 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>مقالي النظم السياسية والقانون الدستوري</title>
-  <!-- خط Cairo من Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:tight@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* =========================================
-       تصميم أكاديمي محسن للقراءة المريحة
-       ========================================= */
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9YE8DKCYD5');
+    </script>
     
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>مقالي النظم السياسية والقانون الدستوري</title>
+    <!-- خط Cairo من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:tight@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           تصميم أكاديمي محسن للقراءة المريحة
+           ========================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Cairo', 'Segoe UI', 'Traditional Arabic', sans-serif;
-      font-size: clamp(17px, 4.5vw, 23px);
-      line-height: 2;
-      color: #2c2c2c;
-      background: #fdfbf7;
-      margin: 0 auto;
-      padding: 2.5vw 3vw;
-      max-width: 68ch;
-      text-align: justify;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Cairo', 'Segoe UI', 'Traditional Arabic', sans-serif;
+            font-size: clamp(17px, 4.5vw, 23px);
+            line-height: 2;
+            color: #2c2c2c;
+            background: #fdfbf7;
+            margin: 0 auto;
+            padding: 2.5vw 3vw;
+            max-width: 68ch;
+            text-align: justify;
+            overflow-x: hidden;
+        }
 
-    /* الهوامش تتسع على الشاشات الكبيرة */
-    @media screen and (min-width: 900px) {
-      body { padding: 3rem 5vw; }
-    }
+        /* الهوامش تتسع على الشاشات الكبيرة */
+        @media screen and (min-width: 900px) {
+            body { padding: 3rem 5vw; }
+        }
 
-    @media print {
-      body {
-        font-size: 17px;
-        line-height: 1.9;
-        padding: 1.5cm 2cm;
-        max-width: 100%;
-        color: #000;
-        background: white;
-      }
-      h1 { page-break-before: always; page-break-after: avoid; }
-      h1:first-of-type { page-break-before: avoid; }
-      h2, h3 { page-break-after: avoid; }
-      .no-print { display: none; }
-    }
+        @media print {
+            body {
+                font-size: 17px;
+                line-height: 1.9;
+                padding: 1.5cm 2cm;
+                max-width: 100%;
+                color: #000;
+                background: white;
+            }
+            h1 { page-break-before: always; page-break-after: avoid; }
+            h1:first-of-type { page-break-before: avoid; }
+            h2, h3 { page-break-after: avoid; }
+            .no-print { display: none; }
+        }
 
-    /* صفحة العنوان */
-    .title-page {
-      text-align: center;
-      margin-bottom: 3.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 2px solid #c4a35a;
-    }
-    .title-page h1 {
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 700;
-      color: #1e3c5c;
-      margin-bottom: 0.5rem;
-      word-spacing: 0.1em;
-    }
-    .title-page h2 {
-      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
-      font-weight: 400;
-      color: #4a627a;
-      word-spacing: 0.15em;
-    }
+        /* صفحة العنوان */
+        .title-page {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid #c4a35a;
+        }
+        .title-page h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 700;
+            color: #1e3c5c;
+            margin-bottom: 0.5rem;
+            word-spacing: 0.1em;
+        }
+        .title-page h2 {
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+            font-weight: 400;
+            color: #4a627a;
+            word-spacing: 0.15em;
+        }
 
-    /* الفهرس */
-    .toc {
-      background: #ffffff;
-      border: 1px solid #e0dbcd;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-      padding: 2rem 2rem;
-      margin: 3rem 0;
-    }
-    .toc-title {
-      margin-top: 0;
-      border-bottom: 1px solid #d4cdb2;
-      padding-bottom: 0.8rem;
-      color: #1e3c5c;
-      font-size: 1.5rem;
-      font-weight: 600;
-      word-spacing: 0.1em;
-    }
-    .toc-note {
-      background: #fff7e5;
-      border-right: 4px solid #c4a35a;
-      padding: 0.8rem 1rem;
-      margin: 1.2rem 0 1rem;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      color: #5a4a2c;
-    }
-    .toc ol {
-      list-style: none;
-      padding-right: 0;
-    }
-    .toc li {
-      margin: 0.7rem 0;
-      font-size: 1.1rem;
-    }
-    .toc a {
-      color: #0d4b6e;
-      text-decoration: none;
-      transition: color 0.2s, border-color 0.2s;
-      word-spacing: 0.05em;
-    }
-    .toc a:hover {
-      color: #b45f06;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
+        /* الفهرس */
+        .toc {
+            background: #ffffff;
+            border: 1px solid #e0dbcd;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+            padding: 2rem 2rem;
+            margin: 3rem 0;
+        }
+        .toc-title {
+            margin-top: 0;
+            border-bottom: 1px solid #d4cdb2;
+            padding-bottom: 0.8rem;
+            color: #1e3c5c;
+            font-size: 1.5rem;
+            font-weight: 600;
+            word-spacing: 0.1em;
+        }
+        .toc-note {
+            background: #fff7e5;
+            border-right: 4px solid #c4a35a;
+            padding: 0.8rem 1rem;
+            margin: 1.2rem 0 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #5a4a2c;
+        }
+        .toc ol {
+            list-style: none;
+            padding-right: 0;
+        }
+        .toc li {
+            margin: 0.7rem 0;
+            font-size: 1.1rem;
+        }
+        .toc a {
+            color: #0d4b6e;
+            text-decoration: none;
+            transition: color 0.2s, border-color 0.2s;
+            word-spacing: 0.05em;
+        }
+        .toc a:hover {
+            color: #b45f06;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
 
-    /* العناوين */
-    h1 {
-      font-size: clamp(1.8rem, 5vw, 2.4rem);
-      font-weight: 700;
-      color: #1e3c5c;
-      margin-bottom: 1.8rem;
-      border-bottom: 1.5px solid #c4a35a;
-      padding-bottom: 0.6rem;
-      word-spacing: 0.08em;
-    }
-    h2 {
-      font-size: clamp(1.4rem, 4vw, 1.8rem);
-      font-weight: 600;
-      color: #2c3e50;
-      margin: 2rem 0 1rem;
-      border-right: 5px solid #c4a35a;
-      padding-right: 0.9rem;
-      word-spacing: 0.06em;
-    }
-    h3 {
-      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-      font-weight: 600;
-      color: #3a5470;
-      margin: 1.6rem 0 0.6rem;
-      padding-right: 0.7rem;
-      border-right: 3px solid #b0a88c;
-      word-spacing: 0.04em;
-    }
+        /* العناوين */
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            font-weight: 700;
+            color: #1e3c5c;
+            margin-bottom: 1.8rem;
+            border-bottom: 1.5px solid #c4a35a;
+            padding-bottom: 0.6rem;
+            word-spacing: 0.08em;
+        }
+        h2 {
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+            border-right: 5px solid #c4a35a;
+            padding-right: 0.9rem;
+            word-spacing: 0.06em;
+        }
+        h3 {
+            font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+            font-weight: 600;
+            color: #3a5470;
+            margin: 1.6rem 0 0.6rem;
+            padding-right: 0.7rem;
+            border-right: 3px solid #b0a88c;
+            word-spacing: 0.04em;
+        }
 
-    p {
-      margin: 1em 0 1.2em;
-    }
-    ul, ol {
-      margin-right: 2rem;
-      padding-right: 0.5rem;
-      margin-bottom: 1.2em;
-    }
-    li {
-      margin-bottom: 0.6em;
-    }
+        p {
+            margin: 1em 0 1.2em;
+        }
+        ul, ol {
+            margin-right: 2rem;
+            padding-right: 0.5rem;
+            margin-bottom: 1.2em;
+        }
+        li {
+            margin-bottom: 0.6em;
+        }
 
-    /* علامة "سؤال مقالي" */
-    .tag {
-      display: inline-block;
-      background: #fdf3e5;
-      color: #b45f06;
-      font-size: 0.75em;
-      font-weight: 600;
-      padding: 0.15em 0.6em;
-      border-radius: 20px;
-      margin-right: 0.5em;
-      vertical-align: middle;
-      border: 1px solid #e9cd9f;
-      word-spacing: 0.05em;
-    }
+        /* علامة "سؤال مقالي" */
+        .tag {
+            display: inline-block;
+            background: #fdf3e5;
+            color: #b45f06;
+            font-size: 0.75em;
+            font-weight: 600;
+            padding: 0.15em 0.6em;
+            border-radius: 20px;
+            margin-right: 0.5em;
+            vertical-align: middle;
+            border: 1px solid #e9cd9f;
+            word-spacing: 0.05em;
+        }
 
-    /* مربعات الملاحظات */
-    .note-box {
-      background: #f2efe6;
-      border: 1px solid rgba(196, 163, 90, 0.25);
-      padding: 1.8rem 2.2rem;
-      margin: 2rem 0;
-      border-radius: 12px;
-      color: #2c2c2c;
-      box-shadow: 0 2px 8px rgba(196, 163, 90, 0.08);
-      word-spacing: 0.02em;
-      line-height: 2.2;
-    }
+        /* مربعات الملاحظات */
+        .note-box {
+            background: #f2efe6;
+            border: 1px solid rgba(196, 163, 90, 0.25);
+            padding: 1.8rem 2.2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            color: #2c2c2c;
+            box-shadow: 0 2px 8px rgba(196, 163, 90, 0.08);
+            word-spacing: 0.02em;
+            line-height: 2.2;
+        }
 
-    /* تمييز المصطلحات */
-    strong {
-      color: #1e3c5c;
-      font-weight: 600;
-    }
+        /* تمييز المصطلحات */
+        strong {
+            color: #1e3c5c;
+            font-weight: 600;
+        }
 
-    /* تذييل التليجرام */
-    .telegram-footer {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 1.1rem;
-      color: #4a627a;
-      border-top: 1.5px solid #d4cdb2;
-      padding-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      word-spacing: 0.08em;
-    }
-    .telegram-footer a {
-      color: #0d4b6e;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .telegram-footer a:hover {
-      text-decoration: underline;
-      color: #b45f06;
-    }
-  </style>
+        /* تذييل التليجرام */
+        .telegram-footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4a627a;
+            border-top: 1.5px solid #d4cdb2;
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            word-spacing: 0.08em;
+        }
+        .telegram-footer a {
+            color: #0d4b6e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .telegram-footer a:hover {
+            text-decoration: underline;
+            color: #b45f06;
+        }
+    </style>
 </head>
 <body>
 
 <!-- صفحة العنوان -->
 <div class="title-page">
-  <h1> 2026/5 اجابات مقالي القانون الدستوري والنظم السياسيه</h1>
-  <h2>الهم صلي وسلم وبارك علي سيدنا محمد وعلي اله وصحبه اجمعين</h2>
+  <h1>موسوعة القانون الدستوري ونظم الحكم</h1>
+  <h2>دراسة أكاديمية في المفاهيم والنظم الدستورية</h2>
 </div>
 
 <!-- فهرس المحتويات -->
@@ -365,7 +374,7 @@
 
 <h2>ثانياً: الأساليب الديمقراطية في وضع الدساتير</h2>
 <h3>١. أسلوب الجمعية النيابية التأسيسية</h3>
-<p>يتمثل في قيام الشعب وحده بانتخاب جمعية تنحصر مهمتها في وضع وثيقة دستورية، بحيث تصبح هذه الأخيرة نافذة بمجرد تمامها دون الحاجة إلى موافقة الحاكم أو الشعب. وعادةً ما يُطلق عليها اسم السلطة التأسيسية الأصلية (المؤسِسة) تمييزاً لها عن السلطة التأسيسية المشتقة (المنشأة). فالسلطة الأولى تعتبر أعلى سلطة في الدولة، ولها إنشاء كافة السلطات القائمة على رأسها السلطة التأسيسية المشتقة التي تتولى وضع النصوص الدستورية أو تعديلها وفقاً للطريقة المحددة في الدستور القائم فعلاً. وتنتمي هذه الطريقة إلى صور الديمقراطية النيابية، حيث يباشر الشعب سلطته التأسيسية بشكل غير مباشر. ومن أمثلتها تاريخياً: الدستور الأمريكي لعام 1787، والدستور الفرنسي لعام 1791، والدستور الإيطالي لعام 1947.</p>
+<p>يتمثل في قيام الشعب وحده بانتخاب جمعية تنحصر مهمتها في وضع وثيقة دستورية، بحيث تصبح هذه الأخيرة نافذة بمجرد تمامها دون الحاجة إلى موافقة الحاكم أو الشعب. وعادةً ما يُطلق عليها اسم السلطة التأسيسية الأصلية (المؤسِكة) تمييزاً لها عن السلطة التأسيسية المشتقة (المنشأة). فالسلطة الأولى تعتبر أعلى سلطة في الدولة، ولها إنشاء كافة السلطات القائمة على رأسها السلطة التأسيسية المشتقة التي تتولى وضع النصوص الدستورية أو تعديلها وفقاً للطريقة المحددة في الدستور القائم فعلاً. وتنتمي هذه الطريقة إلى صور الديمقراطية النيابية، حيث يباشر الشعب سلطته التأسيسية بشكل غير مباشر. ومن أمثلتها تاريخياً: الدستور الأمريكي لعام 1787، والدستور الفرنسي لعام 1791، والدستور الإيطالي لعام 1947.</p>
 <h3>٢. أسلوب الاستفتاء الدستوري</h3>
 <p>يُعد أكثر الأساليب ديمقراطية، وفيه يقوم الشعب بنفسه ومباشرة بالموافقة على الدستور، ولا يكون مشروع الدستور ملزماً قانوناً إلا إذا وافق عليه الشعب مباشرة بالأغلبية. ويُعتبر هذا الأسلوب تعبيراً عن الديمقراطية المباشرة. وهناك طريقتان لهذا الأسلوب:</p>
 <ul>
@@ -523,5 +532,22 @@
   <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
 </div>
 
+<script>
+    // ================= كود الحماية =================
+    (function() {
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || e.key === 'v' || e.key === 'V' || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault(); return false;
+            }
+            if (e.key === 'F12') { e.preventDefault(); return false; }
+        });
+        document.querySelectorAll('*').forEach(el => {
+            el.addEventListener('selectstart', (e) => { e.preventDefault(); return false; });
+            el.addEventListener('dragstart', (e) => { e.preventDefault(); return false; });
+        });
+        document.addEventListener('copy', (e) => { e.preventDefault(); return false; });
+    })();
+</script>
 </body>
-</html>
+  </html>
