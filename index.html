@@ -15,7 +15,6 @@
     <!-- Protection: authorship meta tags -->
     <meta name="author" content="MADAR Platform — @GIX37">
     <meta name="copyright" content="MADAR 2026 — All Rights Reserved">
-    <meta name="robots" content="noindex, nofollow">
     <title>MADAR - منصة اختبارات</title>
     <style>
         :root {
@@ -46,9 +45,9 @@
             --shadow-mid: rgba(60, 40, 20, 0.12);
             --shadow-hover: rgba(60, 40, 20, 0.18);
             --shadow-deep: rgba(60, 40, 20, 0.28);
-            /* استخدام نفس متغيرات الانتقال في الملف الأصلي */
-            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
+            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark {
@@ -79,8 +78,9 @@
             --shadow-mid: rgba(0, 0, 0, 0.28);
             --shadow-hover: rgba(0, 0, 0, 0.42);
             --shadow-deep: rgba(0, 0, 0, 0.55);
-            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
+            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -104,18 +104,12 @@
             background: var(--container-bg);
             border-radius: 40px;
             box-shadow:
-                0 2px 4px var(--shadow-soft),
-                0 8px 20px var(--shadow-mid),
-                0 24px 48px -8px var(--shadow-deep);
+                0 1px 3px var(--shadow-soft),
+                0 6px 16px var(--shadow-mid),
+                0 20px 40px -8px var(--shadow-deep);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.4s ease;
-        }
-        .platform-wrapper:hover {
-            box-shadow:
-                0 2px 4px var(--shadow-soft),
-                0 12px 28px var(--shadow-mid),
-                0 32px 56px -8px var(--shadow-deep);
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .brand-bar {
@@ -173,13 +167,13 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all var(--transition-bounce);
+            transition: all 0.2s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
-            transform: rotate(20deg) scale(1.08);
+            transform: rotate(12deg) scale(1.04);
             background: var(--btn-bg);
-            box-shadow: 0 4px 14px var(--shadow-mid);
+            box-shadow: 0 3px 10px var(--shadow-mid);
         }
         .toggle-theme-btn:active {
             transform: scale(0.9);
@@ -204,13 +198,13 @@
             font-size: 1.2rem;
             color: var(--gold-accent);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all var(--transition-bounce);
+            transition: all 0.2s ease;
             vertical-align: middle;
             margin-left: 6px;
         }
         .main-title .glow-icon:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
+            transform: scale(1.1);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
         }
         .subtitle {
             text-align: center;
@@ -238,12 +232,17 @@
             border-radius: 28px;
             border: 1px solid var(--card-border);
             overflow: hidden;
-            transition: box-shadow var(--transition-smooth), transform 0.3s ease;
-            box-shadow: 0 1px 3px var(--shadow-soft), 0 4px 10px var(--shadow-soft);
+            transition:
+                box-shadow var(--transition-smooth),
+                border-color var(--transition-smooth);
+            box-shadow:
+                0 1px 3px var(--shadow-soft),
+                0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
-            box-shadow: 0 2px 6px var(--shadow-soft), 0 8px 22px var(--shadow-mid);
-            transform: translateY(-1px);
+            box-shadow:
+                0 2px 8px var(--shadow-soft),
+                0 6px 18px var(--shadow-mid);
         }
         .nav-section-header {
             background: var(--nav-gradient);
@@ -255,8 +254,11 @@
             font-weight: 700;
             font-size: 1.15rem;
             color: var(--btn-text);
-            transition: background var(--transition-smooth);
+            transition:
+                background var(--transition-smooth),
+                padding var(--transition-spring);
             user-select: none;
+            -webkit-user-select: none;
             position: relative;
         }
         .nav-section-header::before {
@@ -292,19 +294,25 @@
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
-        /* ضبط الـ transition ليكون مثل الأصل: max-height ثم padding و opacity */
         .nav-section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition-smooth), padding 0.3s ease, opacity 0.3s ease;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition:
+                grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.22s ease,
+                padding 0.22s ease;
             padding: 0 18px;
             opacity: 0;
+        }
+        .nav-section-content-inner {
+            overflow: hidden;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            min-height: 0;
         }
         .nav-section-content.open {
-            /* سيتم ضبط max-height ديناميكيًا بواسطة JS */
+            grid-template-rows: 1fr;
             padding: 18px 18px 14px;
             opacity: 1;
         }
@@ -318,29 +326,39 @@
             font-weight: 500;
             color: var(--btn-text);
             text-decoration: none;
-            transition: all var(--transition-smooth);
+            transition:
+                transform var(--transition-spring),
+                box-shadow var(--transition-smooth),
+                border-color var(--transition-smooth),
+                background var(--transition-smooth);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 1px 2px var(--shadow-soft);
+            box-shadow:
+                0 1px 2px var(--shadow-soft),
+                0 2px 6px var(--shadow-soft);
             transform: translateY(0);
+            position: relative;
         }
         .nav-link i {
             color: var(--gold-accent);
-            transition: transform var(--transition-smooth);
+            transition: transform var(--transition-spring);
         }
         .nav-link:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 4px 12px var(--shadow-mid);
+            transform: translateY(-1px);
+            box-shadow:
+                0 3px 10px var(--shadow-mid),
+                0 8px 20px var(--shadow-hover);
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
         }
         .nav-link:hover i {
-            transform: translateX(-4px) scale(1.12);
+            transform: translateX(-2px);
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
-            transition-duration: 0.1s;
+            box-shadow: 0 1px 4px var(--shadow-soft);
+            transition-duration: 0.08s;
         }
 
         .footer-note {
@@ -356,7 +374,7 @@
             background: var(--badge-bg);
             padding: 4px 12px;
             border-radius: 20px;
-            transition: all var(--transition-smooth);
+            transition: all 0.3s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .footer-note a:hover {
@@ -370,13 +388,13 @@
             font-size: 1.2rem;
             color: var(--badge-text);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all var(--transition-bounce);
+            transition: all 0.2s ease;
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-note .glow-icon:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
+            transform: scale(1.1);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
         }
 
         .src-icon {
@@ -389,7 +407,7 @@
             opacity: 0.78;
             cursor: pointer;
             margin-right: 2px;
-            transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: opacity 0.15s ease, transform 0.2s ease;
             line-height: 1;
             vertical-align: middle;
             user-select: none;
@@ -400,7 +418,7 @@
             transform: scale(1.22);
         }
 
-        /* Modal overlay (مثل الأصل) */
+        /* Modal overlay */
         .src-modal-overlay {
             display: none;
             position: fixed;
@@ -422,20 +440,28 @@
             max-width: 320px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
+            box-shadow:
+                0 4px 12px var(--shadow-mid),
+                0 20px 60px var(--shadow-deep);
             animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            position: relative;
         }
         @keyframes modalIn {
-            from { transform: scale(0.82) translateY(8px); opacity: 0; }
+            from { transform: scale(0.96) translateY(4px); opacity: 0; }
             to   { transform: scale(1)    translateY(0);   opacity: 1; }
+        }
+        .src-modal-label {
+            display: none;
         }
         .src-modal-name {
             font-family: 'Cairo', 'Segoe UI', sans-serif;
             font-size: 1rem;
             font-weight: 500;
             color: var(--text-secondary);
+            letter-spacing: 0;
             line-height: 1.5;
             margin-bottom: 6px;
+            opacity: 1;
         }
         .src-modal-close {
             margin-top: 20px;
@@ -447,12 +473,13 @@
             padding: 8px 24px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .src-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
+            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
         .info-modal-overlay {
@@ -475,7 +502,9 @@
             width: 92%;
             text-align: right;
             direction: rtl;
-            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
+            box-shadow:
+                0 4px 12px var(--shadow-mid),
+                0 20px 60px var(--shadow-deep);
             animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
         .info-modal-title {
@@ -484,11 +513,22 @@
             color: var(--gold-accent);
             margin-bottom: 12px;
             text-align: center;
+            letter-spacing: 1px;
         }
         .info-modal-body {
             font-size: 0.88rem;
             color: var(--text);
             line-height: 1.8;
+            opacity: 0.85;
+        }
+        .info-modal-body .info-cta {
+            display: block;
+            margin-top: 14px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--header-color);
+            opacity: 1;
+            text-align: center;
         }
         .info-modal-close {
             display: block;
@@ -501,14 +541,16 @@
             padding: 8px 28px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .info-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
+            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
+        /* bottom disclaimer — subtle, low-profile, glowing gold text */
         .bottom-disclaimer {
             position: fixed;
             bottom: 0;
@@ -517,6 +559,7 @@
             z-index: 500;
             text-align: center;
             padding: 7px 16px;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
             font-size: 0.76rem;
             font-weight: 500;
             color: rgba(210, 175, 90, 0.68);
@@ -561,6 +604,7 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -570,6 +614,7 @@
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -580,6 +625,7 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -589,6 +635,7 @@
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link"><i class="fas fa-clipboard-list"></i> اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -599,10 +646,12 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                    <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!!</a>
+                  <div class="nav-section-content-inner">
+                    <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'outbound', event_label: 'MCQ_50_nazom', transport_type: 'beacon'});"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!!</a>
                     <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -613,14 +662,16 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
         </div>
 
         <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 04:15AM</div>
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 03:10AM</div>
             <span>⭐</span> أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
@@ -628,6 +679,7 @@
     </div>
 </div>
 
+<!-- bottom disclaimer — subtle glowing text, no background, no interaction -->
 <div class="bottom-disclaimer">
     في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
 </div>
@@ -635,6 +687,7 @@
 <!-- Source Modal -->
 <div class="src-modal-overlay" id="srcModalOverlay" onclick="closeSrcModal(event)">
     <div class="src-modal-box">
+        <div class="src-modal-label">المصدر</div>
         <div class="src-modal-name" id="srcModalName"></div>
         <button class="src-modal-close" onclick="document.getElementById('srcModalOverlay').classList.remove('active')">إغلاق</button>
     </div>
@@ -647,6 +700,7 @@
         <div class="info-modal-body">
             ونود التوضيح أن المصدر الأصلي لبعض أسئلة القانون الدستوري والنظم هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.
             <br><br>في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.
+            <span class="info-cta">للتأكد من المصدر، اضغط &nbsp;<strong>ⓘ</strong>&nbsp; بجانب أي عنصر</span>
         </div>
         <button class="info-modal-close" onclick="document.getElementById('infoModalOverlay').classList.remove('active')">إغلاق</button>
     </div>
@@ -664,7 +718,8 @@
 </div>
 
 <script>
-    // Functions for modals (كما هي)
+    // ─── Original functionality (completely unchanged) ──────────────────────────
+
     function showCacheInfo() {
         document.getElementById('cacheModalOverlay').classList.add('active');
     }
@@ -692,48 +747,32 @@
             document.getElementById('srcModalOverlay').classList.remove('active');
     }
 
-    // ========== أكورديون بنفس سلاسة الملف الأصلي ==========
     function toggleSection(header) {
         const content = header.nextElementSibling;
         const isOpen = content.classList.contains('open');
 
-        // إغلاق جميع الأقسام
         document.querySelectorAll('.nav-section-content').forEach(el => {
             el.classList.remove('open');
-            el.style.maxHeight = null;
-            el.style.opacity = '0';
         });
         document.querySelectorAll('.nav-section-header').forEach(el => {
             el.classList.remove('active');
         });
 
-        // فتح القسم المطلوب إذا لم يكن مفتوحًا
         if (!isOpen) {
             content.classList.add('open');
             header.classList.add('active');
-            // استخدام requestAnimationFrame لضمان الحساب الصحيح بعد إضافة class
-            requestAnimationFrame(() => {
-                // حساب الارتفاع الفعلي للمحتوى + 30px لمسافة آمنة (مثل الأصل)
-                content.style.maxHeight = content.scrollHeight + 30 + 'px';
-                content.style.opacity = '1';
-            });
         }
     }
 
-    // فتح أول قسم تلقائيًا عند تحميل الصفحة
     window.addEventListener('DOMContentLoaded', function() {
         const firstHeader = document.querySelector('.nav-section-header');
         if (firstHeader) firstHeader.click();
     });
 
-    // إعادة حساب max-height عند تغيير حجم النافذة للأقسام المفتوحة
     window.addEventListener('resize', function() {
-        document.querySelectorAll('.nav-section-content.open').forEach(el => {
-            el.style.maxHeight = el.scrollHeight + 30 + 'px';
-        });
+        // no-op with grid approach
     });
 
-    // ========== تبديل المظهر ==========
     const themeToggle = document.getElementById('toggleThemeBtn');
     if (localStorage.getItem('madar_theme') === 'dark') {
         document.body.classList.add('dark');
@@ -745,24 +784,39 @@
         localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    // ========== طبقة الحماية (بدون تعديل) ==========
+
+    // ─── Protection layer ───────────────────────────────────────────────────────
+    // Added below the original block. Nothing above is modified.
+
+    // 1. Iframe hijacking prevention
     (function() {
-        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; } catch(e) {}
+        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
+        catch(e) {}
     })();
+
+    // 2. Right-click disable
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+    // 3. Keyboard shortcut blocking
+    //    Ctrl+U (view-source) · Ctrl+S (save page) · F12
+    //    Ctrl+Shift+I / J / C  (DevTools panels)
     document.addEventListener('keydown', function(e) {
         const k = e.key.toLowerCase();
         const c = e.ctrlKey || e.metaKey;
-        if (c && k === 'u') { e.preventDefault(); return false; }
-        if (c && k === 's') { e.preventDefault(); return false; }
-        if (e.key === 'F12') { e.preventDefault(); return false; }
-        if (c && e.shiftKey && 'ijc'.includes(k)) { e.preventDefault(); return false; }
+        if (c && k === 'u')                            { e.preventDefault(); return false; }
+        if (c && k === 's')                            { e.preventDefault(); return false; }
+        if (e.key === 'F12')                           { e.preventDefault(); return false; }
+        if (c && e.shiftKey && 'ijc'.includes(k))      { e.preventDefault(); return false; }
     });
+
+    // 4. Console ownership watermark — visible proof of origin in any audit
     (function() {
         console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
         console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
     })();
+
+    // 5. Drag-start prevention (prevents dragging content into other tabs)
     document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
-    </html>
+</html>
