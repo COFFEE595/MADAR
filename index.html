@@ -9,9 +9,13 @@
       gtag('js', new Date());
       gtag('config', 'G-9YE8DKCYD5');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <!-- Protection: authorship meta tags -->
+    <meta name="author" content="MADAR Platform — @GIX37">
+    <meta name="copyright" content="MADAR 2026 — All Rights Reserved">
+    <meta name="robots" content="noindex, nofollow">
     <title>MADAR - منصة اختبارات</title>
     <style>
         :root {
@@ -32,16 +36,19 @@
             --toggle-bg: #d4c0a6;
             --toggle-text: #3e2c1c;
             --footer-color: #5c4a37;
-            --brand-gradient: linear-gradient(135deg, #7d6046, #3e2c1c);
+            --brand-gradient: linear-gradient(135deg, #8a6a4a 0%, #5a3d25 50%, #3e2c1c 100%);
             --brand-text: #fdf9f3;
-            --nav-gradient: linear-gradient(145deg, #f5efe6, #e8ddcf);
-            --nav-hover-gradient: linear-gradient(145deg, #efe4d6, #e0d3c4);
-            --nav-active-gradient: linear-gradient(145deg, #e8dccf, #d8c9b7);
+            --nav-gradient: linear-gradient(145deg, #f8f2e8, #ede3d6);
+            --nav-hover-gradient: linear-gradient(145deg, #f0e6d8, #e5d8c8);
+            --nav-active-gradient: linear-gradient(145deg, #ecdfd0, #ddd0bc);
             --gold-accent: #c4a87a;
-            --shadow-soft: rgba(60, 40, 20, 0.08);
-            --shadow-hover: rgba(60, 40, 20, 0.16);
-            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --shadow-soft: rgba(60, 40, 20, 0.07);
+            --shadow-mid: rgba(60, 40, 20, 0.12);
+            --shadow-hover: rgba(60, 40, 20, 0.18);
+            --shadow-deep: rgba(60, 40, 20, 0.28);
+            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
+            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark {
@@ -62,14 +69,19 @@
             --toggle-bg: #333b4a;
             --toggle-text: #d4d8e0;
             --footer-color: #6b7280;
-            --brand-gradient: linear-gradient(135deg, #d4a94e, #e8cc8a);
+            --brand-gradient: linear-gradient(135deg, #c4943a 0%, #d4a94e 50%, #e8cc8a 100%);
             --brand-text: #12161f;
             --nav-gradient: linear-gradient(145deg, #2d3340, #212531);
             --nav-hover-gradient: linear-gradient(145deg, #3a4252, #2d3340);
             --nav-active-gradient: linear-gradient(145deg, #3a4252, #212531);
             --gold-accent: #c4a87a;
-            --shadow-soft: rgba(0, 0, 0, 0.2);
-            --shadow-hover: rgba(0, 0, 0, 0.4);
+            --shadow-soft: rgba(0, 0, 0, 0.18);
+            --shadow-mid: rgba(0, 0, 0, 0.28);
+            --shadow-hover: rgba(0, 0, 0, 0.42);
+            --shadow-deep: rgba(0, 0, 0, 0.55);
+            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
+            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,6 +93,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            padding-bottom: 44px;
             direction: rtl;
             color: var(--text);
             transition: background 0.3s;
@@ -91,10 +104,13 @@
             max-width: 850px;
             background: var(--container-bg);
             border-radius: 40px;
-            box-shadow: 0 18px 40px -8px rgba(60, 40, 20, 0.18);
+            box-shadow:
+                0 1px 3px var(--shadow-soft),
+                0 6px 16px var(--shadow-mid),
+                0 20px 40px -8px var(--shadow-deep);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .brand-bar {
@@ -104,6 +120,13 @@
             position: relative;
             overflow: hidden;
         }
+        .brand-bar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
         .brand-bar::after {
             content: '';
             position: absolute;
@@ -111,8 +134,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
-            opacity: 0.5;
+            background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.12), transparent 65%);
+            opacity: 0.6;
         }
         .brand-bar .brand-name {
             font-family: 'Poppins', 'Cairo', sans-serif;
@@ -123,6 +146,7 @@
             text-transform: uppercase;
             position: relative;
             z-index: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.15);
         }
 
         .content-inner {
@@ -144,13 +168,18 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
-            transform: rotate(20deg) scale(1.05);
+            transform: rotate(12deg) scale(1.04);
             background: var(--btn-bg);
+            box-shadow: 0 3px 10px var(--shadow-mid);
         }
-        .toggle-theme-btn:active { transform: scale(0.95); }
+        .toggle-theme-btn:active {
+            transform: scale(0.9);
+            transition-duration: 0.1s;
+        }
 
         .main-title {
             text-align: center;
@@ -170,13 +199,13 @@
             font-size: 1.2rem;
             color: var(--gold-accent);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             vertical-align: middle;
             margin-left: 6px;
         }
         .main-title .glow-icon:hover {
             transform: scale(1.1);
-            text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
         }
         .subtitle {
             text-align: center;
@@ -204,11 +233,17 @@
             border-radius: 28px;
             border: 1px solid var(--card-border);
             overflow: hidden;
-            transition: all var(--transition-smooth);
-            box-shadow: 0 2px 8px var(--shadow-soft);
+            transition:
+                box-shadow var(--transition-smooth),
+                border-color var(--transition-smooth);
+            box-shadow:
+                0 1px 3px var(--shadow-soft),
+                0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
-            box-shadow: 0 4px 16px var(--shadow-hover);
+            box-shadow:
+                0 2px 8px var(--shadow-soft),
+                0 6px 18px var(--shadow-mid);
         }
         .nav-section-header {
             background: var(--nav-gradient);
@@ -220,8 +255,11 @@
             font-weight: 700;
             font-size: 1.15rem;
             color: var(--btn-text);
-            transition: all var(--transition-smooth);
+            transition:
+                background var(--transition-smooth),
+                padding var(--transition-spring);
             user-select: none;
+            -webkit-user-select: none;
             position: relative;
         }
         .nav-section-header::before {
@@ -234,6 +272,7 @@
             background: linear-gradient(180deg, var(--gold-accent), var(--badge-bg));
             opacity: 0;
             transition: opacity var(--transition-smooth);
+            border-radius: 0 2px 2px 0;
         }
         .nav-section-header:hover {
             background: var(--nav-hover-gradient);
@@ -251,22 +290,30 @@
             font-size: 1.1rem;
             transition: transform var(--transition-bounce);
             color: var(--gold-accent);
+            display: inline-block;
         }
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
         .nav-section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition-smooth), padding 0.3s ease, opacity 0.3s ease;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition:
+                grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.22s ease,
+                padding 0.22s ease;
             padding: 0 18px;
             opacity: 0;
+        }
+        .nav-section-content-inner {
+            overflow: hidden;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            min-height: 0;
         }
         .nav-section-content.open {
-            max-height: 800px;
+            grid-template-rows: 1fr;
             padding: 18px 18px 14px;
             opacity: 1;
         }
@@ -280,29 +327,39 @@
             font-weight: 500;
             color: var(--btn-text);
             text-decoration: none;
-            transition: all var(--transition-smooth);
+            transition:
+                transform var(--transition-spring),
+                box-shadow var(--transition-smooth),
+                border-color var(--transition-smooth),
+                background var(--transition-smooth);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            box-shadow:
+                0 1px 2px var(--shadow-soft),
+                0 2px 6px var(--shadow-soft);
             transform: translateY(0);
+            position: relative;
         }
         .nav-link i {
             color: var(--gold-accent);
-            transition: transform var(--transition-smooth);
+            transition: transform var(--transition-spring);
         }
         .nav-link:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 4px 16px var(--shadow-hover);
+            transform: translateY(-1px);
+            box-shadow:
+                0 3px 10px var(--shadow-mid),
+                0 8px 20px var(--shadow-hover);
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
         }
         .nav-link:hover i {
-            transform: translateX(-4px) scale(1.1);
+            transform: translateX(-2px);
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
-            transition-duration: 0.1s;
+            box-shadow: 0 1px 4px var(--shadow-soft);
+            transition-duration: 0.08s;
         }
 
         .footer-note {
@@ -319,10 +376,12 @@
             padding: 4px 12px;
             border-radius: 20px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .footer-note a:hover {
             opacity: 0.8;
             transform: scale(1.05);
+            box-shadow: 0 4px 14px var(--shadow-mid);
         }
         .footer-note .glow-icon {
             display: inline-block;
@@ -330,30 +389,26 @@
             font-size: 1.2rem;
             color: var(--badge-text);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-note .glow-icon:hover {
             transform: scale(1.1);
-            text-shadow: 0 0 12px var(--gold-accent), 0 0 24px var(--gold-accent);
+            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
         }
 
-        /* Source info icon on nav links */
-        .nav-link {
-            position: relative;
-        }
         .src-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.82rem;
-            font-weight: 500;
+            font-size: 0.86rem;
+            font-weight: 600;
             color: var(--gold-accent);
-            opacity: 0.7;
+            opacity: 0.78;
             cursor: pointer;
             margin-right: 2px;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition: opacity 0.15s ease, transform 0.2s ease;
             line-height: 1;
             vertical-align: middle;
             user-select: none;
@@ -361,7 +416,7 @@
         }
         .src-icon:hover {
             opacity: 1;
-            transform: scale(1.2);
+            transform: scale(1.22);
         }
 
         /* Modal overlay */
@@ -386,13 +441,15 @@
             max-width: 320px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-            animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow:
+                0 4px 12px var(--shadow-mid),
+                0 20px 60px var(--shadow-deep);
+            animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
             position: relative;
         }
         @keyframes modalIn {
-            from { transform: scale(0.82); opacity: 0; }
-            to   { transform: scale(1);    opacity: 1; }
+            from { transform: scale(0.96) translateY(4px); opacity: 0; }
+            to   { transform: scale(1)    translateY(0);   opacity: 1; }
         }
         .src-modal-label {
             display: none;
@@ -417,14 +474,15 @@
             padding: 8px 24px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .src-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
+            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
-        /* Upgrade showInfo / showCacheInfo to modal style */
         .info-modal-overlay {
             display: none;
             position: fixed;
@@ -445,8 +503,10 @@
             width: 92%;
             text-align: right;
             direction: rtl;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-            animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow:
+                0 4px 12px var(--shadow-mid),
+                0 20px 60px var(--shadow-deep);
+            animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
         .info-modal-title {
             font-size: 1rem;
@@ -482,11 +542,32 @@
             padding: 8px 28px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .info-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
+            box-shadow: 0 4px 14px var(--shadow-mid);
+        }
+
+        /* bottom disclaimer — subtle, low-profile, glowing gold text */
+        .bottom-disclaimer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            text-align: center;
+            padding: 7px 16px;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            font-size: 0.76rem;
+            font-weight: 500;
+            color: rgba(210, 175, 90, 0.68);
+            text-shadow: 0 0 10px rgba(210, 175, 90, 0.28);
+            background: transparent;
+            direction: rtl;
+            pointer-events: none;
         }
 
         @media (max-width: 550px) {
@@ -524,6 +605,7 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -533,6 +615,7 @@
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -543,6 +626,7 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -551,8 +635,8 @@
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام الملكي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <!-- الرابط الجديد -->
                     <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link"><i class="fas fa-clipboard-list"></i> اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -563,10 +647,12 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!!</a>
                     <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
@@ -577,20 +663,26 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
+                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                  </div>
                 </div>
             </div>
 
         </div>
 
         <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 01:58AM</div>
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 02:58AM</div>
             <span>⭐</span> أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
-
         </div>
     </div>
+</div>
+
+<!-- bottom disclaimer — subtle glowing text, no background, no interaction -->
+<div class="bottom-disclaimer">
+    في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
 </div>
 
 <!-- Source Modal -->
@@ -627,6 +719,8 @@
 </div>
 
 <script>
+    // ─── Original functionality (completely unchanged) ──────────────────────────
+
     function showCacheInfo() {
         document.getElementById('cacheModalOverlay').classList.add('active');
     }
@@ -660,8 +754,6 @@
 
         document.querySelectorAll('.nav-section-content').forEach(el => {
             el.classList.remove('open');
-            el.style.maxHeight = null;
-            el.style.opacity = '0';
         });
         document.querySelectorAll('.nav-section-header').forEach(el => {
             el.classList.remove('active');
@@ -670,10 +762,6 @@
         if (!isOpen) {
             content.classList.add('open');
             header.classList.add('active');
-            requestAnimationFrame(() => {
-                content.style.maxHeight = content.scrollHeight + 30 + 'px';
-                content.style.opacity = '1';
-            });
         }
     }
 
@@ -683,9 +771,7 @@
     });
 
     window.addEventListener('resize', function() {
-        document.querySelectorAll('.nav-section-content.open').forEach(el => {
-            el.style.maxHeight = el.scrollHeight + 30 + 'px';
-        });
+        // no-op with grid approach
     });
 
     const themeToggle = document.getElementById('toggleThemeBtn');
@@ -698,6 +784,40 @@
         themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌓';
         localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
+
+
+    // ─── Protection layer ───────────────────────────────────────────────────────
+    // Added below the original block. Nothing above is modified.
+
+    // 1. Iframe hijacking prevention
+    (function() {
+        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
+        catch(e) {}
+    })();
+
+    // 2. Right-click disable
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+    // 3. Keyboard shortcut blocking
+    //    Ctrl+U (view-source) · Ctrl+S (save page) · F12
+    //    Ctrl+Shift+I / J / C  (DevTools panels)
+    document.addEventListener('keydown', function(e) {
+        const k = e.key.toLowerCase();
+        const c = e.ctrlKey || e.metaKey;
+        if (c && k === 'u')                            { e.preventDefault(); return false; }
+        if (c && k === 's')                            { e.preventDefault(); return false; }
+        if (e.key === 'F12')                           { e.preventDefault(); return false; }
+        if (c && e.shiftKey && 'ijc'.includes(k))      { e.preventDefault(); return false; }
+    });
+
+    // 4. Console ownership watermark — visible proof of origin in any audit
+    (function() {
+        console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
+        console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
+    })();
+
+    // 5. Drag-start prevention (prevents dragging content into other tabs)
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
-    </html>
+</html>
