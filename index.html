@@ -46,9 +46,9 @@
             --shadow-mid: rgba(60, 40, 20, 0.12);
             --shadow-hover: rgba(60, 40, 20, 0.18);
             --shadow-deep: rgba(60, 40, 20, 0.28);
-            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
-            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            /* استخدام نفس متغيرات الانتقال في الملف الأصلي */
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body.dark {
@@ -79,9 +79,8 @@
             --shadow-mid: rgba(0, 0, 0, 0.28);
             --shadow-hover: rgba(0, 0, 0, 0.42);
             --shadow-deep: rgba(0, 0, 0, 0.55);
-            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
-            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -174,7 +173,7 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: all var(--transition-bounce);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
@@ -205,7 +204,7 @@
             font-size: 1.2rem;
             color: var(--gold-accent);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: all var(--transition-bounce);
             vertical-align: middle;
             margin-left: 6px;
         }
@@ -239,19 +238,11 @@
             border-radius: 28px;
             border: 1px solid var(--card-border);
             overflow: hidden;
-            transition:
-                box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth),
-                transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow:
-                0 1px 3px var(--shadow-soft),
-                0 4px 10px var(--shadow-soft);
+            transition: box-shadow var(--transition-smooth), transform 0.3s ease;
+            box-shadow: 0 1px 3px var(--shadow-soft), 0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
-            box-shadow:
-                0 2px 6px var(--shadow-soft),
-                0 8px 22px var(--shadow-mid),
-                0 16px 32px -8px var(--shadow-hover);
+            box-shadow: 0 2px 6px var(--shadow-soft), 0 8px 22px var(--shadow-mid);
             transform: translateY(-1px);
         }
         .nav-section-header {
@@ -264,11 +255,8 @@
             font-weight: 700;
             font-size: 1.15rem;
             color: var(--btn-text);
-            transition:
-                background var(--transition-smooth),
-                padding var(--transition-spring);
+            transition: background var(--transition-smooth);
             user-select: none;
-            -webkit-user-select: none;
             position: relative;
         }
         .nav-section-header::before {
@@ -304,13 +292,11 @@
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
+        /* ضبط الـ transition ليكون مثل الأصل: max-height ثم padding و opacity */
         .nav-section-content {
             max-height: 0;
             overflow: hidden;
-            transition:
-                max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                padding 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.35s ease;
+            transition: max-height var(--transition-smooth), padding 0.3s ease, opacity 0.3s ease;
             padding: 0 18px;
             opacity: 0;
             display: flex;
@@ -318,7 +304,7 @@
             gap: 8px;
         }
         .nav-section-content.open {
-            max-height: 800px;
+            /* سيتم ضبط max-height ديناميكيًا بواسطة JS */
             padding: 18px 18px 14px;
             opacity: 1;
         }
@@ -332,29 +318,20 @@
             font-weight: 500;
             color: var(--btn-text);
             text-decoration: none;
-            transition:
-                transform var(--transition-spring),
-                box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth),
-                background var(--transition-smooth);
+            transition: all var(--transition-smooth);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow:
-                0 1px 2px var(--shadow-soft),
-                0 2px 6px var(--shadow-soft);
+            box-shadow: 0 1px 2px var(--shadow-soft);
             transform: translateY(0);
-            position: relative;
         }
         .nav-link i {
             color: var(--gold-accent);
-            transition: transform var(--transition-spring);
+            transition: transform var(--transition-smooth);
         }
         .nav-link:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 10px 24px var(--shadow-hover);
+            box-shadow: 0 4px 12px var(--shadow-mid);
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
         }
@@ -363,8 +340,7 @@
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
-            box-shadow: 0 1px 4px var(--shadow-soft);
-            transition-duration: 0.08s;
+            transition-duration: 0.1s;
         }
 
         .footer-note {
@@ -380,7 +356,7 @@
             background: var(--badge-bg);
             padding: 4px 12px;
             border-radius: 20px;
-            transition: all 0.3s ease;
+            transition: all var(--transition-smooth);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .footer-note a:hover {
@@ -394,7 +370,7 @@
             font-size: 1.2rem;
             color: var(--badge-text);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: all var(--transition-bounce);
             vertical-align: middle;
             margin: 0 4px;
         }
@@ -424,7 +400,7 @@
             transform: scale(1.22);
         }
 
-        /* Modal overlay */
+        /* Modal overlay (مثل الأصل) */
         .src-modal-overlay {
             display: none;
             position: fixed;
@@ -446,28 +422,20 @@
             max-width: 320px;
             width: 90%;
             text-align: center;
-            box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 20px 60px var(--shadow-deep);
+            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
             animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
-            position: relative;
         }
         @keyframes modalIn {
             from { transform: scale(0.82) translateY(8px); opacity: 0; }
             to   { transform: scale(1)    translateY(0);   opacity: 1; }
-        }
-        .src-modal-label {
-            display: none;
         }
         .src-modal-name {
             font-family: 'Cairo', 'Segoe UI', sans-serif;
             font-size: 1rem;
             font-weight: 500;
             color: var(--text-secondary);
-            letter-spacing: 0;
             line-height: 1.5;
             margin-bottom: 6px;
-            opacity: 1;
         }
         .src-modal-close {
             margin-top: 20px;
@@ -479,13 +447,12 @@
             padding: 8px 24px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.25s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .src-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
-            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
         .info-modal-overlay {
@@ -508,9 +475,7 @@
             width: 92%;
             text-align: right;
             direction: rtl;
-            box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 20px 60px var(--shadow-deep);
+            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
             animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
         .info-modal-title {
@@ -519,22 +484,11 @@
             color: var(--gold-accent);
             margin-bottom: 12px;
             text-align: center;
-            letter-spacing: 1px;
         }
         .info-modal-body {
             font-size: 0.88rem;
             color: var(--text);
             line-height: 1.8;
-            opacity: 0.85;
-        }
-        .info-modal-body .info-cta {
-            display: block;
-            margin-top: 14px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--header-color);
-            opacity: 1;
-            text-align: center;
         }
         .info-modal-close {
             display: block;
@@ -547,16 +501,14 @@
             padding: 8px 28px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.25s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .info-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
-            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
-        /* bottom disclaimer — subtle, low-profile, glowing gold text */
         .bottom-disclaimer {
             position: fixed;
             bottom: 0;
@@ -565,7 +517,6 @@
             z-index: 500;
             text-align: center;
             padding: 7px 16px;
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
             font-size: 0.76rem;
             font-weight: 500;
             color: rgba(210, 175, 90, 0.68);
@@ -677,7 +628,6 @@
     </div>
 </div>
 
-<!-- bottom disclaimer — subtle glowing text, no background, no interaction -->
 <div class="bottom-disclaimer">
     في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
 </div>
@@ -685,7 +635,6 @@
 <!-- Source Modal -->
 <div class="src-modal-overlay" id="srcModalOverlay" onclick="closeSrcModal(event)">
     <div class="src-modal-box">
-        <div class="src-modal-label">المصدر</div>
         <div class="src-modal-name" id="srcModalName"></div>
         <button class="src-modal-close" onclick="document.getElementById('srcModalOverlay').classList.remove('active')">إغلاق</button>
     </div>
@@ -698,7 +647,6 @@
         <div class="info-modal-body">
             ونود التوضيح أن المصدر الأصلي لبعض أسئلة القانون الدستوري والنظم هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.
             <br><br>في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.
-            <span class="info-cta">للتأكد من المصدر، اضغط &nbsp;<strong>ⓘ</strong>&nbsp; بجانب أي عنصر</span>
         </div>
         <button class="info-modal-close" onclick="document.getElementById('infoModalOverlay').classList.remove('active')">إغلاق</button>
     </div>
@@ -716,8 +664,7 @@
 </div>
 
 <script>
-    // ─── Original functionality (completely unchanged) ──────────────────────────
-
+    // Functions for modals (كما هي)
     function showCacheInfo() {
         document.getElementById('cacheModalOverlay').classList.add('active');
     }
@@ -745,10 +692,12 @@
             document.getElementById('srcModalOverlay').classList.remove('active');
     }
 
+    // ========== أكورديون بنفس سلاسة الملف الأصلي ==========
     function toggleSection(header) {
         const content = header.nextElementSibling;
         const isOpen = content.classList.contains('open');
 
+        // إغلاق جميع الأقسام
         document.querySelectorAll('.nav-section-content').forEach(el => {
             el.classList.remove('open');
             el.style.maxHeight = null;
@@ -758,27 +707,33 @@
             el.classList.remove('active');
         });
 
+        // فتح القسم المطلوب إذا لم يكن مفتوحًا
         if (!isOpen) {
             content.classList.add('open');
             header.classList.add('active');
+            // استخدام requestAnimationFrame لضمان الحساب الصحيح بعد إضافة class
             requestAnimationFrame(() => {
+                // حساب الارتفاع الفعلي للمحتوى + 30px لمسافة آمنة (مثل الأصل)
                 content.style.maxHeight = content.scrollHeight + 30 + 'px';
                 content.style.opacity = '1';
             });
         }
     }
 
+    // فتح أول قسم تلقائيًا عند تحميل الصفحة
     window.addEventListener('DOMContentLoaded', function() {
         const firstHeader = document.querySelector('.nav-section-header');
         if (firstHeader) firstHeader.click();
     });
 
+    // إعادة حساب max-height عند تغيير حجم النافذة للأقسام المفتوحة
     window.addEventListener('resize', function() {
         document.querySelectorAll('.nav-section-content.open').forEach(el => {
             el.style.maxHeight = el.scrollHeight + 30 + 'px';
         });
     });
 
+    // ========== تبديل المظهر ==========
     const themeToggle = document.getElementById('toggleThemeBtn');
     if (localStorage.getItem('madar_theme') === 'dark') {
         document.body.classList.add('dark');
@@ -790,39 +745,24 @@
         localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-
-    // ─── Protection layer ───────────────────────────────────────────────────────
-    // Added below the original block. Nothing above is modified.
-
-    // 1. Iframe hijacking prevention
+    // ========== طبقة الحماية (بدون تعديل) ==========
     (function() {
-        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
-        catch(e) {}
+        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; } catch(e) {}
     })();
-
-    // 2. Right-click disable
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-    // 3. Keyboard shortcut blocking
-    //    Ctrl+U (view-source) · Ctrl+S (save page) · F12
-    //    Ctrl+Shift+I / J / C  (DevTools panels)
     document.addEventListener('keydown', function(e) {
         const k = e.key.toLowerCase();
         const c = e.ctrlKey || e.metaKey;
-        if (c && k === 'u')                            { e.preventDefault(); return false; }
-        if (c && k === 's')                            { e.preventDefault(); return false; }
-        if (e.key === 'F12')                           { e.preventDefault(); return false; }
-        if (c && e.shiftKey && 'ijc'.includes(k))      { e.preventDefault(); return false; }
+        if (c && k === 'u') { e.preventDefault(); return false; }
+        if (c && k === 's') { e.preventDefault(); return false; }
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if (c && e.shiftKey && 'ijc'.includes(k)) { e.preventDefault(); return false; }
     });
-
-    // 4. Console ownership watermark — visible proof of origin in any audit
     (function() {
         console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
         console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
     })();
-
-    // 5. Drag-start prevention (prevents dragging content into other tabs)
     document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
-</html>
+    </html>
