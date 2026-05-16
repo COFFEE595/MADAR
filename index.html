@@ -46,9 +46,9 @@
             --shadow-mid: rgba(60, 40, 20, 0.12);
             --shadow-hover: rgba(60, 40, 20, 0.18);
             --shadow-deep: rgba(60, 40, 20, 0.28);
-            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
-            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         body.dark {
@@ -79,9 +79,9 @@
             --shadow-mid: rgba(0, 0, 0, 0.28);
             --shadow-hover: rgba(0, 0, 0, 0.42);
             --shadow-deep: rgba(0, 0, 0, 0.55);
-            --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.22s cubic-bezier(0.34, 1.05, 0.64, 1);
-            --transition-spring: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -105,12 +105,18 @@
             background: var(--container-bg);
             border-radius: 40px;
             box-shadow:
-                0 1px 3px var(--shadow-soft),
-                0 6px 16px var(--shadow-mid),
-                0 20px 40px -8px var(--shadow-deep);
+                0 2px 4px var(--shadow-soft),
+                0 8px 20px var(--shadow-mid),
+                0 24px 48px -8px var(--shadow-deep);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: background 0.3s, border-color 0.3s;
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.4s ease;
+        }
+        .platform-wrapper:hover {
+            box-shadow:
+                0 2px 4px var(--shadow-soft),
+                0 12px 28px var(--shadow-mid),
+                0 32px 56px -8px var(--shadow-deep);
         }
 
         .brand-bar {
@@ -168,13 +174,13 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all 0.2s ease;
+            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
-            transform: rotate(12deg) scale(1.04);
+            transform: rotate(20deg) scale(1.08);
             background: var(--btn-bg);
-            box-shadow: 0 3px 10px var(--shadow-mid);
+            box-shadow: 0 4px 14px var(--shadow-mid);
         }
         .toggle-theme-btn:active {
             transform: scale(0.9);
@@ -199,13 +205,13 @@
             font-size: 1.2rem;
             color: var(--gold-accent);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.2s ease;
+            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
             vertical-align: middle;
             margin-left: 6px;
         }
         .main-title .glow-icon:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
+            transform: scale(1.15);
+            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
         }
         .subtitle {
             text-align: center;
@@ -235,15 +241,18 @@
             overflow: hidden;
             transition:
                 box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth);
+                border-color var(--transition-smooth),
+                transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow:
                 0 1px 3px var(--shadow-soft),
                 0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
             box-shadow:
-                0 2px 8px var(--shadow-soft),
-                0 6px 18px var(--shadow-mid);
+                0 2px 6px var(--shadow-soft),
+                0 8px 22px var(--shadow-mid),
+                0 16px 32px -8px var(--shadow-hover);
+            transform: translateY(-1px);
         }
         .nav-section-header {
             background: var(--nav-gradient);
@@ -296,24 +305,20 @@
             transform: rotate(180deg);
         }
         .nav-section-content {
-            display: grid;
-            grid-template-rows: 0fr;
+            max-height: 0;
+            overflow: hidden;
             transition:
-                grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.22s ease,
-                padding 0.22s ease;
+                max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                padding 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.35s ease;
             padding: 0 18px;
             opacity: 0;
-        }
-        .nav-section-content-inner {
-            overflow: hidden;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            min-height: 0;
         }
         .nav-section-content.open {
-            grid-template-rows: 1fr;
+            max-height: 800px;
             padding: 18px 18px 14px;
             opacity: 1;
         }
@@ -346,15 +351,15 @@
             transition: transform var(--transition-spring);
         }
         .nav-link:hover {
-            transform: translateY(-1px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 3px 10px var(--shadow-mid),
-                0 8px 20px var(--shadow-hover);
+                0 4px 12px var(--shadow-mid),
+                0 10px 24px var(--shadow-hover);
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
         }
         .nav-link:hover i {
-            transform: translateX(-2px);
+            transform: translateX(-4px) scale(1.12);
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
@@ -389,13 +394,13 @@
             font-size: 1.2rem;
             color: var(--badge-text);
             text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.2s ease;
+            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-note .glow-icon:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 12px var(--gold-accent), 0 0 22px var(--gold-accent);
+            transform: scale(1.15);
+            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
         }
 
         .src-icon {
@@ -408,7 +413,7 @@
             opacity: 0.78;
             cursor: pointer;
             margin-right: 2px;
-            transition: opacity 0.15s ease, transform 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
             line-height: 1;
             vertical-align: middle;
             user-select: none;
@@ -448,7 +453,7 @@
             position: relative;
         }
         @keyframes modalIn {
-            from { transform: scale(0.96) translateY(4px); opacity: 0; }
+            from { transform: scale(0.82) translateY(8px); opacity: 0; }
             to   { transform: scale(1)    translateY(0);   opacity: 1; }
         }
         .src-modal-label {
@@ -605,7 +610,6 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -615,7 +619,6 @@
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                  </div>
                 </div>
             </div>
 
@@ -626,7 +629,6 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
@@ -636,7 +638,6 @@
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link"><i class="fas fa-clipboard-list"></i> اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
-                  </div>
                 </div>
             </div>
 
@@ -647,12 +648,10 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                  <div class="nav-section-content-inner">
                     <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!!</a>
                     <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                     <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                  </div>
                 </div>
             </div>
 
@@ -663,16 +662,14 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                  <div class="nav-section-content-inner">
                     <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
-                  </div>
                 </div>
             </div>
 
         </div>
 
         <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 02:58AM</div>
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 04:15AM</div>
             <span>⭐</span> أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
@@ -754,6 +751,8 @@
 
         document.querySelectorAll('.nav-section-content').forEach(el => {
             el.classList.remove('open');
+            el.style.maxHeight = null;
+            el.style.opacity = '0';
         });
         document.querySelectorAll('.nav-section-header').forEach(el => {
             el.classList.remove('active');
@@ -762,6 +761,10 @@
         if (!isOpen) {
             content.classList.add('open');
             header.classList.add('active');
+            requestAnimationFrame(() => {
+                content.style.maxHeight = content.scrollHeight + 30 + 'px';
+                content.style.opacity = '1';
+            });
         }
     }
 
@@ -771,7 +774,9 @@
     });
 
     window.addEventListener('resize', function() {
-        // no-op with grid approach
+        document.querySelectorAll('.nav-section-content.open').forEach(el => {
+            el.style.maxHeight = el.scrollHeight + 30 + 'px';
+        });
     });
 
     const themeToggle = document.getElementById('toggleThemeBtn');
