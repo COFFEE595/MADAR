@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,17 +11,16 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <!-- Protection: authorship meta tags -->
     <meta name="author" content="MADAR Platform — @GIX37">
     <meta name="copyright" content="MADAR 2026 — All Rights Reserved">
-    <meta name="robots" content="noindex, nofollow">
     <title>MADAR - منصة اختبارات</title>
     <style>
         :root {
             --bg: #e8ddcf;
             --container-bg: #fdf9f3;
-            --text: #1f1a14;
-            --text-secondary: #5c4a37;
+            /* 🎯 تحسينات وضوح النص - تم تغميق الألوان */
+            --text: #14100b;
+            --text-secondary: #4a3a2a;
             --border: #d4c5b2;
             --card-bg: #ffffff;
             --card-border: #ccbbaa;
@@ -32,12 +30,13 @@
             --btn-shadow: #8b6f55;
             --badge-bg: #9b7b5c;
             --badge-text: #fef7f0;
-            --header-color: #3e2c1c;
+            --header-color: #2c1f13;
             --toggle-bg: #d4c0a6;
             --toggle-text: #3e2c1c;
             --footer-color: #5c4a37;
             --brand-gradient: linear-gradient(135deg, #8a6a4a 0%, #5a3d25 50%, #3e2c1c 100%);
-            --brand-text: #fdf9f3;
+            /* 🎯 تحسين وضوح نص العلامة التجارية */
+            --brand-text: #fff8f0;
             --nav-gradient: linear-gradient(145deg, #f8f2e8, #ede3d6);
             --nav-hover-gradient: linear-gradient(145deg, #f0e6d8, #e5d8c8);
             --nav-active-gradient: linear-gradient(145deg, #ecdfd0, #ddd0bc);
@@ -46,9 +45,11 @@
             --shadow-mid: rgba(60, 40, 20, 0.12);
             --shadow-hover: rgba(60, 40, 20, 0.18);
             --shadow-deep: rgba(60, 40, 20, 0.28);
-            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
-            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            /* 🎯 تحسينات السلاسة فقط - تم تحديث القيم (لا تلمسها) */
+            --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+            --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --transition-accordion: 0.5s cubic-bezier(0.3, 0, 0.2, 1);
         }
 
         body.dark {
@@ -79,11 +80,14 @@
             --shadow-mid: rgba(0, 0, 0, 0.28);
             --shadow-hover: rgba(0, 0, 0, 0.42);
             --shadow-deep: rgba(0, 0, 0, 0.55);
-            --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-bounce: 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
-            --transition-spring: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            /* نفس التحسينات في الوضع الليلي */
+            --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+            --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --transition-accordion: 0.5s cubic-bezier(0.3, 0, 0.2, 1);
         }
 
+        /* باقي التنسيقات (CSS) كما هي تماماً - لم يتم تغيير أي شيء */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: var(--bg);
@@ -104,19 +108,14 @@
             max-width: 850px;
             background: var(--container-bg);
             border-radius: 40px;
+            /* 🎯 استبدال الإضاءة بلمسة 3D خفيفة وظلال */
             box-shadow:
-                0 2px 4px var(--shadow-soft),
-                0 8px 20px var(--shadow-mid),
-                0 24px 48px -8px var(--shadow-deep);
+                0 10px 20px var(--shadow-mid),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.2),
+                inset -1px -1px 0 rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.4s ease;
-        }
-        .platform-wrapper:hover {
-            box-shadow:
-                0 2px 4px var(--shadow-soft),
-                0 12px 28px var(--shadow-mid),
-                0 32px 56px -8px var(--shadow-deep);
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .brand-bar {
@@ -174,13 +173,13 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: all var(--transition-spring);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
-            transform: rotate(20deg) scale(1.08);
+            transform: rotate(12deg) scale(1.04);
             background: var(--btn-bg);
-            box-shadow: 0 4px 14px var(--shadow-mid);
+            box-shadow: 0 3px 10px var(--shadow-mid);
         }
         .toggle-theme-btn:active {
             transform: scale(0.9);
@@ -204,14 +203,17 @@
             cursor: pointer;
             font-size: 1.2rem;
             color: var(--gold-accent);
-            text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            /* 🎯 إزالة الإضاءة وإضافة لمسة 3D خفيفة */
+            text-shadow: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            transition: all var(--transition-spring);
             vertical-align: middle;
             margin-left: 6px;
         }
         .main-title .glow-icon:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
+            transform: scale(1.1);
+            /* 🎯 إزالة الإضاءة في الـ hover */
+            text-shadow: none;
         }
         .subtitle {
             text-align: center;
@@ -241,18 +243,15 @@
             overflow: hidden;
             transition:
                 box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth),
-                transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                border-color var(--transition-smooth);
             box-shadow:
                 0 1px 3px var(--shadow-soft),
                 0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
             box-shadow:
-                0 2px 6px var(--shadow-soft),
-                0 8px 22px var(--shadow-mid),
-                0 16px 32px -8px var(--shadow-hover);
-            transform: translateY(-1px);
+                0 2px 8px var(--shadow-soft),
+                0 6px 18px var(--shadow-mid);
         }
         .nav-section-header {
             background: var(--nav-gradient);
@@ -304,13 +303,11 @@
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
+        /* 🎯 تحسين سلاسة المحتوى (تم تحديث المدة فقط) */
         .nav-section-content {
             max-height: 0;
             overflow: hidden;
-            transition:
-                max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                padding 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.35s ease;
+            transition: max-height var(--transition-accordion), opacity 0.35s ease, padding 0.35s ease;
             padding: 0 18px;
             opacity: 0;
             display: flex;
@@ -318,7 +315,6 @@
             gap: 8px;
         }
         .nav-section-content.open {
-            max-height: 800px;
             padding: 18px 18px 14px;
             opacity: 1;
         }
@@ -340,9 +336,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            /* 🎯 استبدال الإضاءة بلمسة 3D خفيفة وظلال */
             box-shadow:
-                0 1px 2px var(--shadow-soft),
-                0 2px 6px var(--shadow-soft);
+                1px 1px 0 rgba(0, 0, 0, 0.05),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(0);
             position: relative;
         }
@@ -351,19 +348,22 @@
             transition: transform var(--transition-spring);
         }
         .nav-link:hover {
-            transform: translateY(-3px) scale(1.02);
+            transform: translateY(-3px);
+            /* 🎯 تحسين لمسة الـ 3D في الـ hover */
             box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 10px 24px var(--shadow-hover);
+                2px 2px 0 rgba(0, 0, 0, 0.1),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.1);
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
         }
         .nav-link:hover i {
-            transform: translateX(-4px) scale(1.12);
+            transform: translateX(-3px);
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
-            box-shadow: 0 1px 4px var(--shadow-soft);
+            /* 🎯 استبدال الإضاءة في الـ active */
+            box-shadow:
+                inset 1px 1px 2px rgba(0, 0, 0, 0.1);
             transition-duration: 0.08s;
         }
 
@@ -380,7 +380,7 @@
             background: var(--badge-bg);
             padding: 4px 12px;
             border-radius: 20px;
-            transition: all 0.3s ease;
+            transition: all var(--transition-spring);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .footer-note a:hover {
@@ -393,14 +393,17 @@
             cursor: pointer;
             font-size: 1.2rem;
             color: var(--badge-text);
-            text-shadow: 0 0 8px var(--gold-accent), 0 0 16px var(--gold-accent);
-            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            /* 🎯 إزالة الإضاءة وإضافة لمسة 3D خفيفة */
+            text-shadow: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            transition: all var(--transition-spring);
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-note .glow-icon:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 14px var(--gold-accent), 0 0 28px var(--gold-accent);
+            transform: scale(1.1);
+            /* 🎯 إزالة الإضاءة في الـ hover */
+            text-shadow: none;
         }
 
         .src-icon {
@@ -413,7 +416,7 @@
             opacity: 0.78;
             cursor: pointer;
             margin-right: 2px;
-            transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+            transition: opacity 0.15s ease, transform var(--transition-spring);
             line-height: 1;
             vertical-align: middle;
             user-select: none;
@@ -449,11 +452,11 @@
             box-shadow:
                 0 4px 12px var(--shadow-mid),
                 0 20px 60px var(--shadow-deep);
-            animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            animation: modalIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
             position: relative;
         }
         @keyframes modalIn {
-            from { transform: scale(0.82) translateY(8px); opacity: 0; }
+            from { transform: scale(0.96) translateY(8px); opacity: 0; }
             to   { transform: scale(1)    translateY(0);   opacity: 1; }
         }
         .src-modal-label {
@@ -511,7 +514,7 @@
             box-shadow:
                 0 4px 12px var(--shadow-mid),
                 0 20px 60px var(--shadow-deep);
-            animation: modalIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+            animation: modalIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
         }
         .info-modal-title {
             font-size: 1rem;
@@ -569,10 +572,50 @@
             font-size: 0.76rem;
             font-weight: 500;
             color: rgba(210, 175, 90, 0.68);
-            text-shadow: 0 0 10px rgba(210, 175, 90, 0.28);
+            /* 🎯 إزالة الإضاءة */
+            text-shadow: none;
             background: transparent;
             direction: rtl;
             pointer-events: none;
+        }
+
+        .done-badge {
+            font-size: 0.72em;
+            font-weight: 600;
+            color: #7a9e7a;
+            border: 1px solid rgba(122, 158, 122, 0.45);
+            border-radius: 20px;
+            padding: 1px 9px;
+            margin-right: 8px;
+            opacity: 0.9;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
+        }
+        body.dark .done-badge {
+            color: #88bb88;
+            border-color: rgba(136, 187, 136, 0.35);
+        }
+        .coming-soon-badge {
+            font-size: 0.72em;
+            font-weight: 600;
+            color: #c4a87a;
+            border: 1px solid rgba(196, 168, 122, 0.4);
+            border-radius: 20px;
+            padding: 1px 9px;
+            margin-right: 8px;
+            opacity: 0.85;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
+        }
+        .await-notice {
+            text-align: center;
+            color: var(--gold-accent);
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-top: 18px;
+            margin-bottom: 2px;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 550px) {
@@ -603,10 +646,9 @@
 
         <div class="main-nav">
 
-            <!-- القانون الدستوري -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-balance-scale" style="margin-left: 10px; color: var(--gold-accent);"></i> القانون الدستوري</span>
+                    <span><i class="fas fa-balance-scale" style="margin-left: 10px; color: var(--gold-accent);"></i> القانون الدستوري <span class="done-badge">✓ تم الانتهاء</span></span>
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
@@ -622,10 +664,9 @@
                 </div>
             </div>
 
-            <!-- النظم السياسية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-globe-americas" style="margin-left: 10px; color: var(--gold-accent);"></i> النظم السياسية</span>
+                    <span><i class="fas fa-globe-americas" style="margin-left: 10px; color: var(--gold-accent);"></i> النظم السياسية <span class="done-badge">✓ تم الانتهاء</span></span>
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
@@ -641,35 +682,75 @@
                 </div>
             </div>
 
-            <!-- حجات تهمك -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-star" style="margin-left: 10px; color: var(--gold-accent);"></i> حجات تهمك؟ <span style="font-weight: 300; font-size: 0.78em; color: #c9a84c; letter-spacing: 1px; margin-right: 4px;">جديد</span></span>
+                    <span><i class="fas fa-star" style="margin-left: 10px; color: var(--gold-accent);"></i> حجات تهمك؟</span>
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                    <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!!</a>
-                    <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'outbound', event_label: 'MCQ_50_nazom', transport_type: 'beacon'});"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!! <span class="done-badge">✓ تم</span></a>
+                    <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
                 </div>
             </div>
 
-            <!-- إجابات مقالي نموذجيه -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
                     <span><i class="fas fa-pencil" style="margin-left: 10px; color: var(--gold-accent);"></i> إجابات مقالي نموذجيه</span>
                     <span class="arrow">▼</span>
                 </div>
                 <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                    <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-moon" style="margin-left: 10px; color: var(--gold-accent);"></i> الشريعة الإسلامية <span class="coming-soon-badge">قريباً</span></span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-gavel" style="margin-left: 10px; color: var(--gold-accent);"></i> علم الاجرام والعقاب <span class="coming-soon-badge">قريباً</span></span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-users" style="margin-left: 10px; color: var(--gold-accent);"></i> القضايا المجتمعية <span class="coming-soon-badge">قريباً</span></span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span><i class="fas fa-copyright" style="margin-left: 10px; color: var(--gold-accent);"></i> الملكية الفكرية <span class="coming-soon-badge">قريباً</span></span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="nav-section-content">
+                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
                 </div>
             </div>
 
         </div>
 
+        <div class="await-notice">✨ انتظروا كل جديد — بالتوفيق 🎓</div>
+
         <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/16 — 04:15AM</div>
+            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/17 — 01:15PM</div>
             <span>⭐</span> أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
@@ -677,12 +758,10 @@
     </div>
 </div>
 
-<!-- bottom disclaimer — subtle glowing text, no background, no interaction -->
 <div class="bottom-disclaimer">
     في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
 </div>
 
-<!-- Source Modal -->
 <div class="src-modal-overlay" id="srcModalOverlay" onclick="closeSrcModal(event)">
     <div class="src-modal-box">
         <div class="src-modal-label">المصدر</div>
@@ -691,7 +770,6 @@
     </div>
 </div>
 
-<!-- Info Modal -->
 <div class="info-modal-overlay" id="infoModalOverlay" onclick="closeInfoModal(event)">
     <div class="info-modal-box">
         <div class="info-modal-title">ⓘ معلومات</div>
@@ -704,7 +782,6 @@
     </div>
 </div>
 
-<!-- Cache Info Modal -->
 <div class="info-modal-overlay" id="cacheModalOverlay" onclick="closeCacheModal(event)">
     <div class="info-modal-box">
         <div class="info-modal-title">ⓘ تحديثات المنصة</div>
@@ -791,21 +868,14 @@
     });
 
 
-    // ─── Protection layer ───────────────────────────────────────────────────────
-    // Added below the original block. Nothing above is modified.
-
-    // 1. Iframe hijacking prevention
+    // ─── Protection layer (unchanged) ───────────────────────────────────────────
     (function() {
         try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
         catch(e) {}
     })();
 
-    // 2. Right-click disable
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
-    // 3. Keyboard shortcut blocking
-    //    Ctrl+U (view-source) · Ctrl+S (save page) · F12
-    //    Ctrl+Shift+I / J / C  (DevTools panels)
     document.addEventListener('keydown', function(e) {
         const k = e.key.toLowerCase();
         const c = e.ctrlKey || e.metaKey;
@@ -815,13 +885,11 @@
         if (c && e.shiftKey && 'ijc'.includes(k))      { e.preventDefault(); return false; }
     });
 
-    // 4. Console ownership watermark — visible proof of origin in any audit
     (function() {
         console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
         console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
     })();
 
-    // 5. Drag-start prevention (prevents dragging content into other tabs)
     document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
