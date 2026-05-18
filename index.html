@@ -49,7 +49,8 @@
             --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
             --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
             --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            --transition-accordion: 0.5s cubic-bezier(0.3, 0, 0.2, 1);
+            /* 🎯 تحسين سلاسة الـ accordion - مدة أطول ومنحنى ناعم جداً */
+            --transition-accordion: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body.dark {
@@ -84,7 +85,7 @@
             --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
             --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
             --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            --transition-accordion: 0.5s cubic-bezier(0.3, 0, 0.2, 1);
+            --transition-accordion: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         /* باقي التنسيقات (CSS) كما هي تماماً - لم يتم تغيير أي شيء */
@@ -303,22 +304,24 @@
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
-        /* 🎯 تحسين سلاسة المحتوى (تم تحديث المدة فقط) */
+        /* 🎯 تحسين سلاسة المحتوى - مدة أطول ومنحنى ناعم جداً */
         .nav-section-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height var(--transition-accordion), opacity 0.35s ease, padding 0.35s ease;
+            transition: max-height var(--transition-accordion), opacity var(--transition-accordion), padding var(--transition-accordion);
             padding: 0 18px;
             opacity: 0;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            will-change: max-height;
         }
         .nav-section-content.open {
             padding: 18px 18px 14px;
             opacity: 1;
         }
 
+        /* 🎯 تحسين ظهور الخيارات بشكل متتابع وسلس جداً (ناعم) */
         .nav-link {
             background: var(--btn-bg);
             border: 1px solid var(--btn-border);
@@ -336,20 +339,61 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            /* 🎯 استبدال الإضاءة بلمسة 3D خفيفة وظلال */
             box-shadow:
                 1px 1px 0 rgba(0, 0, 0, 0.05),
                 inset 1px 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(0);
             position: relative;
+            /* إعدادات الظهور المتتابع الناعم */
+            opacity: 0;
+            transform: translateY(6px);
+            animation: fadeInUp 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
         }
+        /* إخفاء الأنيميشن عند الإغلاق - لن تظهر الأزرار حتى يفتح القسم */
+        .nav-section-content:not(.open) .nav-link {
+            animation: none;
+            opacity: 0;
+            transform: translateY(6px);
+        }
+        /* تسلسل ظهور الأزرار بفارق بسيط جداً (stagger ناعم) */
+        .nav-section-content.open .nav-link:nth-child(1) { animation-delay: 0.01s; }
+        .nav-section-content.open .nav-link:nth-child(2) { animation-delay: 0.02s; }
+        .nav-section-content.open .nav-link:nth-child(3) { animation-delay: 0.03s; }
+        .nav-section-content.open .nav-link:nth-child(4) { animation-delay: 0.04s; }
+        .nav-section-content.open .nav-link:nth-child(5) { animation-delay: 0.05s; }
+        .nav-section-content.open .nav-link:nth-child(6) { animation-delay: 0.06s; }
+        .nav-section-content.open .nav-link:nth-child(7) { animation-delay: 0.07s; }
+        .nav-section-content.open .nav-link:nth-child(8) { animation-delay: 0.08s; }
+        .nav-section-content.open .nav-link:nth-child(9) { animation-delay: 0.09s; }
+        .nav-section-content.open .nav-link:nth-child(10) { animation-delay: 0.10s; }
+        .nav-section-content.open .nav-link:nth-child(11) { animation-delay: 0.11s; }
+        .nav-section-content.open .nav-link:nth-child(12) { animation-delay: 0.12s; }
+        .nav-section-content.open .nav-link:nth-child(13) { animation-delay: 0.13s; }
+        .nav-section-content.open .nav-link:nth-child(14) { animation-delay: 0.14s; }
+        .nav-section-content.open .nav-link:nth-child(15) { animation-delay: 0.15s; }
+        .nav-section-content.open .nav-link:nth-child(16) { animation-delay: 0.16s; }
+        .nav-section-content.open .nav-link:nth-child(17) { animation-delay: 0.17s; }
+        .nav-section-content.open .nav-link:nth-child(18) { animation-delay: 0.18s; }
+        .nav-section-content.open .nav-link:nth-child(19) { animation-delay: 0.19s; }
+        .nav-section-content.open .nav-link:nth-child(20) { animation-delay: 0.20s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .nav-link i {
             color: var(--gold-accent);
             transition: transform var(--transition-spring);
         }
         .nav-link:hover {
             transform: translateY(-3px);
-            /* 🎯 تحسين لمسة الـ 3D في الـ hover */
             box-shadow:
                 2px 2px 0 rgba(0, 0, 0, 0.1),
                 inset 1px 1px 0 rgba(255, 255, 255, 0.1);
@@ -361,7 +405,6 @@
         }
         .nav-link:active {
             transform: translateY(1px) scale(0.97);
-            /* 🎯 استبدال الإضاءة في الـ active */
             box-shadow:
                 inset 1px 1px 2px rgba(0, 0, 0, 0.1);
             transition-duration: 0.08s;
@@ -623,6 +666,8 @@
             .main-title h1 { font-size: 1.8rem; }
             .nav-section-header { font-size: 1rem; padding: 14px 16px; }
             .nav-link { font-size: 0.9rem; padding: 8px 16px; }
+            /* تقليل التأخير قليلاً على الشاشات الصغيرة */
+            .nav-section-content.open .nav-link { animation-duration: 0.24s; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&family=Tajawal:wght@700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
