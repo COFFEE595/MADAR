@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -18,7 +19,6 @@
         :root {
             --bg: #e8ddcf;
             --container-bg: #fdf9f3;
-            /* 🎯 تحسينات وضوح النص - تم تغميق الألوان */
             --text: #14100b;
             --text-secondary: #4a3a2a;
             --border: #d4c5b2;
@@ -35,7 +35,6 @@
             --toggle-text: #3e2c1c;
             --footer-color: #5c4a37;
             --brand-gradient: linear-gradient(135deg, #8a6a4a 0%, #5a3d25 50%, #3e2c1c 100%);
-            /* 🎯 تحسين وضوح نص العلامة التجارية */
             --brand-text: #fff8f0;
             --nav-gradient: linear-gradient(145deg, #f8f2e8, #ede3d6);
             --nav-hover-gradient: linear-gradient(145deg, #f0e6d8, #e5d8c8);
@@ -45,12 +44,10 @@
             --shadow-mid: rgba(60, 40, 20, 0.12);
             --shadow-hover: rgba(60, 40, 20, 0.18);
             --shadow-deep: rgba(60, 40, 20, 0.28);
-            /* 🎯 تحسينات السلاسة فقط - تم تحديث القيم (لا تلمسها) */
-            --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-            --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
-            --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            /* 🎯 تحسين سلاسة الـ accordion - مدة أطول ومنحنى ناعم جداً */
-            --transition-accordion: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* 🎯 تحسينات الأنيميشن السلس */
+            --transition-menu: opacity 200ms cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 250ms, transform 200ms cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --transition-spring: transform 200ms cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body.dark {
@@ -81,14 +78,15 @@
             --shadow-mid: rgba(0, 0, 0, 0.28);
             --shadow-hover: rgba(0, 0, 0, 0.42);
             --shadow-deep: rgba(0, 0, 0, 0.55);
-            /* نفس التحسينات في الوضع الليلي */
-            --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-            --transition-bounce: 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
-            --transition-spring: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            --transition-accordion: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* باقي التنسيقات (CSS) كما هي تماماً - لم يتم تغيير أي شيء */
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                --transition-menu: opacity 250ms ease, visibility 250ms !important;
+                --transition-spring: transform 0ms !important;
+            }
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: var(--bg);
@@ -109,7 +107,6 @@
             max-width: 850px;
             background: var(--container-bg);
             border-radius: 40px;
-            /* 🎯 استبدال الإضاءة بلمسة 3D خفيفة وظلال */
             box-shadow:
                 0 10px 20px var(--shadow-mid),
                 inset 1px 1px 0 rgba(255, 255, 255, 0.2),
@@ -174,7 +171,7 @@
             border-radius: 50%;
             cursor: pointer;
             line-height: 1;
-            transition: all var(--transition-spring);
+            transition: var(--transition-spring);
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .toggle-theme-btn:hover {
@@ -184,7 +181,6 @@
         }
         .toggle-theme-btn:active {
             transform: scale(0.9);
-            transition-duration: 0.1s;
         }
 
         .main-title {
@@ -204,17 +200,14 @@
             cursor: pointer;
             font-size: 1.2rem;
             color: var(--gold-accent);
-            /* 🎯 إزالة الإضاءة وإضافة لمسة 3D خفيفة */
             text-shadow: none;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            transition: all var(--transition-spring);
+            transition: transform 0.2s ease;
             vertical-align: middle;
             margin-left: 6px;
         }
         .main-title .glow-icon:hover {
             transform: scale(1.1);
-            /* 🎯 إزالة الإضاءة في الـ hover */
-            text-shadow: none;
         }
         .subtitle {
             text-align: center;
@@ -237,22 +230,18 @@
             flex-direction: column;
             gap: 12px;
         }
+
+        /* 🎯 القسم المحسن: القوائم */
         .nav-section {
             background: var(--card-bg);
             border-radius: 28px;
             border: 1px solid var(--card-border);
             overflow: hidden;
-            transition:
-                box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth);
-            box-shadow:
-                0 1px 3px var(--shadow-soft),
-                0 4px 10px var(--shadow-soft);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 1px 3px var(--shadow-soft), 0 4px 10px var(--shadow-soft);
         }
         .nav-section:hover {
-            box-shadow:
-                0 2px 8px var(--shadow-soft),
-                0 6px 18px var(--shadow-mid);
+            box-shadow: 0 2px 8px var(--shadow-soft), 0 6px 18px var(--shadow-mid);
         }
         .nav-section-header {
             background: var(--nav-gradient);
@@ -264,11 +253,8 @@
             font-weight: 700;
             font-size: 1.15rem;
             color: var(--btn-text);
-            transition:
-                background var(--transition-smooth),
-                padding var(--transition-spring);
+            transition: background 0.2s ease;
             user-select: none;
-            -webkit-user-select: none;
             position: relative;
         }
         .nav-section-header::before {
@@ -280,48 +266,60 @@
             width: 4px;
             background: linear-gradient(180deg, var(--gold-accent), var(--badge-bg));
             opacity: 0;
-            transition: opacity var(--transition-smooth);
+            transition: opacity 0.2s ease;
             border-radius: 0 2px 2px 0;
         }
         .nav-section-header:hover {
             background: var(--nav-hover-gradient);
         }
-        .nav-section-header:hover::before {
+        .nav-section-header:hover::before,
+        .nav-section-header.active::before {
             opacity: 1;
         }
         .nav-section-header.active {
             background: var(--nav-active-gradient);
         }
-        .nav-section-header.active::before {
-            opacity: 1;
-        }
         .nav-section-header .arrow {
             font-size: 1.1rem;
-            transition: transform var(--transition-bounce);
+            transition: transform 250ms cubic-bezier(0.2, 0.9, 0.4, 1.1);
             color: var(--gold-accent);
             display: inline-block;
         }
         .nav-section-header.active .arrow {
             transform: rotate(180deg);
         }
-        /* 🎯 تحسين سلاسة المحتوى - مدة أطول ومنحنى ناعم جداً */
-        .nav-section-content {
+
+        /* آلية فتح القائمة السلسة ومراعاة النعومة القصوى */
+        .nav-section-wrapper {
             max-height: 0;
             overflow: hidden;
-            transition: max-height var(--transition-accordion), opacity var(--transition-accordion), padding var(--transition-accordion);
-            padding: 0 18px;
-            opacity: 0;
+            transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1); /* إغلاق أنعم وأكثر انسيابية */
+        }
+        .nav-section-wrapper.open {
+            transition: max-height 500ms cubic-bezier(0.25, 1, 0.3, 1); /* فتح مرن ومتدفق */
+        }
+        .nav-section-content {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            will-change: max-height;
+            padding: 0 18px;
         }
-        .nav-section-content.open {
-            padding: 18px 18px 14px;
-            opacity: 1;
+        
+        /* تعويض المسافات العلوية والسفلية */
+        .nav-section-content::before {
+            content: '';
+            width: 100%;
+            height: 10px;
+            display: block;
+        }
+        .nav-section-content::after {
+            content: '';
+            width: 100%;
+            height: 6px;
+            display: block;
         }
 
-        /* 🎯 تحسين ظهور الخيارات بشكل متتابع وسلس جداً (ناعم) */
+        /* الروابط داخل القائمة مع تأثير متتابع مفعم بالنعومة */
         .nav-link {
             background: var(--btn-bg);
             border: 1px solid var(--btn-border);
@@ -331,89 +329,62 @@
             font-weight: 500;
             color: var(--btn-text);
             text-decoration: none;
-            transition:
-                transform var(--transition-spring),
-                box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth),
-                background var(--transition-smooth);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow:
-                1px 1px 0 rgba(0, 0, 0, 0.05),
-                inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateY(0);
-            position: relative;
-            /* إعدادات الظهور المتتابع الناعم */
-            opacity: 0;
-            transform: translateY(6px);
-            animation: fadeInUp 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+            opacity: 0; 
+            transform: translateY(-5px) scale(0.98);
+            transition: opacity 150ms ease, transform 150ms ease, background 0.2s ease, border-color 0.2s ease;
         }
-        /* إخفاء الأنيميشن عند الإغلاق - لن تظهر الأزرار حتى يفتح القسم */
-        .nav-section-content:not(.open) .nav-link {
-            animation: none;
-            opacity: 0;
-            transform: translateY(6px);
+        .nav-section-wrapper.open .nav-link {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: opacity 400ms ease-out, transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease, border-color 0.2s ease;
         }
-        /* تسلسل ظهور الأزرار بفارق بسيط جداً (stagger ناعم) */
-        .nav-section-content.open .nav-link:nth-child(1) { animation-delay: 0.01s; }
-        .nav-section-content.open .nav-link:nth-child(2) { animation-delay: 0.02s; }
-        .nav-section-content.open .nav-link:nth-child(3) { animation-delay: 0.03s; }
-        .nav-section-content.open .nav-link:nth-child(4) { animation-delay: 0.04s; }
-        .nav-section-content.open .nav-link:nth-child(5) { animation-delay: 0.05s; }
-        .nav-section-content.open .nav-link:nth-child(6) { animation-delay: 0.06s; }
-        .nav-section-content.open .nav-link:nth-child(7) { animation-delay: 0.07s; }
-        .nav-section-content.open .nav-link:nth-child(8) { animation-delay: 0.08s; }
-        .nav-section-content.open .nav-link:nth-child(9) { animation-delay: 0.09s; }
-        .nav-section-content.open .nav-link:nth-child(10) { animation-delay: 0.10s; }
-        .nav-section-content.open .nav-link:nth-child(11) { animation-delay: 0.11s; }
-        .nav-section-content.open .nav-link:nth-child(12) { animation-delay: 0.12s; }
-        .nav-section-content.open .nav-link:nth-child(13) { animation-delay: 0.13s; }
-        .nav-section-content.open .nav-link:nth-child(14) { animation-delay: 0.14s; }
-        .nav-section-content.open .nav-link:nth-child(15) { animation-delay: 0.15s; }
-        .nav-section-content.open .nav-link:nth-child(16) { animation-delay: 0.16s; }
-        .nav-section-content.open .nav-link:nth-child(17) { animation-delay: 0.17s; }
-        .nav-section-content.open .nav-link:nth-child(18) { animation-delay: 0.18s; }
-        .nav-section-content.open .nav-link:nth-child(19) { animation-delay: 0.19s; }
-        .nav-section-content.open .nav-link:nth-child(20) { animation-delay: 0.20s; }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(6px);
+        /* تأخيرات متتابعة لعناصر القائمة عند الفتح فقط يضيف إحساس الانبثاق */
+        .nav-section-wrapper.open .nav-link:nth-child(1) { transition-delay: 30ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(2) { transition-delay: 50ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(3) { transition-delay: 70ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(4) { transition-delay: 90ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(5) { transition-delay: 110ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(6) { transition-delay: 130ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(7) { transition-delay: 150ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(8) { transition-delay: 170ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(9) { transition-delay: 190ms; }
+        .nav-section-wrapper.open .nav-link:nth-child(n+10) { transition-delay: 210ms; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-link {
+                transition: none !important;
+                transform: none !important;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .nav-section-wrapper {
+                transition: none !important;
+            }
+            .nav-section-content {
+                transition: none !important;
+                transform: none !important;
             }
         }
 
-        .nav-link i {
-            color: var(--gold-accent);
-            transition: transform var(--transition-spring);
-        }
         .nav-link:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                2px 2px 0 rgba(0, 0, 0, 0.1),
-                inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px) scale(1) !important;
             border-color: var(--gold-accent);
             background: var(--nav-hover-gradient);
-        }
-        .nav-link:hover i {
-            transform: translateX(-3px);
-        }
-        .nav-link:active {
-            transform: translateY(1px) scale(0.97);
-            box-shadow:
-                inset 1px 1px 2px rgba(0, 0, 0, 0.1);
-            transition-duration: 0.08s;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
         }
 
+        .nav-link:active {
+            transform: scale(0.97) !important;
+        }
+
+        /* باقي التنسيقات */
         .footer-note {
             text-align: center;
             color: var(--footer-color);
-            margin-top: 20px;
+            margin-top: 8px; /* تم رفع التاريخ للأعلى */
             font-size: 0.85rem;
         }
         .footer-note a {
@@ -423,7 +394,7 @@
             background: var(--badge-bg);
             padding: 4px 12px;
             border-radius: 20px;
-            transition: all var(--transition-spring);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .footer-note a:hover {
@@ -436,17 +407,14 @@
             cursor: pointer;
             font-size: 1.2rem;
             color: var(--badge-text);
-            /* 🎯 إزالة الإضاءة وإضافة لمسة 3D خفيفة */
             text-shadow: none;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            transition: all var(--transition-spring);
+            transition: transform 0.2s ease;
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-note .glow-icon:hover {
             transform: scale(1.1);
-            /* 🎯 إزالة الإضاءة في الـ hover */
-            text-shadow: none;
         }
 
         .src-icon {
@@ -458,8 +426,8 @@
             color: var(--gold-accent);
             opacity: 0.78;
             cursor: pointer;
-            margin-right: 2px;
-            transition: opacity 0.15s ease, transform var(--transition-spring);
+            margin-right: 5px;
+            transition: opacity 0.15s ease, transform 0.2s ease;
             line-height: 1;
             vertical-align: middle;
             user-select: none;
@@ -470,7 +438,7 @@
             transform: scale(1.22);
         }
 
-        /* Modal overlay */
+        /* النوافذ المنبثقة */
         .src-modal-overlay {
             display: none;
             position: fixed;
@@ -480,9 +448,12 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(3px);
+            opacity: 0;
+            transition: opacity 250ms ease;
         }
         .src-modal-overlay.active {
             display: flex;
+            opacity: 1;
         }
         .src-modal-box {
             background: var(--container-bg);
@@ -492,19 +463,16 @@
             max-width: 320px;
             width: 90%;
             text-align: center;
-            box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 20px 60px var(--shadow-deep);
-            animation: modalIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-            position: relative;
+            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
+            transform: scale(0.95) translateY(10px);
+            opacity: 0;
+            transition: transform 250ms cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 250ms ease;
         }
-        @keyframes modalIn {
-            from { transform: scale(0.96) translateY(8px); opacity: 0; }
-            to   { transform: scale(1)    translateY(0);   opacity: 1; }
+        .src-modal-overlay.active .src-modal-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
-        .src-modal-label {
-            display: none;
-        }
+        .src-modal-label { display: none; }
         .src-modal-name {
             font-family: 'Cairo', 'Segoe UI', sans-serif;
             font-size: 1rem;
@@ -525,13 +493,12 @@
             padding: 8px 24px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: background 0.2s ease, border-color 0.2s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .src-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
-            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
         .info-modal-overlay {
@@ -543,8 +510,13 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(3px);
+            opacity: 0;
+            transition: opacity 250ms ease;
         }
-        .info-modal-overlay.active { display: flex; }
+        .info-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
         .info-modal-box {
             background: var(--container-bg);
             border: 1px solid var(--card-border);
@@ -554,10 +526,14 @@
             width: 92%;
             text-align: right;
             direction: rtl;
-            box-shadow:
-                0 4px 12px var(--shadow-mid),
-                0 20px 60px var(--shadow-deep);
-            animation: modalIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
+            transform: scale(0.95) translateY(10px);
+            opacity: 0;
+            transition: transform 250ms cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 250ms ease;
+        }
+        .info-modal-overlay.active .info-modal-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
         .info-modal-title {
             font-size: 1rem;
@@ -593,16 +569,14 @@
             padding: 8px 28px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: background 0.2s ease, border-color 0.2s ease;
             box-shadow: 0 2px 8px var(--shadow-soft);
         }
         .info-modal-close:hover {
             background: var(--nav-hover-gradient);
             border-color: var(--gold-accent);
-            box-shadow: 0 4px 14px var(--shadow-mid);
         }
 
-        /* bottom disclaimer — subtle, low-profile, glowing gold text */
         .bottom-disclaimer {
             position: fixed;
             bottom: 0;
@@ -615,41 +589,26 @@
             font-size: 0.76rem;
             font-weight: 500;
             color: rgba(210, 175, 90, 0.68);
-            /* 🎯 إزالة الإضاءة */
             text-shadow: none;
             background: transparent;
             direction: rtl;
             pointer-events: none;
         }
 
-        .done-badge {
+        .done-badge, .coming-soon-badge {
             font-size: 0.72em;
             font-weight: 600;
-            color: #7a9e7a;
-            border: 1px solid rgba(122, 158, 122, 0.45);
             border-radius: 20px;
             padding: 1px 9px;
             margin-right: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
             opacity: 0.9;
-            vertical-align: middle;
-            letter-spacing: 0.5px;
         }
-        body.dark .done-badge {
-            color: #88bb88;
-            border-color: rgba(136, 187, 136, 0.35);
-        }
-        .coming-soon-badge {
-            font-size: 0.72em;
-            font-weight: 600;
-            color: #c4a87a;
-            border: 1px solid rgba(196, 168, 122, 0.4);
-            border-radius: 20px;
-            padding: 1px 9px;
-            margin-right: 8px;
-            opacity: 0.85;
-            vertical-align: middle;
-            letter-spacing: 0.5px;
-        }
+        .done-badge { color: #7a9e7a; border: 1px solid rgba(122, 158, 122, 0.45); }
+        body.dark .done-badge { color: #88bb88; border-color: rgba(136, 187, 136, 0.35); }
+        .coming-soon-badge { color: #c4a87a; border: 1px solid rgba(196, 168, 122, 0.4); opacity: 0.85; }
+        
         .await-notice {
             text-align: center;
             color: var(--gold-accent);
@@ -666,8 +625,6 @@
             .main-title h1 { font-size: 1.8rem; }
             .nav-section-header { font-size: 1rem; padding: 14px 16px; }
             .nav-link { font-size: 0.9rem; padding: 8px 16px; }
-            /* تقليل التأخير قليلاً على الشاشات الصغيرة */
-            .nav-section-content.open .nav-link { animation-duration: 0.24s; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&family=Tajawal:wght@700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -691,125 +648,149 @@
 
         <div class="main-nav">
 
+            <!-- القانون الدستوري -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-balance-scale" style="margin-left: 10px; color: var(--gold-accent);"></i> القانون الدستوري <span class="done-badge">✓ تم الانتهاء</span></span>
+                    <span>القانون الدستوري <span class="done-badge">تم الانتهاء</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link"><i class="fas fa-file-alt"></i> المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link"><i class="fas fa-file-alt"></i> طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link"><i class="fas fa-file-alt"></i> طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="nav-link"><i class="fas fa-file-alt"></i> القيمة القانونية والقوانين الأساسية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> العرف الدستوري <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> سمو القاعدة والرقابة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link"><i class="fas fa-file-alt"></i> مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link"><i class="fas fa-file-alt"></i> رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link">المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link">طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link">طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="nav-link">القيمة القانونية والقوانين الأساسية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="nav-link">العرف الدستوري <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="nav-link">سمو القاعدة والرقابة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link">تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link">مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link">رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    </div>
                 </div>
             </div>
 
+            <!-- النظم السياسية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-globe-americas" style="margin-left: 10px; color: var(--gold-accent);"></i> النظم السياسية <span class="done-badge">✓ تم الانتهاء</span></span>
+                    <span>النظم السياسية <span class="done-badge">تم الانتهاء</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link"><i class="fas fa-file-alt"></i> أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link"><i class="fas fa-file-alt"></i> السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link"><i class="fas fa-file-alt"></i> الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="nav-link"><i class="fas fa-file-alt"></i> أشكال الدول والاتحادات <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="nav-link"><i class="fas fa-file-alt"></i> نظم الحكم: أشكال الديمقراطية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام الملكي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link"><i class="fas fa-file-alt"></i> النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link"><i class="fas fa-file-alt"></i> صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link"><i class="fas fa-clipboard-list"></i> اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link">أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link">السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link">الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="nav-link">أشكال الدول والاتحادات <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="nav-link">نظم الحكم: أشكال الديمقراطية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link">النظام الملكي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link">النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link">صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link">اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- مادة اللغة الفرنسية (تم إزالة علامة "تم") -->
+            <!-- اللغة الفرنسية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-language" style="margin-left: 10px; color: var(--gold-accent);"></i> اللغة الفرنسية</span>
+                    <span>اللغة الفرنسية</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/const-quiz/French_legal_terms.html" class="nav-link"><i class="fas fa-gavel"></i> مصطلحات قانونيه للغة الفرنسية - MCQ <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <a href="https://COFFEE595.github.io/const-quiz/French_legal_terms.html" class="nav-link">مصطلحات قانونيه للغة الفرنسية - MCQ <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- المواد القادمة (الشريعة، علم الاجرام، القضايا المجتمعية، الملكية الفكرية) تبقى كما هي -->
+            <!-- الشريعة الإسلامية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-moon" style="margin-left: 10px; color: var(--gold-accent);"></i> الشريعة الإسلامية <span class="coming-soon-badge">قريباً</span></span>
+                    <span>الشريعة الإسلامية <span class="coming-soon-badge">قريباً</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <span class="nav-link" style="opacity:0.5; cursor:default;">انتظرونا قريباً</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- علم الاجرام والعقاب -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-gavel" style="margin-left: 10px; color: var(--gold-accent);"></i> علم الاجرام والعقاب <span class="coming-soon-badge">قريباً</span></span>
+                    <span>علم الاجرام والعقاب <span class="coming-soon-badge">قريباً</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <span class="nav-link" style="opacity:0.5; cursor:default;">انتظرونا قريباً</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- القضايا المجتمعية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-users" style="margin-left: 10px; color: var(--gold-accent);"></i> القضايا المجتمعية <span class="coming-soon-badge">قريباً</span></span>
+                    <span>القضايا المجتمعية <span class="coming-soon-badge">قريباً</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <span class="nav-link" style="opacity:0.5; cursor:default;">انتظرونا قريباً</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- الملكية الفكرية -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-copyright" style="margin-left: 10px; color: var(--gold-accent);"></i> الملكية الفكرية <span class="coming-soon-badge">قريباً</span></span>
+                    <span>الملكية الفكرية <span class="coming-soon-badge">قريباً</span></span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <span class="nav-link" style="opacity:0.5; cursor:default;"><i class="fas fa-clock"></i> انتظرونا قريباً</span>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <span class="nav-link" style="opacity:0.5; cursor:default;">انتظرونا قريباً</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- تم نقل "حجات تهمك" و "إجابات مقالي نموذجيه" إلى الأسفل -->
+            <!-- حجات تهمك -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-star" style="margin-left: 10px; color: var(--gold-accent);"></i> حجات تهمك؟</span>
+                    <span>حجات تهمك؟</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'outbound', event_label: 'MCQ_50_nazom', transport_type: 'beacon'});"><i class="fas fa-list-ol"></i> اهم 50 سؤال MCQ لماده النظم السياسية!! <span class="done-badge">✓ تم</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link"><i class="fas fa-pen"></i> ميدتيرم وكويزات 1-5 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link"><i class="fas fa-clock"></i> أسئلة 2026/5/4 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link"><i class="fas fa-pen"></i> امتحان 2023 <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'outbound', event_label: 'MCQ_50_nazom', transport_type: 'beacon'});">اهم 50 سؤال MCQ لماده النظم السياسية!! <span class="done-badge">تم</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link">ميدتيرم وكويزات 1-5 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link">أسئلة 2026/5/4 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                        <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link">امتحان 2023 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
+                    </div>
                 </div>
             </div>
 
+            <!-- إجابات مقالي نموذجيه -->
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span><i class="fas fa-pencil" style="margin-left: 10px; color: var(--gold-accent);"></i> إجابات مقالي نموذجيه</span>
+                    <span>إجابات مقالي نموذجيه</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="nav-section-content">
-                    <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link"><i class="fas fa-file-alt"></i> مقالي دستوري ونظم <span class="done-badge">✓ تم</span> <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                <div class="nav-section-wrapper">
+                    <div class="nav-section-content">
+                        <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link">مقالي دستوري ونظم <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="await-notice">✨ انتظروا كل جديد — بالتوفيق 🎓</div>
+        <div class="await-notice">انتظروا كل جديد — بالتوفيق</div>
 
         <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6;">آخر تحديث: 2026/5/18 — 04:00PM</div>
-            <span>⭐</span> أبلغنا برأيك
+            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 6px;">آخر تحديث: 2026/5/19 — 03:00AM</div>
+            أبلغنا برأيك
             <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
         </div>
@@ -820,6 +801,7 @@
     في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
 </div>
 
+<!-- النوافذ المنبثقة -->
 <div class="src-modal-overlay" id="srcModalOverlay" onclick="closeSrcModal(event)">
     <div class="src-modal-box">
         <div class="src-modal-label">المصدر</div>
@@ -851,69 +833,117 @@
 </div>
 
 <script>
-    // ─── Original functionality (completely unchanged) ──────────────────────────
-
+    // دوال النوافذ المنبثقة
     function showCacheInfo() {
-        document.getElementById('cacheModalOverlay').classList.add('active');
+        requestAnimationFrame(() => {
+            const el = document.getElementById('cacheModalOverlay');
+            el.style.display = 'flex';
+            requestAnimationFrame(() => el.classList.add('active'));
+        });
     }
     function closeCacheModal(e) {
-        if (e.target === document.getElementById('cacheModalOverlay'))
-            document.getElementById('cacheModalOverlay').classList.remove('active');
+        const el = document.getElementById('cacheModalOverlay');
+        if (e.target === el) {
+            el.classList.remove('active');
+            setTimeout(() => el.style.display = 'none', 250);
+        }
     }
 
     function showInfo() {
-        document.getElementById('infoModalOverlay').classList.add('active');
+        requestAnimationFrame(() => {
+            const el = document.getElementById('infoModalOverlay');
+            el.style.display = 'flex';
+            requestAnimationFrame(() => el.classList.add('active'));
+        });
     }
     function closeInfoModal(e) {
-        if (e.target === document.getElementById('infoModalOverlay'))
-            document.getElementById('infoModalOverlay').classList.remove('active');
+        const el = document.getElementById('infoModalOverlay');
+        if (e.target === el) {
+            el.classList.remove('active');
+            setTimeout(() => el.style.display = 'none', 250);
+        }
     }
 
     function showSrc(e, name) {
         e.preventDefault();
         e.stopPropagation();
         document.getElementById('srcModalName').textContent = 'المصدر: ' + (name === 'ثري' ? 'سنتر ثري' : 'MADAR');
-        document.getElementById('srcModalOverlay').classList.add('active');
+        requestAnimationFrame(() => {
+            const el = document.getElementById('srcModalOverlay');
+            el.style.display = 'flex';
+            requestAnimationFrame(() => el.classList.add('active'));
+        });
     }
     function closeSrcModal(e) {
-        if (e.target === document.getElementById('srcModalOverlay'))
-            document.getElementById('srcModalOverlay').classList.remove('active');
-    }
-
-    function toggleSection(header) {
-        const content = header.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-
-        document.querySelectorAll('.nav-section-content').forEach(el => {
-            el.classList.remove('open');
-            el.style.maxHeight = null;
-            el.style.opacity = '0';
-        });
-        document.querySelectorAll('.nav-section-header').forEach(el => {
+        const el = document.getElementById('srcModalOverlay');
+        if (e.target === el) {
             el.classList.remove('active');
-        });
-
-        if (!isOpen) {
-            content.classList.add('open');
-            header.classList.add('active');
-            requestAnimationFrame(() => {
-                content.style.maxHeight = content.scrollHeight + 30 + 'px';
-                content.style.opacity = '1';
-            });
+            setTimeout(() => el.style.display = 'none', 250);
         }
     }
 
+    // 🎯 دالة فتح القوائم المحسنة
+    function toggleSection(header) {
+        const wrapper = header.nextElementSibling;
+        const content = wrapper.querySelector('.nav-section-content');
+        const isOpen = wrapper.classList.contains('open');
+
+        // إغلاق أي قسم مفتوح (بما في ذلك القسم الحالي في حال ضغطنا عليه ليغلق)
+        document.querySelectorAll('.nav-section-wrapper').forEach(el => {
+            if (el.classList.contains('open')) {
+                const elContent = el.querySelector('.nav-section-content');
+                
+                el.style.willChange = 'max-height';
+                if (elContent) elContent.style.willChange = 'transform, opacity';
+                
+                // تحديد الارتفاع الحالي لتفعيل الانتقال العكسي
+                el.style.maxHeight = el.scrollHeight + 'px';
+                
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        el.classList.remove('open');
+                        el.style.maxHeight = '0px';
+                        el.previousElementSibling.classList.remove('active');
+                    });
+                });
+                
+                // إزالة will-change بعد الانتهاء
+                setTimeout(() => { 
+                    if (!el.classList.contains('open')) {
+                        el.style.willChange = 'auto';
+                        if (elContent) elContent.style.willChange = 'auto';
+                    }
+                }, 300); // إغلاق سريع وناعم
+            }
+        });
+
+        // فتح القسم الحالي إذا لم يكن مفتوحاً
+        if (!isOpen) {
+            wrapper.style.willChange = 'max-height';
+            if (content) content.style.willChange = 'transform, opacity';
+            
+            wrapper.classList.add('open');
+            header.classList.add('active');
+            
+            wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+
+            setTimeout(() => {
+                if (wrapper.classList.contains('open')) {
+                    wrapper.style.willChange = 'auto';
+                    if (content) content.style.willChange = 'auto';
+                    wrapper.style.maxHeight = 'none'; // السماح بالنمو الديناميكي بعد إتمام الفتح
+                }
+            }, 500); // يتوافق مع مدة الفتح
+        }
+    }
+
+    // فتح القسم الأول تلقائياً بعد تحميل الصفحة
     window.addEventListener('DOMContentLoaded', function() {
         const firstHeader = document.querySelector('.nav-section-header');
-        if (firstHeader) firstHeader.click();
+        if (firstHeader) setTimeout(() => firstHeader.click(), 100);
     });
 
-    window.addEventListener('resize', function() {
-        document.querySelectorAll('.nav-section-content.open').forEach(el => {
-            el.style.maxHeight = el.scrollHeight + 30 + 'px';
-        });
-    });
-
+    // الوضع الليلي
     const themeToggle = document.getElementById('toggleThemeBtn');
     if (localStorage.getItem('madar_theme') === 'dark') {
         document.body.classList.add('dark');
@@ -925,30 +955,25 @@
         localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-
-    // ─── Protection layer (unchanged) ───────────────────────────────────────────
+    // طبقة الحماية
     (function() {
         try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
         catch(e) {}
     })();
-
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
     document.addEventListener('keydown', function(e) {
         const k = e.key.toLowerCase();
         const c = e.ctrlKey || e.metaKey;
-        if (c && k === 'u')                            { e.preventDefault(); return false; }
-        if (c && k === 's')                            { e.preventDefault(); return false; }
-        if (e.key === 'F12')                           { e.preventDefault(); return false; }
-        if (c && e.shiftKey && 'ijc'.includes(k))      { e.preventDefault(); return false; }
+        if (c && k === 'u') { e.preventDefault(); return false; }
+        if (c && k === 's') { e.preventDefault(); return false; }
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if (c && e.shiftKey && 'ijc'.includes(k)) { e.preventDefault(); return false; }
     });
-
     (function() {
         console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
         console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
     })();
-
     document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
-    </html>
+                            </html>
