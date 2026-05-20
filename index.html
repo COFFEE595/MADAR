@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="author" content="MADAR Platform — @GIX37">
+    <meta name="author" content="MADAR Platform — @KOK0KK | programmer Mohammed">
     <meta name="copyright" content="MADAR 2026 — All Rights Reserved">
     <title>MADAR - منصة اختبارات</title>
     <style>
@@ -476,6 +476,183 @@
             transform: scale(1.05);
             box-shadow: 0 4px 14px var(--shadow-mid);
         }
+        /* ── Team Section ───────────────────────── */
+        .team-section {
+            margin: 28px 0 12px;
+            position: relative;
+        }
+        .team-label {
+            text-align: center;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0.55;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-label::before,
+        .team-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .team-cards {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .team-card {
+            text-decoration: none;
+            flex: 1;
+            max-width: 230px;
+            border-radius: 22px;
+            padding: 20px 16px 16px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            isolation: isolate;
+        }
+        .team-card--primary {
+            background: var(--brand-gradient);
+            box-shadow: 0 4px 20px rgba(45, 90, 61, 0.35);
+        }
+        .team-card--secondary {
+            background: var(--nav-gradient);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 16px var(--shadow-soft);
+        }
+        body.dark .team-card--primary {
+            box-shadow: 0 4px 20px rgba(230, 195, 113, 0.2);
+        }
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.18) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes teamShine {
+            0%   { transform: translateX(-120%) skewX(-15deg); }
+            100% { transform: translateX(220%)  skewX(-15deg); }
+        }
+        .team-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transform: translateX(-120%) skewX(-15deg);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .team-card:hover::after {
+            animation: teamShine 0.65s ease forwards;
+        }
+        .team-card:hover {
+            transform: translateY(-5px) scale(1.025);
+        }
+        .team-card--primary:hover {
+            box-shadow: 0 12px 36px rgba(45, 90, 61, 0.45);
+        }
+        body.dark .team-card--primary:hover {
+            box-shadow: 0 12px 36px rgba(230, 195, 113, 0.3);
+        }
+        .team-card--secondary:hover {
+            box-shadow: 0 10px 28px var(--shadow-mid);
+            border-color: var(--gold-accent);
+        }
+        .team-card:active {
+            transform: scale(0.97);
+        }
+        .team-card-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            position: relative;
+            z-index: 2;
+            letter-spacing: -0.5px;
+        }
+        .team-card--primary .team-card-avatar {
+            background: rgba(255,255,255,0.22);
+            color: #fff;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .team-card--secondary .team-card-avatar {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            box-shadow: 0 0 0 2px var(--card-border), 0 4px 12px var(--shadow-soft);
+        }
+        .team-card-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .team-card-name {
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .team-card--primary .team-card-name {
+            color: #fff;
+        }
+        .team-card--secondary .team-card-name {
+            color: var(--text);
+        }
+        .team-card-role {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+        .team-card--primary .team-card-role {
+            background: rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.92);
+        }
+        .team-card--secondary .team-card-role {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+        }
+        .team-card-handle {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.73rem;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        .team-card--primary .team-card-handle {
+            color: rgba(255,255,255,0.65);
+        }
+        .team-card--secondary .team-card-handle {
+            color: var(--text-secondary);
+            opacity: 0.75;
+        }
         .footer-note .glow-icon {
             display: inline-block;
             cursor: pointer;
@@ -572,6 +749,220 @@
         }
         .src-modal-close:hover {
             background: var(--nav-hover-gradient);
+            border-color: var(--gold-accent);
+        }
+
+        /* ── Channel Banner ─────────────────────── */
+        .channel-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #0d7ec4 0%, #29B6F6 60%, #0288D1 100%);
+            border-radius: 18px;
+            padding: 13px 18px;
+            margin: 8px 0 16px;
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(41, 182, 246, 0.3);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .channel-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -30%;
+            width: 160%; height: 200%;
+            background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.18) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        @keyframes bannerShine {
+            0%   { transform: translateX(-150%) skewX(-15deg); }
+            100% { transform: translateX(250%)  skewX(-15deg); }
+        }
+        .channel-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: translateX(-150%) skewX(-15deg);
+            pointer-events: none;
+        }
+        .channel-banner:hover::after {
+            animation: bannerShine 0.7s ease forwards;
+        }
+        .channel-banner:hover {
+            transform: translateY(-2px) scale(1.015);
+            box-shadow: 0 8px 28px rgba(41, 182, 246, 0.45);
+        }
+        .channel-banner:active { transform: scale(0.98); }
+        .channel-banner-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
+        }
+        .channel-banner-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+        }
+        .channel-banner-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+        .channel-banner-sub {
+            font-size: 0.75rem;
+            opacity: 0.82;
+            font-weight: 500;
+        }
+        .channel-banner-arrow {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+        .channel-banner:hover .channel-banner-arrow {
+            transform: translateX(-4px);
+        }
+
+        /* ── Telegram Join Popup ─────────────────── */
+        .tg-join-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            transition: opacity 400ms ease;
+        }
+        .tg-join-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .tg-join-box {
+            background: var(--container-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 36px 28px 28px;
+            max-width: 340px;
+            width: 92%;
+            text-align: center;
+            direction: rtl;
+            box-shadow: 0 8px 32px var(--shadow-mid), 0 24px 72px var(--shadow-deep);
+            transform: scale(0.88) translateY(24px);
+            opacity: 0;
+            transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tg-join-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #29B6F6, #0288D1, #29B6F6);
+            background-size: 200%;
+            animation: tgShimmer 2.5s infinite linear;
+        }
+        @keyframes tgShimmer {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
+        }
+        .tg-join-overlay.active .tg-join-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .tg-join-icon {
+            margin-bottom: 14px;
+            animation: tgBounce 2s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97);
+        }
+        @keyframes tgBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
+        }
+        .tg-join-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin-bottom: 8px;
+        }
+        .tg-join-sub {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .tg-join-handle {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #29B6F6;
+            background: rgba(41, 182, 246, 0.1);
+            border: 1px solid rgba(41, 182, 246, 0.25);
+            border-radius: 50px;
+            padding: 4px 14px;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+        }
+        .tg-join-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .tg-join-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #29B6F6, #0288D1);
+            color: white;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(41, 182, 246, 0.35);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+        }
+        .tg-join-btn:hover {
+            transform: scale(1.03) translateY(-1px);
+            box-shadow: 0 6px 22px rgba(41, 182, 246, 0.5);
+        }
+        .tg-join-btn:active {
+            transform: scale(0.97);
+        }
+        .tg-skip-btn {
+            background: transparent;
+            border: 1px solid var(--btn-border);
+            color: var(--text-secondary);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85rem;
+            padding: 9px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .tg-skip-btn:hover {
+            background: var(--btn-bg);
+            color: var(--text);
             border-color: var(--gold-accent);
         }
 
@@ -732,6 +1123,18 @@
         <div class="subtitle">الفرقة الأولى · حقوق المنصورة</div>
         <div class="date-info">أسئلة واختبارات للترم الثاني · مايو - يونيو 2026</div>
 
+        <!-- قناة تيليجرام -->
+        <a href="https://t.me/MADAR_ACADEMIC" target="_blank" rel="noopener noreferrer" class="channel-banner">
+            <span class="channel-banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
+            </span>
+            <span class="channel-banner-text">
+                <span class="channel-banner-title">MADAR ACADEMIC</span>
+                <span class="channel-banner-sub">انضم للقناة الرسمية</span>
+            </span>
+            <span class="channel-banner-arrow">←</span>
+        </a>
+
         <div class="main-nav">
 
             <!-- القانون الدستوري -->
@@ -872,19 +1275,69 @@
 
         </div>
 
+        <!-- قسم الفريق -->
+        <div class="team-section">
+            <div class="team-label">الفريق</div>
+            <div class="team-cards">
+                <a href="https://t.me/KOK0KK" target="_blank" rel="noopener noreferrer" class="team-card team-card--primary">
+                    <div class="team-card-avatar">M</div>
+                    <div class="team-card-info">
+                        <span class="team-card-name">Mohammed</span>
+                        <span class="team-card-role">Programmer</span>
+                        <span class="team-card-handle">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
+                            @KOK0KK
+                        </span>
+                    </div>
+                </a>
+                <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer" class="team-card team-card--secondary">
+                    <div class="team-card-avatar">G</div>
+                    <div class="team-card-info">
+                        <span class="team-card-name">@GIX37</span>
+                        <span class="team-card-role">فكرة وتصميم</span>
+                        <span class="team-card-handle">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
+                            @GIX37
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div class="await-notice">انتظروا كل جديد — بالتوفيق</div>
 
         <div class="footer-note">
             <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 6px;">آخر تحديث: 2026/5/19 — 03:00AM</div>
             أبلغنا برأيك
-            <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer">@GIX37</a>
             <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
         </div>
     </div>
 </div>
 
+
 <div class="bottom-disclaimer">
     في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
+</div>
+
+<!-- نافذة الانضمام لقناة تيليجرام -->
+<div class="tg-join-overlay" id="tgJoinOverlay">
+    <div class="tg-join-box">
+        <div class="tg-join-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z" fill="#29B6F6"/>
+            </svg>
+        </div>
+        <div class="tg-join-title">انضم لقناتنا على تيليجرام</div>
+        <div class="tg-join-sub">تابع كل جديد ومحتوى حصري على قناة MADAR</div>
+        <div class="tg-join-handle">MADAR ACADEMIC</div>
+        <div class="tg-join-buttons">
+            <a href="https://t.me/MADAR_ACADEMIC" target="_blank" rel="noopener noreferrer" class="tg-join-btn" onclick="closeTgJoin()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white" style="flex-shrink:0"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
+                انضم الآن
+            </a>
+            <button class="tg-skip-btn" onclick="closeTgJoin()">تخطي</button>
+        </div>
+    </div>
 </div>
 
 <!-- النوافذ المنبثقة -->
@@ -1014,12 +1467,30 @@
         }
     }
 
+    // ── نافذة الانضمام لتيليجرام ───────────────────
+    function closeTgJoin() {
+        const el = document.getElementById('tgJoinOverlay');
+        el.classList.remove('active');
+        setTimeout(() => { el.style.display = 'none'; }, 450);
+        sessionStorage.setItem('tg_join_shown', '1');
+    }
+
+    function showTgJoin() {
+        if (sessionStorage.getItem('tg_join_shown')) return;
+        const el = document.getElementById('tgJoinOverlay');
+        el.style.display = 'flex';
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => { el.classList.add('active'); });
+        });
+    }
+
     // تنفيذ الحركات عند تحميل الصفحة
     window.addEventListener('DOMContentLoaded', function() {
        const mainNav = document.querySelector('.main-nav');
        if (mainNav) mainNav.classList.add('open');
-       
-       // تم حذف الكود الذي كان يفتح القوائم تلقائياً (ستبقى مغلقة افتراضياً)
+
+       // عرض نافذة الانضمام بعد ثانية
+       setTimeout(showTgJoin, 1000);
     });
 
     // 🎯 الوضع الليلي مع إعادة تشغيل الأنيميشن المتتابع
@@ -1062,10 +1533,9 @@
     });
     (function() {
         console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
-        console.log('%c© 2026 — Original work by @GIX37. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
+        console.log('%c© 2026 — programmer Mohammed @KOK0KK. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
     })();
     document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 </body>
 </html>
-
