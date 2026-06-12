@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MADAR - المنصة الرقمية</title>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -9,1527 +13,1595 @@
       gtag('config', 'G-9YE8DKCYD5');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="author" content="MADAR Platform — @KOK0KK | programmer Mohammed">
-    <meta name="copyright" content="MADAR 2026 — All Rights Reserved">
-    <title>MADAR - منصة اختبارات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- 2. حماية الـ CSS: منع السحب والتحديد (Drag & Select) --- */
+        body, html, .container, * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-user-drag: none !important;
+        }
+        img, a, svg {
+            -webkit-user-drag: none !important;
+        }
+
         :root {
-            /* وضع النهار المحسن (Light Mode) حسب معايير 2025 */
-            --bg: #E8E4DE;
-            --container-bg: #F5F3EF;
-            --text: #1A1814;
-            --text-secondary: #6B6560;
-            --border: #D5CFC9;
-            --card-bg: #FAF8F5;
-            --card-border: #D5CFC9;
-            --btn-bg: #EDE9E3;
-            --btn-text: #2E2A25;
-            --btn-border: #D5CFC9;
-            --btn-shadow: #A9A29B;
-            --badge-bg: #2D5A3D;
-            --badge-text: #FFFFFF;
-            --header-color: #1A1814;
-            --toggle-bg: #FAF8F5;
-            --toggle-text: #1A1814;
-            --footer-color: #6B6560;
-            --brand-gradient: linear-gradient(135deg, #2D5A3D 0%, #234832 50%, #1A3826 100%);
-            --brand-text: #FFFFFF;
-            --nav-gradient: linear-gradient(145deg, #FAF8F5, #F5F3EF);
-            --nav-hover-gradient: linear-gradient(145deg, #F5F3EF, #EDE9E3);
-            --nav-active-gradient: linear-gradient(145deg, #EDE9E3, #D8D3CD);
-            --gold-accent: #2D5A3D;
-            --shadow-soft: rgba(26, 24, 20, 0.05);
-            --shadow-mid: rgba(26, 24, 20, 0.1);
-            --shadow-hover: rgba(26, 24, 20, 0.15);
-            --shadow-deep: rgba(26, 24, 20, 0.2);
+            /* Light Mode Variables */
+            --bg-color: #F8F6F2;
+            --main-container: #F8F6F2;
+            --text-main: #141414;
+            --text-secondary: #6B7280;
+            --madar-glow: rgba(46, 204, 113, 0.4);
+            --madar-color: #2E7D32;
+            --header-glow: #2ECC71;
+            --divider-color: #E2DFD8;
+            --pill-bg: #FFFFFF;
+            --pill-border: #E8E5DF;
+            --stat-badge-bg: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --hover-bg: #F0EEE9;
             
-            --scrollbar-track: #EAE5DF;
-            --scrollbar-thumb: #C0B9B2;
-            --scrollbar-thumb-hover: #A09890;
+            --team-programmer-bg: #E8F5E9;
+            --team-programmer-border: #C8E6C9;
+            --team-programmer-glow: rgba(46, 204, 113, 0.2);
+            --team-designer-bg: #FFFFFF;
+            --team-designer-border: #E8E5DF;
+            --team-designer-glow: rgba(0,0,0,0.05);
+
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
             
-            /* 🎯 تحسينات الأنيميشن السلس */
-            --transition-menu: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), visibility 300ms, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-spring: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+            --telegram-gradient: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            --telegram-shadow: rgba(37, 211, 102, 0.4);
         }
 
-        body.dark {
-            --bg: #121620;
-            --container-bg: #161A25;
-            --text: #E1E4EA;
-            --text-secondary: #A0A5B5;
-            --border: #242A38;
-            --card-bg: #1E2330;
-            --card-border: #2C3446;
-            --btn-bg: #282F44;
-            --btn-text: #E1E4EA;
-            --btn-border: #38425C;
-            --btn-shadow: #0D1018;
-            --badge-bg: rgba(230, 195, 113, 0.15);
-            --badge-text: #E6C371;
-            --header-color: #F4F6FA;
-            --toggle-bg: #282F44;
-            --toggle-text: #E6C371;
-            --footer-color: #A0A5B5;
-            --brand-gradient: linear-gradient(135deg, #C29A51 0%, #E6C371 50%, #FFF3B3 100%);
-            --brand-text: #121620;
-            --nav-gradient: linear-gradient(145deg, #222838, #1E2330);
-            --nav-hover-gradient: linear-gradient(145deg, #2D354A, #222838);
-            --nav-active-gradient: linear-gradient(145deg, #2A3245, #1E2330);
-            --gold-accent: #E6C371;
-            --shadow-soft: rgba(0, 0, 0, 0.25);
-            --shadow-mid: rgba(0, 0, 0, 0.4);
-            --shadow-hover: rgba(0, 0, 0, 0.55);
-            --shadow-deep: rgba(0, 0, 0, 0.7);
+        [data-theme="dark"] {
+            /* Dark Mode Variables */
+            --bg-color: #0A0A0B;
+            --main-container: #0A0A0B;
+            --text-main: #FFFFFF;
+            --text-secondary: #9CA3AF;
+            --madar-glow: rgba(245, 158, 11, 0.4);
+            --madar-color: #F59E0B;
+            --header-glow: #FCD34D;
+            --divider-color: #1F2023;
+            --pill-bg: #141517;
+            --pill-border: #1F2023;
+            --stat-badge-bg: #141517;
+            --card-bg: #141517;
+            --hover-bg: #1C1E21;
             
-            --scrollbar-track: #161A25;
-            --scrollbar-thumb: #282F44;
-            --scrollbar-thumb-hover: #38425C;
+            --team-programmer-bg: rgba(245, 158, 11, 0.1);
+            --team-programmer-border: rgba(245, 158, 11, 0.3);
+            --team-programmer-glow: rgba(245, 158, 11, 0.15);
+            --team-designer-bg: #141517;
+            --team-designer-border: #1F2023;
+            --team-designer-glow: rgba(0,0,0,0.3);
+
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            :root {
-                --transition-menu: opacity 250ms ease, visibility 250ms !important;
-                --transition-spring: transform 0ms !important;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-        
-        /* ── Scrollbar styling ───────────────────── */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
-        ::-webkit-scrollbar-thumb {
-            background: var(--scrollbar-thumb);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: var(--bg);
-            font-family: 'Cairo', 'Segoe UI', 'Amiri', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
-            padding-bottom: 44px;
-            direction: rtl;
-            color: var(--text);
-            transition: background 0.4s ease;
+            padding: 12px 16px 24px 16px;
         }
 
-        .platform-wrapper {
+        .container {
             width: 100%;
-            max-width: 850px;
-            background: var(--container-bg);
-            border-radius: 40px;
-            box-shadow:
-                0 10px 20px var(--shadow-mid),
-                inset 1px 1px 0 rgba(255, 255, 255, 0.2),
-                inset -1px -1px 0 rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: background 0.4s ease, border-color 0.4s ease;
+            max-width: 650px;
         }
 
-        .brand-bar {
-            background: var(--brand-gradient);
-            text-align: center;
-            padding: 12px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .brand-bar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .brand-bar::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.12), transparent 65%);
-            opacity: 0.6;
-        }
-        .brand-bar .brand-name {
-            font-family: 'Poppins', 'Cairo', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--brand-text);
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.15);
-        }
-
-        .content-inner {
-            padding: 28px 24px 32px;
-        }
-
-        .top-actions {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .toggle-theme-btn {
-            margin-inline-start: auto;
-            background: var(--toggle-bg);
-            border: 1px solid var(--btn-border);
-            color: var(--toggle-text);
-            font-size: 1.2rem;
-            padding: 7px 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            line-height: 1;
-            transition: var(--transition-spring);
-            box-shadow: 0 2px 8px var(--shadow-soft);
-        }
-        .toggle-theme-btn:hover {
-            transform: rotate(12deg) scale(1.04);
-            background: var(--btn-bg);
-            box-shadow: 0 3px 10px var(--shadow-mid);
-        }
-        .toggle-theme-btn:active {
-            transform: scale(0.9);
-        }
-
-        .main-title {
-            text-align: center;
-            margin-bottom: 4px;
-        }
-        .main-title h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--header-color);
-            letter-spacing: 0;
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            line-height: 1.3;
-        }
-        .main-title .glow-icon {
-            display: inline-block;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--gold-accent);
-            text-shadow: none;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            vertical-align: middle;
-            margin-left: 6px;
-        }
-        .main-title .glow-icon:hover {
-            transform: scale(1.15);
-        }
-        .subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
-        .date-info {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 12px;
-        }
-
-        .main-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* 🎯 القسم المحسن: القوائم والطبقات */
-        .nav-section {
-            background: var(--card-bg);
-            border-radius: 28px;
-            border: 1px solid var(--card-border);
-            overflow: hidden;
-            transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-            box-shadow: 0 1px 3px var(--shadow-soft), 0 4px 10px var(--shadow-soft);
-            transform: translateZ(0); /* طبقة تسريع أساسية للهاتف */
-        }
-        .nav-section:hover {
-            box-shadow: 0 2px 8px var(--shadow-soft), 0 6px 18px var(--shadow-mid);
-        }
-        .nav-section-header {
-            background: var(--nav-gradient);
-            padding: 16px 22px;
-            cursor: pointer;
+        /* Top Bar */
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--btn-text);
-            transition: background 0.3s ease;
-            user-select: none;
-            position: relative;
-        }
-        .nav-section-header::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--gold-accent), var(--badge-bg));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 0 2px 2px 0;
-        }
-        .nav-section-header:hover {
-            background: var(--nav-hover-gradient);
-        }
-        .nav-section-header:hover::before,
-        .nav-section-header.active::before {
-            opacity: 1;
-        }
-        .nav-section-header.active {
-            background: var(--nav-active-gradient);
-        }
-        .nav-section-header .arrow {
-            font-size: 1.1rem;
-            transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
-            color: var(--gold-accent);
-            display: inline-block;
-        }
-        .nav-section-header.active .arrow {
-            transform: rotate(180deg);
+            margin-bottom: 12px;
         }
 
-        .nav-section-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 450ms cubic-bezier(0.3, 0, 0, 1); 
-            transform: translate3d(0,0,0);
-            backface-visibility: hidden;
-            perspective: 1000px;
-            will-change: max-height;
-        }
-        .nav-section-wrapper.open {
-            transition: max-height 850ms cubic-bezier(0.19, 1, 0.22, 1); 
-        }
-        .nav-section-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 0 18px;
-            transform: translateZ(0); 
-            backface-visibility: hidden;
-        }
-        
-        .nav-section-content::before {
-            content: '';
-            width: 100%;
-            height: 10px;
-            display: block;
-        }
-        .nav-section-content::after {
-            content: '';
-            width: 100%;
-            height: 6px;
-            display: block;
-        }
-
-        .nav-link {
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            border-radius: 60px;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--btn-text);
-            text-decoration: none;
+        .platform-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-            
-            opacity: 0; 
-            transform: translate3d(40px, 0, 0) scale(0.97);
-            transform-origin: center;
-            transition: opacity 350ms ease, transform 400ms cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border-color 0.3s ease;
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-        }
-        .nav-section-wrapper.open .nav-link {
-            opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
-            transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 950ms cubic-bezier(0.19, 1, 0.22, 1), background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .nav-section-wrapper.open .nav-link:nth-child(1) { transition-delay: 50ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(2) { transition-delay: 100ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(3) { transition-delay: 150ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(4) { transition-delay: 200ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(5) { transition-delay: 250ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(6) { transition-delay: 300ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(7) { transition-delay: 350ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(8) { transition-delay: 400ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(9) { transition-delay: 450ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(10) { transition-delay: 500ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(11) { transition-delay: 550ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(12) { transition-delay: 600ms; }
-        .nav-section-wrapper.open .nav-link:nth-child(n+13) { transition-delay: 650ms; }
-
-        @keyframes gentlePulse {
-            0% { opacity: 0.55; box-shadow: inset 0 0 0 rgba(0,0,0,0); }
-            100% { opacity: 0.95; box-shadow: inset 0 0 12px rgba(230, 195, 113, 0.2); border-color: rgba(230, 195, 113, 0.4); }
-        }
-        @keyframes shimmerEffect {
-            0% { transform: translateX(150%); }
-            100% { transform: translateX(-150%); }
-        }
-        .placeholder-link {
-            position: relative;
-            overflow: hidden;
-            cursor: not-allowed !important;
-            border: 1px dashed var(--btn-border) !important;
-            animation: gentlePulse 2.5s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .placeholder-link::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(230, 195, 113, 0.15), transparent);
-            animation: shimmerEffect 2s infinite linear;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .nav-link:hover {
-            transform: translate3d(-2px, 0, 0) scale(1.02) !important;
-            border-color: var(--gold-accent);
-            background: var(--nav-hover-gradient);
-            transition: background 0.2s ease, border-color 0.2s ease, transform 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-        }
-
-        .nav-link:active {
-            transform: scale(0.97) !important;
-        }
-
-        /* 🎯 التأثير المتتابع لظهور الأقسام (تم إخراجه من الميديا كويري ليعمل في كل الحالات) */
-        .main-nav.open .nav-section {
-            opacity: 0;
-            transform: translate3d(0, -50px, -20px) scale(0.8);
-            transform-origin: top center;
-            animation: sectionEmerge 1.1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-            will-change: transform, opacity, filter;
-            backface-visibility: hidden;
-        }
-
-        .main-nav.open .nav-section:nth-child(1) { animation-delay: 80ms; }
-        .main-nav.open .nav-section:nth-child(2) { animation-delay: 170ms; }
-        .main-nav.open .nav-section:nth-child(3) { animation-delay: 260ms; }
-        .main-nav.open .nav-section:nth-child(4) { animation-delay: 350ms; }
-        .main-nav.open .nav-section:nth-child(5) { animation-delay: 440ms; }
-        .main-nav.open .nav-section:nth-child(6) { animation-delay: 530ms; }
-        .main-nav.open .nav-section:nth-child(7) { animation-delay: 620ms; }
-        .main-nav.open .nav-section:nth-child(8) { animation-delay: 710ms; }
-        .main-nav.open .nav-section:nth-child(9) { animation-delay: 800ms; }
-        .main-nav.open .nav-section:nth-child(n+10) { animation-delay: 890ms; }
-
-        @keyframes sectionEmerge {
-            0% {
-                opacity: 0;
-                transform: translate3d(0, -50px, -15px) scale(0.85);
-                filter: blur(5px);
-            }
-            100% {
-                opacity: 1;
-                transform: translate3d(0, 0, 0) scale(1);
-                filter: blur(0);
-            }
-        }
-
-        /* باقي التنسيقات */
-        .footer-note {
-            text-align: center;
-            color: var(--footer-color);
-            margin-top: 8px;
-            font-size: 0.85rem;
-        }
-        .footer-note a {
-            color: var(--badge-text);
-            text-decoration: none;
-            font-weight: 600;
-            background: var(--badge-bg);
-            padding: 4px 12px;
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow-soft);
-        }
-        .footer-note a:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-            box-shadow: 0 4px 14px var(--shadow-mid);
-        }
-        /* ── Team Section ───────────────────────── */
-        .team-section {
-            margin: 28px 0 12px;
-            position: relative;
-        }
-        .team-label {
-            text-align: center;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            opacity: 0.55;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .team-label::before,
-        .team-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        .team-cards {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        .team-card {
-            text-decoration: none;
-            flex: 1;
-            max-width: 230px;
-            border-radius: 22px;
-            padding: 20px 16px 16px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            isolation: isolate;
-        }
-        .team-card--primary {
-            background: var(--brand-gradient);
-            box-shadow: 0 4px 20px rgba(45, 90, 61, 0.35);
-        }
-        .team-card--secondary {
-            background: var(--nav-gradient);
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 16px var(--shadow-soft);
-        }
-        body.dark .team-card--primary {
-            box-shadow: 0 4px 20px rgba(230, 195, 113, 0.2);
-        }
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            left: -30%;
-            width: 160%;
-            height: 160%;
-            background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.18) 0%, transparent 65%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        @keyframes teamShine {
-            0%   { transform: translateX(-120%) skewX(-15deg); }
-            100% { transform: translateX(220%)  skewX(-15deg); }
-        }
-        .team-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-            transform: translateX(-120%) skewX(-15deg);
-            pointer-events: none;
-            z-index: 1;
-        }
-        .team-card:hover::after {
-            animation: teamShine 0.65s ease forwards;
-        }
-        .team-card:hover {
-            transform: translateY(-5px) scale(1.025);
-        }
-        .team-card--primary:hover {
-            box-shadow: 0 12px 36px rgba(45, 90, 61, 0.45);
-        }
-        body.dark .team-card--primary:hover {
-            box-shadow: 0 12px 36px rgba(230, 195, 113, 0.3);
-        }
-        .team-card--secondary:hover {
-            box-shadow: 0 10px 28px var(--shadow-mid);
-            border-color: var(--gold-accent);
-        }
-        .team-card:active {
-            transform: scale(0.97);
-        }
-        .team-card-avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-family: 'Poppins', 'Cairo', sans-serif;
-            position: relative;
-            z-index: 2;
-            letter-spacing: -0.5px;
-        }
-        .team-card--primary .team-card-avatar {
-            background: rgba(255,255,255,0.22);
-            color: #fff;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .team-card--secondary .team-card-avatar {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-            box-shadow: 0 0 0 2px var(--card-border), 0 4px 12px var(--shadow-soft);
-        }
-        .team-card-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-        .team-card-name {
-            font-size: 1rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        .team-card--primary .team-card-name {
-            color: #fff;
-        }
-        .team-card--secondary .team-card-name {
-            color: var(--text);
-        }
-        .team-card-role {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-        .team-card--primary .team-card-role {
-            background: rgba(255,255,255,0.18);
-            color: rgba(255,255,255,0.92);
-        }
-        .team-card--secondary .team-card-role {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-        }
-        .team-card-handle {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.73rem;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-        .team-card--primary .team-card-handle {
-            color: rgba(255,255,255,0.65);
-        }
-        .team-card--secondary .team-card-handle {
-            color: var(--text-secondary);
-            opacity: 0.75;
-        }
-        .footer-note .glow-icon {
-            display: inline-block;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--badge-text);
-            text-shadow: none;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            vertical-align: middle;
-            margin: 0 4px;
-        }
-        .footer-note .glow-icon:hover {
-            transform: scale(1.15);
-        }
-
-        .src-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--gold-accent);
-            opacity: 0.78;
-            cursor: pointer;
-            margin-right: 5px;
-            transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            line-height: 1;
-            vertical-align: middle;
-            user-select: none;
-            flex-shrink: 0;
-        }
-        .src-icon:hover {
-            opacity: 1;
-            transform: scale(1.22);
-        }
-
-        /* النوافذ المنبثقة */
-        .src-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.45);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(3px);
-            opacity: 0;
-            transition: opacity 300ms ease;
-        }
-        .src-modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-        .src-modal-box {
-            background: var(--container-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 32px 28px 24px;
-            max-width: 320px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
-            transform: scale(0.95) translateY(15px);
-            opacity: 0;
-            transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease;
-        }
-        .src-modal-overlay.active .src-modal-box {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        .src-modal-label { display: none; }
-        .src-modal-name {
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            letter-spacing: 0;
-            line-height: 1.5;
-            margin-bottom: 6px;
-            opacity: 1;
-        }
-        .src-modal-close {
-            margin-top: 20px;
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            color: var(--btn-text);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.85rem;
-            padding: 8px 24px;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 8px 16px;
             border-radius: 50px;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-            box-shadow: 0 2px 8px var(--shadow-soft);
-        }
-        .src-modal-close:hover {
-            background: var(--nav-hover-gradient);
-            border-color: var(--gold-accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-soft);
+            color: var(--text-secondary);
         }
 
-        /* ── Channel Banner ─────────────────────── */
-        .channel-banner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            background: linear-gradient(135deg, #0d7ec4 0%, #29B6F6 60%, #0288D1 100%);
-            border-radius: 18px;
-            padding: 13px 18px;
-            margin: 8px 0 16px;
-            color: #fff;
-            box-shadow: 0 4px 18px rgba(41, 182, 246, 0.3);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.35s ease;
-            position: relative;
-            overflow: hidden;
+        .platform-badge span.madar-text {
+            color: var(--text-main);
+            margin-left: 2px;
         }
-        .channel-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -30%;
-            width: 160%; height: 200%;
-            background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.18) 0%, transparent 65%);
-            pointer-events: none;
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--madar-color);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--header-glow);
         }
-        @keyframes bannerShine {
-            0%   { transform: translateX(-150%) skewX(-15deg); }
-            100% { transform: translateX(250%)  skewX(-15deg); }
-        }
-        .channel-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transform: translateX(-150%) skewX(-15deg);
-            pointer-events: none;
-        }
-        .channel-banner:hover::after {
-            animation: bannerShine 0.7s ease forwards;
-        }
-        .channel-banner:hover {
-            transform: translateY(-2px) scale(1.015);
-            box-shadow: 0 8px 28px rgba(41, 182, 246, 0.45);
-        }
-        .channel-banner:active { transform: scale(0.98); }
-        .channel-banner-icon {
+
+        .theme-toggle {
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            color: var(--text-main);
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
-        }
-        .channel-banner-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            flex: 1;
-        }
-        .channel-banner-title {
-            font-size: 0.95rem;
-            font-weight: 800;
-            font-family: 'Poppins', 'Cairo', sans-serif;
-            letter-spacing: 0.5px;
-            color: #fff;
-        }
-        .channel-banner-sub {
-            font-size: 0.75rem;
-            opacity: 0.82;
-            font-weight: 500;
-        }
-        .channel-banner-arrow {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            transition: transform 0.3s ease;
-        }
-        .channel-banner:hover .channel-banner-arrow {
-            transform: translateX(-4px);
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* ── Telegram Join Popup ─────────────────── */
-        .tg-join-overlay {
-            display: none;
-            position: fixed;
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .term-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @keyframes letterDrop {
+            0%   { opacity: 0; transform: translateY(-18px) scale(1.15); }
+            60%  { opacity: 1; transform: translateY(4px) scale(0.97); }
+            80%  { transform: translateY(-2px) scale(1.01); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes shimmerPass {
+            0%, 100% { background-position: -300% center; opacity: 0; }
+            4%        { opacity: 1; background-position: -300% center; }
+            18%       { opacity: 1; background-position: 300% center; }
+            22%        { opacity: 0; background-position: 300% center; }
+        }
+
+        .brand-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin: 0;
+            letter-spacing: -2px;
+            position: relative;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0;
+            direction: ltr;
+        }
+
+        .brand-letter {
+            display: inline-block;
+            opacity: 0;
+            color: var(--madar-color);
+            text-shadow: 0 0 15px var(--madar-glow);
+            animation:
+                letterDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        .brand-letter:nth-child(1) { animation-delay: 0.00s; }
+        .brand-letter:nth-child(2) { animation-delay: 0.09s; }
+        .brand-letter:nth-child(3) { animation-delay: 0.18s; }
+        .brand-letter:nth-child(4) { animation-delay: 0.27s; }
+        .brand-letter:nth-child(5) { animation-delay: 0.36s; }
+
+        .brand-title::after {
+            content: "MADAR";
+            position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.55);
-            z-index: 99999;
+            color: transparent;
+            background: linear-gradient(
+                105deg,
+                transparent 30%,
+                rgba(255,255,255,0.85) 50%,
+                transparent 70%
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmerPass 10s 0.9s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @media (max-width: 480px) {
+            .brand-title { font-size: 3.2rem; }
+        }
+
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--divider-color);
+            margin: 15px 0 20px 0;
+            position: relative;
+        }
+
+        .subtitle-container {
+            display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            opacity: 0;
-            transition: opacity 400ms ease;
-        }
-        .tg-join-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-        .tg-join-box {
-            background: var(--container-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            padding: 36px 28px 28px;
-            max-width: 340px;
-            width: 92%;
-            text-align: center;
-            direction: rtl;
-            box-shadow: 0 8px 32px var(--shadow-mid), 0 24px 72px var(--shadow-deep);
-            transform: scale(0.88) translateY(24px);
-            opacity: 0;
-            transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .tg-join-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #29B6F6, #0288D1, #29B6F6);
-            background-size: 200%;
-            animation: tgShimmer 2.5s infinite linear;
-        }
-        @keyframes tgShimmer {
-            0% { background-position: 0%; }
-            100% { background-position: 200%; }
-        }
-        .tg-join-overlay.active .tg-join-box {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        .tg-join-icon {
-            margin-bottom: 14px;
-            animation: tgBounce 2s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97);
-        }
-        @keyframes tgBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.05); }
-        }
-        .tg-join-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--header-color);
+            gap: 16px;
+            width: 100%;
             margin-bottom: 8px;
         }
-        .tg-join-sub {
-            font-size: 0.88rem;
+
+        .subtitle-container::before {
+            content: "";
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(to right, var(--madar-color), transparent);
+            max-width: 180px;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .subtitle-container::after {
+            content: "";
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(to left, var(--madar-color), transparent);
+            max-width: 180px;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .class-info {
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            margin-bottom: 10px;
-            line-height: 1.5;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .tg-join-handle {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #29B6F6;
-            background: rgba(41, 182, 246, 0.1);
-            border: 1px solid rgba(41, 182, 246, 0.25);
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 32px 20px 16px 10px;
+            gap: 16px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1) 80%, transparent);
+            border-radius: 2px;
+        }
+
+        [data-theme="light"] .section-title {
+            color: #1a1a2e;
+        }
+
+        [data-theme="light"] .section-title::after {
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) 80%, transparent);
+        }
+
+        .stat-pill {
+            background: var(--stat-badge-bg);
+            border: 1px solid var(--pill-border);
+            padding: 8px 16px;
             border-radius: 50px;
-            padding: 4px 14px;
-            margin-bottom: 20px;
-            letter-spacing: 0.3px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .tg-join-buttons{
+
+        .subjects-list {
+            transform: translateZ(0);
+            isolation: isolate;
+        }
+
+        .subject-card {
+            transform: translateZ(0);
+            will-change: transform, opacity;
+        }
+
+        .animate-item-left,
+        .animate-item-right,
+        .animate-item-up {
+            opacity: 0;
+        }
+
+        .animate-item-left {
+            animation: slideInLeft 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .animate-item-right {
+            animation: slideInRight 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .animate-item-up {
+            animation: slideInUp 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translate3d(-22px, 0, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translate3d(22px, 0, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translate3d(0, 14px, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        /* Circular Tabs Switcher */
+        .circular-tabs {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        
+        .circular-tabs * {
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .circular-tab {
+            position: absolute;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 10px 24px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease;
+            color: var(--text-secondary);
+            text-align: center;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            user-select: none !important;
+            outline: none !important;
+            will-change: transform, opacity;
+        }
+
+        .circular-tab.active {
+            color: var(--text-main);
+            transform: translateX(0) scale(1.15);
+            z-index: 3;
+            opacity: 1;
+        }
+
+        [data-theme="light"] .circular-tab.active {
+            color: var(--madar-color);
+        }
+
+        .circular-tab.prev {
+            transform: translateX(110px) scale(0.85);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .circular-tab.next {
+            transform: translateX(-110px) scale(0.85);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        /* Telegram CTA */
+        .telegram-bnr {
+            background: var(--telegram-gradient);
+            border-radius: 16px;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 10px 20px var(--telegram-shadow);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .telegram-bnr:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px var(--telegram-shadow);
+        }
+
+        .t-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .t-icon-circle {
+            background: rgba(255, 255, 255, 0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .t-left {
+            background: rgba(255, 255, 255, 0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Subjects List */
+        .subjects-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+        }
+
+        .subjects-count {
+            background: var(--pill-border);
+            color: var(--text-main);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 20px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .subject-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .sc-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+        
+        .sc-header:hover {
+            background: var(--hover-bg);
+        }
+
+        .sc-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sc-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            width: 20px;
+        }
+
+        .sc-icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sc-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+        }
+
+        .sc-date.past {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        [data-theme="dark"] .sc-date.past {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .sc-date.future {
+            color: #27ae60;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
+        }
+
+        [data-theme="dark"] .sc-date.future {
+            color: #2ecc71;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+        }
+
+        .sc-title {
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .sc-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #27ae60;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-done {
+            color: #2ecc71;
+            border-color: rgba(46, 204, 113, 0.4);
+        }
+
+        .badge-soon {
+            background: rgba(243, 156, 18, 0.15);
+            color: #f39c12;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-soon {
+            color: #f5b041;
+            border-color: rgba(243, 156, 18, 0.4);
+        }
+
+        .badge-count {
+            background: rgba(52, 152, 219, 0.15);
+            color: #3498db;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-count {
+            color: #5dade2;
+            border-color: rgba(52, 152, 219, 0.4);
+        }
+
+        .arrow-down {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .subject-card.active .arrow-down {
+            transform: rotate(180deg);
+        }
+
+        .sc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .sc-body-inner {
+            padding: 0 20px 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .tg-join-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #29B6F6, #0288D1);
-            color: white;
+
+        .item-link {
             text-decoration: none;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            padding: 12px 24px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(41, 182, 246, 0.35);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-        }
-        .tg-join-btn:hover {
-            transform: scale(1.03) translateY(-1px);
-            box-shadow: 0 6px 22px rgba(41, 182, 246, 0.5);
-        }
-        .tg-join-btn:active {
-            transform: scale(0.97);
-        }
-        .tg-skip-btn {
-            background: transparent;
-            border: 1px solid var(--btn-border);
-            color: var(--text-secondary);
-            font-family: 'Cairo', sans-serif;
+            color: var(--text-main);
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 12px 16px;
+            border-radius: 12px;
             font-size: 0.85rem;
-            padding: 9px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-        }
-        .tg-skip-btn:hover {
-            background: var(--btn-bg);
-            color: var(--text);
-            border-color: var(--gold-accent);
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
 
-        .info-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.45);
-            z-index: 9999;
+        .item-link:hover {
+            background: var(--hover-bg);
+            transform: translateX(-4px);
+        }
+
+        .item-link-soon {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .item-link-soon:hover {
+            background: var(--pill-bg);
+            transform: none;
+        }
+
+        .item-right-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .src-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--pill-border);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .src-btn:hover {
+            background: var(--madar-color);
+            color: #fff;
+            border-color: var(--madar-color);
+        }
+
+        /* --- Team Section --- */
+
+        .team-section {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .team-title {
+            display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(3px);
-            opacity: 0;
-            transition: opacity 300ms ease;
-        }
-        .info-modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-        .info-modal-box {
-            background: var(--container-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 28px 24px 22px;
-            max-width: 360px;
-            width: 92%;
-            text-align: right;
-            direction: rtl;
-            box-shadow: 0 4px 12px var(--shadow-mid), 0 20px 60px var(--shadow-deep);
-            transform: scale(0.95) translateY(15px);
-            opacity: 0;
-            transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease;
-        }
-        .info-modal-overlay.active .info-modal-box {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        .info-modal-title {
-            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
             font-weight: 700;
-            color: var(--gold-accent);
-            margin-bottom: 12px;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-        .info-modal-body {
-            font-size: 0.88rem;
-            color: var(--text);
-            line-height: 1.8;
-            opacity: 0.85;
-        }
-        .info-modal-body .info-cta {
-            display: block;
-            margin-top: 14px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--header-color);
-            opacity: 1;
-            text-align: center;
-        }
-        .info-modal-close {
-            display: block;
-            margin: 18px auto 0;
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
-            color: var(--btn-text);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.85rem;
-            padding: 8px 28px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-            box-shadow: 0 2px 8px var(--shadow-soft);
-        }
-        .info-modal-close:hover {
-            background: var(--nav-hover-gradient);
-            border-color: var(--gold-accent);
-        }
-
-        .bottom-disclaimer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 500;
-            text-align: center;
-            padding: 7px 16px;
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
-            font-size: 0.76rem;
-            font-weight: 500;
             color: var(--text-secondary);
-            text-shadow: none;
-            background: transparent;
-            direction: rtl;
-            pointer-events: none;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            opacity: 0.5;
         }
 
-        body.dark .main-title .glow-icon, 
-        body.dark .footer-note .glow-icon,
-        body.dark .src-icon {
-            filter: drop-shadow(0 0 5px rgba(230, 195, 113, 0.45));
-            text-shadow: 0 0 8px rgba(230, 195, 113, 0.2);
+        .team-title::before, .team-title::after {
+            content: "";
+            height: 1px;
+            width: 80px;
+            background-color: var(--text-secondary);
+            margin: 0 16px;
+            opacity: 0.3;
         }
 
-        body.dark .bottom-disclaimer {
-            color: rgba(230, 195, 113, 0.85);
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
-        .done-badge, .coming-soon-badge {
-            font-size: 0.72em;
-            font-weight: 600;
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        .team-box {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
             border-radius: 20px;
-            padding: 1px 9px;
-            margin-right: 8px;
-            vertical-align: middle;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
-        }
-        .done-badge { color: #2D6A1F; background: #EBF5E7; border: 1px solid #A8D4A0; }
-        body.dark .done-badge { color: #8FBC8F; background: transparent; border-color: rgba(143, 188, 143, 0.35); }
-        .coming-soon-badge { color: #7A4D00; background: #FEF5E3; border: 1px solid #F0C97A; opacity: 1; }
-        body.dark .coming-soon-badge { color: #E6C371; background: transparent; border: 1px solid rgba(230, 195, 113, 0.4); opacity: 0.95; }
-        
-        .await-notice {
+            padding: 30px 10px;
             text-align: center;
-            color: var(--gold-accent);
-            font-size: 0.92rem;
-            font-weight: 600;
-            margin-top: 18px;
-            margin-bottom: 2px;
-            opacity: 0.85;
-            letter-spacing: 0.5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        @media (max-width: 550px) {
-            .content-inner { padding: 18px 14px; }
-            .main-title h1 { font-size: 1.8rem; }
-            .nav-section-header { font-size: 1rem; padding: 14px 16px; }
-            .nav-link { font-size: 0.9rem; padding: 8px 16px; }
+        [data-theme="dark"] .team-box {
+            background: linear-gradient(150deg, #12141a 0%, #0a0b0e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 8px 24px rgba(0, 0, 0, 0.3);
         }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .avatar-programmer {
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(251, 191, 36, 0.02) 100%);
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.12), inset 0 0 12px rgba(251, 191, 36, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-programmer:hover {
+            box-shadow: 0 8px 28px rgba(245, 158, 11, 0.18), inset 0 0 15px rgba(251, 191, 36, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .avatar-designer {
+            color: #93c5fd;
+            border: 1px solid rgba(147, 197, 253, 0.25);
+            background: linear-gradient(135deg, rgba(147, 197, 253, 0.12) 0%, rgba(147, 197, 253, 0.02) 100%);
+            box-shadow: 0 6px 24px rgba(96, 165, 250, 0.12), inset 0 0 12px rgba(147, 197, 253, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-designer:hover {
+            box-shadow: 0 8px 28px rgba(96, 165, 250, 0.18), inset 0 0 15px rgba(147, 197, 253, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .member-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .member-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .role-ar {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+            font-size: 0.75rem;
+        }
+
+        .member-social {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .social-programmer {
+            color: #fbbf24;
+            text-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+        }
+
+        .social-designer {
+            color: #93c5fd;
+            text-shadow: 0 0 16px rgba(147, 197, 253, 0.25);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .copyright-text {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 340px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay.open .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--madar-color);
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .modal-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--pill-border);
+            color: var(--text-main);
+            padding: 10px 32px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        /* SVG Color Classes */
+        .color-01 { color: #2ecc71; background: rgba(46, 204, 113, 0.1); box-shadow: 0 0 12px rgba(46, 204, 113, 0.2); }
+        .color-02 { color: #3498db; background: rgba(52, 152, 219, 0.1); box-shadow: 0 0 12px rgba(52, 152, 219, 0.2); }
+        .color-03 { color: #9b59b6; background: rgba(155, 89, 182, 0.1); box-shadow: 0 0 12px rgba(155, 89, 182, 0.2); }
+        .color-04 { color: #f39c12; background: rgba(243, 156, 18, 0.1); box-shadow: 0 0 12px rgba(243, 156, 18, 0.2); }
+        .color-05 { color: #e74c3c; background: rgba(231, 76, 60, 0.1); box-shadow: 0 0 12px rgba(231, 76, 60, 0.2); }
+        .color-06 { color: #1abc9c; background: rgba(26, 188, 156, 0.1); box-shadow: 0 0 12px rgba(26, 188, 156, 0.2); }
+        .color-07 { color: #f43f5e; background: rgba(244, 63, 94, 0.1); box-shadow: 0 0 12px rgba(244, 63, 94, 0.2); }
+        .color-08 { color: #00BFFF; background: rgba(0, 191, 255, 0.1); box-shadow: 0 0 12px rgba(0, 191, 255, 0.2); }
+        .color-09 { color: #2ecc71; background: rgba(46, 204, 113, 0.1); box-shadow: 0 0 12px rgba(46, 204, 113, 0.2); }
+
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Poppins:wght@700&family=Tajawal:wght@700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="platform-wrapper" id="platformWrapper">
-    <div class="brand-bar">
-        <span class="brand-name">Madar</span>
-    </div>
 
-    <div class="content-inner">
-        <div class="top-actions">
-            <button class="toggle-theme-btn" id="toggleThemeBtn" title="تبديل المظهر">🌓</button>
-        </div>
-
-        <div class="main-title">
-            <h1><span class="glow-icon" onclick="showCacheInfo()" title="تحديثات المنصة">ⓘ</span> منصة اختبارات</h1>
-        </div>
-        <div class="subtitle">الفرقة الأولى · حقوق المنصورة</div>
-        <div class="date-info">أسئلة واختبارات للترم الثاني · مايو - يونيو 2026</div>
-
-        <a href="https://t.me/MADAR_ACADEMIC" target="_blank" rel="noopener noreferrer" class="channel-banner">
-            <span class="channel-banner-arrow" style="order:0;">←</span>
-            <span class="channel-banner-text" style="text-align:center; flex:1;">
-                <span class="channel-banner-title">MADAR ACADEMIC</span>
-                <span class="channel-banner-sub">انضم للقناة الرسمية</span>
-            </span>
-            <span class="channel-banner-icon" style="order:2;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/>
+    <div class="container">
+        <header class="top-bar">
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
-            </span>
+            </button>
+        </header>
+
+        <section class="hero">
+            <div style="font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-secondary); margin-top: -15px; margin-bottom: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                تيم العدل اساس الملك
+            </div>
+            
+            <h1 class="brand-title"><span class="brand-letter">M</span><span class="brand-letter">A</span><span class="brand-letter">D</span><span class="brand-letter">A</span><span class="brand-letter">R</span></h1>
+            <div class="hero-divider"></div>
+            
+            <div class="subtitle-container">
+                <h2 class="subtitle"><a href="https://whatsapp.com/channel/0029VbAzdW8ADTOCIqiSD00g" style="text-decoration: none; color: inherit;" target="_blank">المنصة الرقمية</a></h2>
+            </div>
+
+            <div class="class-info">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                الفرقة الأولى · حقوق المنصورة
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-pill">إجابات نموذجية</div>
+                <div class="stat-pill">أسئلة تفاعلية</div>
+                <div class="stat-pill">دعم لجميع المواد</div>
+            </div>
+        </section>
+
+        <div class="circular-tabs" id="circularTabs">
+            <div class="circular-tab active" data-id="mcq" onclick="selectTab('mcq')">MCQ</div>
+            <div class="circular-tab next" data-id="maqali" onclick="selectTab('maqali')">مقالي</div>
+            <div class="circular-tab prev" data-id="important" onclick="selectTab('important')">حاجات تهمك</div>
+        </div>
+
+        <div class="section-title" id="dynamicSectionTitle">MCQ</div>
+
+        <div class="subjects-header">
+            SUBJECTS <div class="subjects-count">6</div>
+        </div>
+
+        <div id="list-mcq" class="subjects-list">
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">01</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTgyJUQ4JUE3JUQ5JTg2JUQ5JTg4JUQ5JTg2JTIwJUQ4JUE3JUQ5JTg0JUQ4JUFGJUQ4JUIzJUQ4JUFBJUQ5JTg4JUQ4JUIxJUQ5JThB"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">17/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="item-link">المفهوم الشكلي والموضوعي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="item-link">طبيعة القواعد ومصادرها <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="item-link">طرق وضع الدساتير <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="item-link">القيمة القانونية والقوانين الأساسية <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="item-link">العرف الدستوري <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="item-link">سمو القاعدة والرقابة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="item-link">تعديل الدستور وانتهاؤه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="item-link">مجلس النواب (تشكيل واختصاصات) <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="item-link">رئيس الجمهورية والحكومة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="item-link">ميدتيرم وكويزات 1-5 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="item-link">امتحان 2023 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">02</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg2JUQ4JUI4JUQ5JTg1JTIwJUQ4JUE3JUQ5JTg0JUQ4JUIzJUQ5JThBJUQ4JUE3JUQ4JUIzJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">17/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="item-link">أركان الدولة (الشعب والإقليم) <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="item-link">السيادة الجغرافية والمياه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="item-link">الشخصية المعنوية والسيادة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="item-link">أشكال الدول والاتحادات <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="item-link">نظم الحكم: أشكال الديمقراطية <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="item-link">النظام الملكي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="item-link">النظام المجلسي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="item-link">صور الاقتراع والانتخاب <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="item-link">اختبار توجيهي / الباب الاول <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="item-link">أسئلة 2026/5/4 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">03</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg0JUQ4JUJBJUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ5JTgxJUQ4JUIxJUQ5JTg2JUQ4JUIzJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">21/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/const-quiz/French_legal_terms.html" class="item-link">مصطلحات قانونيه للغة الفرنسية - MCQ <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">04</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUI0JUQ4JUIxJUQ5JThBJUQ4JUI5JUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUIzJUQ5JTg0JUQ4JUE3JUQ5JTg1JUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">01/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <div class="item-link item-link-soon">انتظرونا قريباً ...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">05</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUFDJUQ4JUIxJUQ4JUE3JUQ5JTg1JTIwJUQ5JTg4JUQ4JUE3JUQ5JTg0JUQ4JUI5JUQ5JTgyJUQ4JUE3JUQ4JUE4"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">06/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://voluble-semolina-20e95e.netlify.app/Criminology_General_Questions.html" class="item-link">علم العقاب_اسالة من وقائع امتحانات سابقه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://voluble-semolina-20e95e.netlify.app/Exam_2025.html" class="item-link">اسأله امتحان 2025 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://voluble-semolina-20e95e.netlify.app/Criminology_General_Questions.html" class="item-link">علم الاجرام اساله متعددة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://voluble-semolina-20e95e.netlify.app/Past_exam_papers_for_criminology.html" class="item-link">علم الاجرام_أساله من وقائع امتحانات سابقه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">06</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg1JUQ5JTg0JUQ5JTgzJUQ5JThBJUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ5JTgxJUQ5JTgzJUQ4JUIxJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date future">15/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://coffee595.github.io/MADAR/ipnotes.html" class="item-link">اسالة ملكية فكرية MCQ <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'نابليون')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="list-important" class="subjects-list" style="display: none;">
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">01</div>
+                        <div class="sc-icon-wrap color-01">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
+                        <div class="sc-title">جروبات الفرقة الأولى</div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://chat.whatsapp.com/LiNXLj2h5pJAc5L0rT9mxP" class="item-link" target="_blank">جروب شباب الفرقه الاولى <div class="item-right-content"></div></a>
+                        <a href="https://chat.whatsapp.com/DLaaB8vht1sBXhjKaQROS3" class="item-link" target="_blank">جروب بنات الفرقه الاولى <div class="item-right-content"></div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="list-maqali" class="subjects-list" style="display: none;">
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">09</div>
+                        <div class="sc-icon-wrap color-09">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUFGJUQ4JUIzJUQ4JUFBJUQ5JTg4JUQ4JUIxJUQ5JThBJTIwJUQ5JTg4JUQ5JTg2JUQ4JUI4JUQ5JTg1"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="item-link">مقالي دستوري ونظم <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">10</div>
+                        <div class="sc-icon-wrap color-01">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUI0JUQ4JUIxJUQ5JThBJUQ4JUI5JUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUIzJUQ5JTg0JUQ4JUE3JUQ5JTg1JUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <div class="item-link item-link-soon">قريباً ...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">11</div>
+                        <div class="sc-icon-wrap color-03">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg1JUQ5JTg0JUQ5JTgzJUQ5JThBJUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ5JTgxJUQ5JTgzJUQ4JUIxJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://voluble-semolina-20e95e.netlify.app/index-30-19.html" class="item-link">مقالي ملكيه فكريه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="team-section">
+            <div class="team-title">THE TEAM</div>
+        </section>
+
+        <a href="https://whatsapp.com/channel/0029VbAzdW8ADTOCIqiSD00g" target="_blank" class="telegram-bnr">
+            <div class="t-right">
+                <div class="t-icon-circle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <div style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size:0.75rem; opacity:0.8; line-height: 1.2; margin-bottom: 2px;">تيم العدل</div>
+                    <div style="font-size: 1.05rem; line-height: 1.2;">انضم للقناة الرسمية</div>
+                </div>
+            </div>
+            <div class="t-left">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </div>
         </a>
 
-        <div class="main-nav">
+        <footer class="footer">
+            <div>آخر تحديث: 2026/6/7 — 12:00AM</div>
+            <div><a href="https://t.me/MADAR_ACADEMIC" target="_blank" style="color: inherit; text-decoration: underline;">أبلغنا برأيك</a></div>
+            <div class="copyright-text">MADAR © 2026</div>
+            <div class="copyright-text" style="margin-top: 10px;">في حال اكتشاف أي خطأ يرجى إبلاغنا — شاكرين لتعاونك معنا</div>
+        </footer>
+    </div>
 
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>القانون الدستوري <span class="done-badge">تم الانتهاء</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="nav-link">المفهوم الشكلي والموضوعي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="nav-link">طبيعة القواعد ومصادرها <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="nav-link">طرق وضع الدساتير <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="nav-link">القيمة القانونية والقوانين الأساسية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="nav-link">العرف الدستوري <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="nav-link">سمو القاعدة والرقابة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="nav-link">تعديل الدستور وانتهاؤه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="nav-link">مجلس النواب (تشكيل واختصاصات) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="nav-link">رئيس الجمهورية والحكومة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>النظم السياسية <span class="done-badge">تم الانتهاء</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="nav-link">أركان الدولة (الشعب والإقليم) <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="nav-link">السيادة الجغرافية والمياه <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="nav-link">الشخصية المعنوية والسيادة <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="nav-link">أشكال الدول والاتحادات <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="nav-link">نظم الحكم: أشكال الديمقراطية <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="nav-link">النظام الملكي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="nav-link">النظام المجلسي <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="nav-link">صور الاقتراع والانتخاب <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="nav-link">اختبار توجيهي / الباب الاول <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>اللغة الفرنسية</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <a href="https://COFFEE595.github.io/const-quiz/French_legal_terms.html" class="nav-link">مصطلحات قانونيه للغة الفرنسية - MCQ <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>الشريعة الإسلامية <span class="coming-soon-badge">قريباً</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <span class="nav-link placeholder-link">انتظرونا قريباً</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>علم الاجرام والعقاب <span class="coming-soon-badge">قريباً</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <span class="nav-link placeholder-link">انتظرونا قريباً</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>القضايا المجتمعية <span class="coming-soon-badge">قريباً</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <span class="nav-link placeholder-link">انتظرونا قريباً</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>الملكية الفكرية <span class="coming-soon-badge">قريباً</span></span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <span class="nav-link placeholder-link">انتظرونا قريباً</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>حجات تهمك؟</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <a href="https://t.me/Napoleon_Law52/1022" class="nav-link" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'outbound', event_label: 'MCQ_50_nazom', transport_type: 'beacon'});">اهم 50 سؤال MCQ لماده النظم السياسية!! <span class="done-badge">تم</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="nav-link">ميدتيرم وكويزات 1-5 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="nav-link">أسئلة 2026/5/4 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                        <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="nav-link">امتحان 2023 <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'ثري')">ⓘ</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)">
-                    <span>إجابات مقالي نموذجيه</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="nav-section-wrapper">
-                    <div class="nav-section-content">
-                        <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="nav-link">مقالي دستوري ونظم <span class="done-badge">تم</span> <span class="src-icon" onclick="showSrc(event,'MADAR')">ⓘ</span></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="team-section">
-            <div class="team-label">الفريق</div>
-            <div class="team-cards">
-                <a href="https://t.me/KOK0KK" target="_blank" rel="noopener noreferrer" class="team-card team-card--primary">
-                    <div class="team-card-avatar">M</div>
-                    <div class="team-card-info">
-                        <span class="team-card-name">Mohammed</span>
-                        <span class="team-card-role">Programmer</span>
-                        <span class="team-card-handle">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
-                            @KOK0KK
-                        </span>
-                    </div>
-                </a>
-                <a href="https://t.me/GIX37" target="_blank" rel="noopener noreferrer" class="team-card team-card--secondary">
-                    <div class="team-card-avatar">G</div>
-                    <div class="team-card-info">
-                        <span class="team-card-name">@GIX37</span>
-                        <span class="team-card-role">فكرة وتصميم</span>
-                        <span class="team-card-handle">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.17l-1.68 7.91c-.12.56-.45.7-.91.43l-2.52-1.86-1.22 1.17c-.13.14-.25.25-.51.25l.18-2.57 4.67-4.21c.2-.18-.04-.28-.32-.1L7.6 15.07l-2.47-.77c-.54-.17-.55-.54.11-.8l9.64-3.72c.45-.16.84.11.69.8l.36-.17z"/></svg>
-                            @GIX37
-                        </span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="await-notice">انتظروا كل جديد — بالتوفيق</div>
-
-        <div class="footer-note">
-            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 6px;">آخر تحديث: 2026/5/19 — 03:00AM</div>
-            أبلغنا برأيك
-            <span class="glow-icon" onclick="showInfo()" title="معلومات">ⓘ</span>
+    <div class="modal-overlay" id="srcModal" onclick="closeModals(event)">
+        <div class="modal-container">
+            <div class="modal-title">المصدر</div>
+            <div class="modal-body" id="srcModalText"></div>
+            <button class="modal-btn" onclick="document.getElementById('srcModal').classList.remove('open')">إغلاق</button>
         </div>
     </div>
-</div>
 
-
-<div class="bottom-disclaimer">
-    في حال اكتشاف أي خطأ، يرجى إبلاغنا — شاكرين لتعاونك معنا
-</div>
-
-<div class="tg-join-overlay" id="tgJoinOverlay">
-    <div class="tg-join-box">
-        <div class="tg-join-icon">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="url(#platformGrad)"/>
-                <path d="M8 12l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <defs>
-                    <linearGradient id="platformGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#C29A51"/>
-                        <stop offset="100%" stop-color="#E6C371"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-        <div class="tg-join-title">المنصة الجديدة متاحة الآن!</div>
-        <div class="tg-join-sub">تم إطلاق المنصة الرقمية الجديدة — انتقل إليها الآن للاستمتاع بتجربة أفضل</div>
-        <div class="tg-join-handle" style="color: var(--gold-accent); background: var(--badge-bg); border-color: var(--gold-accent);">MADAR Platform</div>
-        <div class="tg-join-buttons">
-            <a href="https://voluble-semolina-20e95e.netlify.app/" target="_blank" rel="noopener noreferrer" class="tg-join-btn" onclick="closeTgJoin()" style="background: linear-gradient(135deg, #C29A51, #E6C371); color: #121620;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#121620" style="flex-shrink:0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-                انتقل للمنصة الجديدة
-            </a>
-            <button class="tg-skip-btn" onclick="closeTgJoin()">تخطي</button>
+    <div class="modal-overlay" id="infoModal" onclick="closeModals(event)">
+        <div class="modal-container">
+            <div class="modal-title">ⓘ معلومات</div>
+            <div class="modal-body" style="text-align: right; direction: rtl;">
+                ونود التوضيح أن المصدر الأصلي لبعض أسئلة القانون الدستوري والنظم هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي.<br><br>ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.
+            </div>
+            <button class="modal-btn" onclick="document.getElementById('infoModal').classList.remove('open')">إغلاق</button>
         </div>
     </div>
-</div>
 
-<div class="src-modal-overlay" id="srcModalOverlay" onclick="closeSrcModal(event)">
-    <div class="src-modal-box">
-        <div class="src-modal-label">المصدر</div>
-        <div class="src-modal-name" id="srcModalName"></div>
-        <button class="src-modal-close" onclick="document.getElementById('srcModalOverlay').classList.remove('active')">إغلاق</button>
-    </div>
-</div>
-
-<div class="info-modal-overlay" id="infoModalOverlay" onclick="closeInfoModal(event)">
-    <div class="info-modal-box">
-        <div class="info-modal-title">ⓘ معلومات</div>
-        <div class="info-modal-body">
-            ونود التوضيح أن المصدر الأصلي لبعض أسئلة القانون الدستوري والنظم هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي. ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.
-            <br><br>في حال اكتشاف أي خطأ، يرجى إبلاغنا، شاكرين لتعاونك معنا.
-            <span class="info-cta">للتأكد من المصدر، اضغط &nbsp;<strong>ⓘ</strong>&nbsp; بجانب أي عنصر</span>
-        </div>
-        <button class="info-modal-close" onclick="document.getElementById('infoModalOverlay').classList.remove('active')">إغلاق</button>
-    </div>
-</div>
-
-<div class="info-modal-overlay" id="cacheModalOverlay" onclick="closeCacheModal(event)">
-    <div class="info-modal-box">
-        <div class="info-modal-title">ⓘ تحديثات المنصة</div>
-        <div class="info-modal-body">
-            ننصحك بتحديث الصفحة بشكل دوري لضمان رؤية آخر التحديثات على المنصة.
-        </div>
-        <button class="info-modal-close" onclick="document.getElementById('cacheModalOverlay').classList.remove('active')">إغلاق</button>
-    </div>
-</div>
-
-<script>
-    // دوال النوافذ المنبثقة
-    function showCacheInfo() {
-        requestAnimationFrame(() => {
-            const el = document.getElementById('cacheModalOverlay');
-            el.style.display = 'flex';
-            requestAnimationFrame(() => el.classList.add('active'));
+    <script>
+        // --- 4. حماية شاملة: منع الكليك يمين، النسخ، الاختصارات، وفك الشفرات ---
+        
+        // فك تشفير النصوص المؤمنة عند تحميل الصفحة (تشفير Base64)
+        // إضافة: لتشفير أي نص جديد مستقبلاً استخدم الكود التالي في لوحة تحكم المتصفح (Console):
+        // btoa(encodeURIComponent("النص الذي تريد تشفيره"))
+        document.addEventListener("DOMContentLoaded", () => {
+            const securedElements = document.querySelectorAll(".secured-text");
+            securedElements.forEach(el => {
+                try {
+                    const encodedText = el.getAttribute("data-secured");
+                    if(encodedText) {
+                        el.textContent = decodeURIComponent(atob(encodedText));
+                    }
+                } catch(e) {
+                    // حماية صامتة في حال التلاعب
+                }
+            });
         });
-    }
-    function closeCacheModal(e) {
-        const el = document.getElementById('cacheModalOverlay');
-        if (e.target === el) {
-            el.classList.remove('active');
-            setTimeout(() => el.style.display = 'none', 300);
-        }
-    }
 
-    function showInfo() {
-        requestAnimationFrame(() => {
-            const el = document.getElementById('infoModalOverlay');
-            el.style.display = 'flex';
-            requestAnimationFrame(() => el.classList.add('active'));
+        // منع النقر الأيمن
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // منع عمليات النسخ والقص واللصق
+        ['copy', 'cut', 'paste'].forEach(eventName => {
+            document.addEventListener(eventName, event => event.preventDefault());
         });
-    }
-    function closeInfoModal(e) {
-        const el = document.getElementById('infoModalOverlay');
-        if (e.target === el) {
-            el.classList.remove('active');
-            setTimeout(() => el.style.display = 'none', 300);
-        }
-    }
 
-    function showSrc(e, name) {
-        e.preventDefault();
-        e.stopPropagation();
-        document.getElementById('srcModalName').textContent = 'المصدر: ' + (name === 'ثري' ? 'سنتر ثري' : 'MADAR');
-        requestAnimationFrame(() => {
-            const el = document.getElementById('srcModalOverlay');
-            el.style.display = 'flex';
-            requestAnimationFrame(() => el.classList.add('active'));
-        });
-    }
-    function closeSrcModal(e) {
-        const el = document.getElementById('srcModalOverlay');
-        if (e.target === el) {
-            el.classList.remove('active');
-            setTimeout(() => el.style.display = 'none', 300);
-        }
-    }
+        // منع السحب والإفلات
+        document.addEventListener('dragstart', event => event.preventDefault());
+        document.addEventListener('drop', event => event.preventDefault());
 
-    // 🎯 دالة فتح القوائم المحسنة
-    function toggleSection(header) {
-        const wrapper = header.nextElementSibling;
-        const isOpen = wrapper.classList.contains('open');
-
-        // 1. إغلاق أي قسم مفتوح آخر
-        document.querySelectorAll('.nav-section-wrapper').forEach(el => {
-            if (el.classList.contains('open') && el !== wrapper) {
-                el.style.maxHeight = el.scrollHeight + 'px';
-                
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        el.classList.remove('open');
-                        el.style.maxHeight = '0px';
-                        el.previousElementSibling.classList.remove('active');
-                    });
-                });
+        // منع اختصارات لوحة المفاتيح المخصصة للتفتيش (F12, Ctrl+U, Ctrl+S, Ctrl+C, Ctrl+Shift+I وغيرها)
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 123) { // F12
+                event.preventDefault();
+                return false;
+            }
+            if (event.ctrlKey) {
+                const key = event.key ? event.key.toLowerCase() : String.fromCharCode(event.keyCode).toLowerCase();
+                if (
+                    key === 'u' || // منع عرض المصدر
+                    key === 's' || // منع الحفظ
+                    key === 'c' || // منع النسخ
+                    key === 'a' || // منع تحديد الكل
+                    key === 'p' || // منع الطباعة
+                    (event.shiftKey && key === 'i') || // وضع المطورين
+                    (event.shiftKey && key === 'c') || // التفتيش
+                    (event.shiftKey && key === 'j')    // شاشة الأوامر
+                ) {
+                    event.preventDefault();
+                    return false;
+                }
             }
         });
 
-        // 2. التعامل مع القسم الحالي
-        if (!isOpen) {
-            wrapper.classList.add('open');
-            header.classList.add('active');
-            
-            wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+        // ======================================
+        // الأكواد الأساسية للصفحة (بدون أي تعديل)
+        // ======================================
 
-            setTimeout(() => {
-                if (wrapper.classList.contains('open')) {
-                    wrapper.style.maxHeight = 'none';
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        const sunIcon = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+        function setTheme(isDark) {
+            if (isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeIcon.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            setTheme(true);
+        } else if (savedTheme === 'light') {
+            setTheme(false);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme(true);
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = document.body.hasAttribute('data-theme');
+            setTheme(!isDark);
+        });
+
+        const tabItems = [
+            { id: 'mcq' },
+            { id: 'maqali' },
+            { id: 'important' }
+        ];
+        let currentActiveIndex = 0;
+
+        function applyTabPositions(direction = 'up') {
+            tabItems.forEach((tab, index) => {
+                const el = document.querySelector(`.circular-tab[data-id="${tab.id}"]`);
+                el.className = 'circular-tab';
+                
+                if (index === currentActiveIndex) {
+                    el.classList.add('active');
+                    showCategory(tab.id, direction);
+                } else if (index === (currentActiveIndex + 1) % tabItems.length) {
+                    el.classList.add('next');
+                } else {
+                    el.classList.add('prev');
                 }
-            }, 1000); 
-            
-        } else {
-            wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-            
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    wrapper.classList.remove('open');
-                    wrapper.style.maxHeight = '0px';
-                    header.classList.remove('active');
-                });
             });
         }
-    }
 
-    // ── نافذة الانضمام لتيليجرام ───────────────────
-    function closeTgJoin() {
-        const el = document.getElementById('tgJoinOverlay');
-        el.classList.remove('active');
-        setTimeout(() => { el.style.display = 'none'; }, 450);
-        sessionStorage.setItem('tg_join_shown', '1');
-    }
+        let pendingAnimFrame = null;
 
-    function showTgJoin() {
-        if (sessionStorage.getItem('tg_join_shown')) return;
-        const el = document.getElementById('tgJoinOverlay');
-        el.style.display = 'flex';
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => { el.classList.add('active'); });
-        });
-    }
+        function showCategory(cat, direction) {
+            const activeEl = document.getElementById('list-' + cat);
+            const lists = ['mcq', 'maqali', 'important'];
 
-    // تنفيذ الحركات عند تحميل الصفحة
-    window.addEventListener('DOMContentLoaded', function() {
-       const mainNav = document.querySelector('.main-nav');
-       if (mainNav) mainNav.classList.add('open');
+            if (pendingAnimFrame) {
+                cancelAnimationFrame(pendingAnimFrame);
+                pendingAnimFrame = null;
+            }
 
-       // عرض نافذة الانضمام بعد ثانية
-       setTimeout(showTgJoin, 1000);
-    });
+            lists.forEach(l => {
+                if (l === cat) return;
+                const el = document.getElementById('list-' + l);
+                el.style.display = 'none';
+                el.querySelectorAll(':scope > .subject-card').forEach(card => {
+                    card.classList.remove('animate-item-left', 'animate-item-right', 'animate-item-up');
+                    card.style.animationDelay = '';
+                });
+            });
 
-    // 🎯 الوضع الليلي مع إعادة تشغيل الأنيميشن المتتابع
-    const themeToggle = document.getElementById('toggleThemeBtn');
-    if (localStorage.getItem('madar_theme') === 'dark') {
-        document.body.classList.add('dark');
-        themeToggle.textContent = '☀️';
-    }
-    themeToggle.addEventListener('click', function() {
-        // تبديل الوضع
-        document.body.classList.toggle('dark');
-        themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌓';
-        localStorage.setItem('madar_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+            const cards = Array.from(activeEl.querySelectorAll(':scope > .subject-card'));
+            const animClass =
+                direction === 'left'  ? 'animate-item-left'  :
+                direction === 'right' ? 'animate-item-right' :
+                                        'animate-item-up';
 
-        // إعادة تشغيل حركة انبثاق الأقسام بشكل متتابع وسلس
-        const mainNav = document.querySelector('.main-nav');
-        if (mainNav) {
-            // إزالة الكلاس لإيقاف الحركة
-            mainNav.classList.remove('open');
-            // إجبار المتصفح على قراءة التغيير (Reflow)
-            void mainNav.offsetWidth;
-            // إضافة الكلاس مجدداً لتبدأ الحركة من الصفر
-            mainNav.classList.add('open');
+            cards.forEach((card, i) => {
+                card.classList.remove('animate-item-left', 'animate-item-right', 'animate-item-up');
+                card.style.animationDelay = `${i * 0.07}s`;
+            });
+
+            activeEl.style.display = 'block';
+            void activeEl.offsetHeight;
+
+            pendingAnimFrame = requestAnimationFrame(() => {
+                cards.forEach(card => card.classList.add(animClass));
+                pendingAnimFrame = null;
+            });
+
+            const titleEl = document.getElementById('dynamicSectionTitle');
+            if (titleEl) {
+                titleEl.textContent =
+                    cat === 'mcq'    ? 'MCQ'       :
+                    cat === 'maqali' ? 'مقالي'     :
+                                       'حاجات تهمك';
+            }
+
+            const countEl = document.querySelector('.subjects-count');
+            if (countEl) countEl.textContent = cards.length;
         }
-    });
 
-    // طبقة الحماية
-    (function() {
-        try { if (window.self !== window.top) window.top.location.href = window.self.location.href; }
-        catch(e) {}
-    })();
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-    document.addEventListener('keydown', function(e) {
-        const k = e.key.toLowerCase();
-        const c = e.ctrlKey || e.metaKey;
-        if (c && k === 'u') { e.preventDefault(); return false; }
-        if (c && k === 's') { e.preventDefault(); return false; }
-        if (e.key === 'F12') { e.preventDefault(); return false; }
-        if (c && e.shiftKey && 'ijc'.includes(k)) { e.preventDefault(); return false; }
-    });
-    (function() {
-        console.log('%c MADAR Platform ', 'color:#c4a87a;font-weight:700;font-size:1rem;background:#1b1f2a;padding:2px 8px;border-radius:4px;');
-        console.log('%c© 2026 — programmer Mohammed @KOK0KK. Unauthorised reproduction is prohibited.', 'color:#888;font-size:0.78rem;');
-    })();
-    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-</script>
+        function selectTab(id) {
+            const index = tabItems.findIndex(t => t.id === id);
+            if (index === currentActiveIndex) return;
+            
+            let direction = 'up';
+            if (
+                (index === currentActiveIndex + 1) ||
+                (index === 0 && currentActiveIndex === tabItems.length - 1)
+            ) {
+                direction = 'right'; 
+            } else {
+                direction = 'left';
+            }
+            
+            currentActiveIndex = index;
+            applyTabPositions(direction);
+        }
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        const SWIPE_THRESHOLD = 45;
+        const ANGLE_LOCK = 1.2;
+
+        function onTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }
+
+        function onTouchEnd(e) {
+            const dx = e.changedTouches[0].screenX - touchStartX;
+            const dy = e.changedTouches[0].screenY - touchStartY;
+            if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy) * ANGLE_LOCK) return;
+
+            if (dx < 0) {
+                currentActiveIndex = (currentActiveIndex - 1 + tabItems.length) % tabItems.length;
+                applyTabPositions('left');
+            } else {
+                currentActiveIndex = (currentActiveIndex + 1) % tabItems.length;
+                applyTabPositions('right');
+            }
+        }
+
+        const circularTabs = document.getElementById('circularTabs');
+        [circularTabs, ...['mcq','maqali','important'].map(id => document.getElementById('list-' + id))].forEach(el => {
+            if (!el) return;
+            el.addEventListener('touchstart', onTouchStart, { passive: true });
+            el.addEventListener('touchend',   onTouchEnd,   { passive: true });
+        });
+
+        function toggleAcc(header) {
+            const card = header.parentElement;
+            const body = card.querySelector('.sc-body');
+            
+            document.querySelectorAll('.subject-card').forEach(c => {
+                if (c !== card && c.classList.contains('active')) {
+                    c.classList.remove('active');
+                    c.querySelector('.sc-body').style.maxHeight = null;
+                }
+            });
+
+            if (card.classList.contains('active')) {
+                card.classList.remove('active');
+                body.style.maxHeight = null;
+            } else {
+                card.classList.add('active');
+                body.style.maxHeight = body.scrollHeight + "px";
+                
+                setTimeout(() => {
+                    if (card.classList.contains('active')) {
+                        body.style.maxHeight = (body.scrollHeight + 50) + "px";
+                    }
+                }, 400);
+            }
+        }
+
+        const srcModal = document.getElementById('srcModal');
+        const infoModal = document.getElementById('infoModal');
+        const srcModalText = document.getElementById('srcModalText');
+
+        function openSrc(e, source) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            let srcName = "MADAR";
+            if (source === "ثري") {
+                srcName = "سنتر ثري";
+            } else if (source === "نابليون") {
+                srcName = "سنتر نابليون";
+            }
+            
+            srcModalText.textContent = "المصدر: " + srcName;
+            srcModal.classList.add('open');
+        }
+
+        function openInfoModal() {
+            infoModal.classList.add('open');
+        }
+
+        function closeModals(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                srcModal.classList.remove('open');
+                infoModal.classList.remove('open');
+            }
+        }
+
+    </script>
 </body>
 </html>
