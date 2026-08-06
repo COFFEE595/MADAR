@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MADAR - المنصة الرقمية</title>
+    
+    <!-- 1. Google tag (gtag.js) تم دمج الإحصائيات -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9YE8DKCYD5');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 2. حماية الـ CSS: منع السحب والتحديد (Drag & Select) --- */
+        body, html, .container, * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-user-drag: none !important;
+        }
+        img, a, svg {
+            -webkit-user-drag: none !important;
+        }
+
+        :root {
+            /* Light Mode Variables */
+            --bg-color: #F8F6F2;
+            --main-container: #F8F6F2;
+            --text-main: #141414;
+            --text-secondary: #6B7280;
+            --madar-glow: rgba(46, 204, 113, 0.4);
+            --madar-color: #2E7D32;
+            --header-glow: #2ECC71;
+            --divider-color: #E2DFD8;
+            --pill-bg: #FFFFFF;
+            --pill-border: #E8E5DF;
+            --stat-badge-bg: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --hover-bg: #F0EEE9;
+            
+            --team-programmer-bg: #E8F5E9;
+            --team-programmer-border: #C8E6C9;
+            --team-programmer-glow: rgba(46, 204, 113, 0.2);
+            --team-designer-bg: #FFFFFF;
+            --team-designer-border: #E8E5DF;
+            --team-designer-glow: rgba(0,0,0,0.05);
+
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            
+            --telegram-gradient: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            --telegram-shadow: rgba(37, 211, 102, 0.4);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode Variables */
+            --bg-color: #0A0A0B;
+            --main-container: #0A0A0B;
+            --text-main: #FFFFFF;
+            --text-secondary: #9CA3AF;
+            --madar-glow: rgba(245, 158, 11, 0.4);
+            --madar-color: #F59E0B;
+            --header-glow: #FCD34D;
+            --divider-color: #1F2023;
+            --pill-bg: #141517;
+            --pill-border: #1F2023;
+            --stat-badge-bg: #141517;
+            --card-bg: #141517;
+            --hover-bg: #1C1E21;
+            
+            --team-programmer-bg: rgba(245, 158, 11, 0.1);
+            --team-programmer-border: rgba(245, 158, 11, 0.3);
+            --team-programmer-glow: rgba(245, 158, 11, 0.15);
+            --team-designer-bg: #141517;
+            --team-designer-border: #1F2023;
+            --team-designer-glow: rgba(0,0,0,0.3);
+
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 12px 16px 24px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-soft);
+            color: var(--text-secondary);
+        }
+
+        .platform-badge span.madar-text {
+            color: var(--text-main);
+            margin-left: 2px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--madar-color);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--header-glow);
+        }
+
+        .theme-toggle {
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .term-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @keyframes letterDrop {
+            0%   { opacity: 0; transform: translateY(-18px) scale(1.15); }
+            60%  { opacity: 1; transform: translateY(4px) scale(0.97); }
+            80%  { transform: translateY(-2px) scale(1.01); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes shimmerPass {
+            0%, 100% { background-position: -300% center; opacity: 0; }
+            4%        { opacity: 1; background-position: -300% center; }
+            18%       { opacity: 1; background-position: 300% center; }
+            22%        { opacity: 0; background-position: 300% center; }
+        }
+
+        .brand-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin: 0;
+            letter-spacing: -2px;
+            position: relative;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0;
+            direction: ltr;
+        }
+
+        .brand-letter {
+            display: inline-block;
+            opacity: 0;
+            color: var(--madar-color);
+            text-shadow: 0 0 15px var(--madar-glow);
+            animation:
+                letterDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        .brand-letter:nth-child(1) { animation-delay: 0.00s; }
+        .brand-letter:nth-child(2) { animation-delay: 0.09s; }
+        .brand-letter:nth-child(3) { animation-delay: 0.18s; }
+        .brand-letter:nth-child(4) { animation-delay: 0.27s; }
+        .brand-letter:nth-child(5) { animation-delay: 0.36s; }
+
+        .brand-title::after {
+            content: "MADAR";
+            position: absolute;
+            inset: 0;
+            color: transparent;
+            background: linear-gradient(
+                105deg,
+                transparent 30%,
+                rgba(255,255,255,0.85) 50%,
+                transparent 70%
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmerPass 10s 0.9s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @media (max-width: 480px) {
+            .brand-title { font-size: 3.2rem; }
+        }
+
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--divider-color);
+            margin: 15px 0 20px 0;
+            position: relative;
+        }
+
+        .subtitle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .subtitle-container::before {
+            content: "";
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(to right, var(--madar-color), transparent);
+            max-width: 180px;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .subtitle-container::after {
+            content: "";
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(to left, var(--madar-color), transparent);
+            max-width: 180px;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .class-info {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 32px 20px 16px 10px;
+            gap: 16px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1) 80%, transparent);
+            border-radius: 2px;
+        }
+
+        [data-theme="light"] .section-title {
+            color: #1a1a2e;
+        }
+
+        [data-theme="light"] .section-title::after {
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) 80%, transparent);
+        }
+
+        .stat-pill {
+            background: var(--stat-badge-bg);
+            border: 1px solid var(--pill-border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .subjects-list {
+            transform: translateZ(0);
+            isolation: isolate;
+        }
+
+        .subject-card {
+            transform: translateZ(0);
+            will-change: transform, opacity;
+        }
+
+        .animate-item-left,
+        .animate-item-right,
+        .animate-item-up {
+            opacity: 0;
+        }
+
+        .animate-item-left {
+            animation: slideInLeft 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .animate-item-right {
+            animation: slideInRight 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .animate-item-up {
+            animation: slideInUp 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translate3d(-22px, 0, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translate3d(22px, 0, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translate3d(0, 14px, 0); }
+            to   { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        /* Circular Tabs Switcher */
+        .circular-tabs {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        
+        .circular-tabs * {
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .circular-tab {
+            position: absolute;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 10px 24px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease;
+            color: var(--text-secondary);
+            text-align: center;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            user-select: none !important;
+            outline: none !important;
+            will-change: transform, opacity;
+        }
+
+        .circular-tab.active {
+            color: var(--text-main);
+            transform: translateX(0) scale(1.15);
+            z-index: 3;
+            opacity: 1;
+        }
+
+        [data-theme="light"] .circular-tab.active {
+            color: var(--madar-color);
+        }
+
+        .circular-tab.prev {
+            transform: translateX(110px) scale(0.85);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .circular-tab.next {
+            transform: translateX(-110px) scale(0.85);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        /* Telegram CTA */
+        .telegram-bnr {
+            background: var(--telegram-gradient);
+            border-radius: 16px;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 10px 20px var(--telegram-shadow);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .telegram-bnr:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px var(--telegram-shadow);
+        }
+
+        .t-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .t-icon-circle {
+            background: rgba(255, 255, 255, 0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .t-left {
+            background: rgba(255, 255, 255, 0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Subjects List */
+        .subjects-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+        }
+
+        .subjects-count {
+            background: var(--pill-border);
+            color: var(--text-main);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 20px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .subject-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .sc-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+        
+        .sc-header:hover {
+            background: var(--hover-bg);
+        }
+
+        .sc-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sc-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            width: 20px;
+        }
+
+        .sc-icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sc-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+        }
+
+        .sc-date.past {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        [data-theme="dark"] .sc-date.past {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .sc-date.future {
+            color: #27ae60;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
+        }
+
+        [data-theme="dark"] .sc-date.future {
+            color: #2ecc71;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+        }
+
+        .sc-title {
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .sc-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #27ae60;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-done {
+            color: #2ecc71;
+            border-color: rgba(46, 204, 113, 0.4);
+        }
+
+        .badge-soon {
+            background: rgba(243, 156, 18, 0.15);
+            color: #f39c12;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-soon {
+            color: #f5b041;
+            border-color: rgba(243, 156, 18, 0.4);
+        }
+
+        .badge-count {
+            background: rgba(52, 152, 219, 0.15);
+            color: #3498db;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .badge-count {
+            color: #5dade2;
+            border-color: rgba(52, 152, 219, 0.4);
+        }
+
+        .arrow-down {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .subject-card.active .arrow-down {
+            transform: rotate(180deg);
+        }
+
+        .sc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .sc-body-inner {
+            padding: 0 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item-link {
+            text-decoration: none;
+            color: var(--text-main);
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .item-link:hover {
+            background: var(--hover-bg);
+            transform: translateX(-4px);
+        }
+
+        .item-link-soon {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .item-link-soon:hover {
+            background: var(--pill-bg);
+            transform: none;
+        }
+
+        .item-right-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .src-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--pill-border);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .src-btn:hover {
+            background: var(--madar-color);
+            color: #fff;
+            border-color: var(--madar-color);
+        }
+
+        /* --- Team Section --- */
+
+        .team-section {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .team-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            opacity: 0.5;
+        }
+
+        .team-title::before, .team-title::after {
+            content: "";
+            height: 1px;
+            width: 80px;
+            background-color: var(--text-secondary);
+            margin: 0 16px;
+            opacity: 0.3;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        .team-box {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 20px;
+            padding: 30px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        [data-theme="dark"] .team-box {
+            background: linear-gradient(150deg, #12141a 0%, #0a0b0e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .avatar-programmer {
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(251, 191, 36, 0.02) 100%);
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.12), inset 0 0 12px rgba(251, 191, 36, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-programmer:hover {
+            box-shadow: 0 8px 28px rgba(245, 158, 11, 0.18), inset 0 0 15px rgba(251, 191, 36, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .avatar-designer {
+            color: #93c5fd;
+            border: 1px solid rgba(147, 197, 253, 0.25);
+            background: linear-gradient(135deg, rgba(147, 197, 253, 0.12) 0%, rgba(147, 197, 253, 0.02) 100%);
+            box-shadow: 0 6px 24px rgba(96, 165, 250, 0.12), inset 0 0 12px rgba(147, 197, 253, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-designer:hover {
+            box-shadow: 0 8px 28px rgba(96, 165, 250, 0.18), inset 0 0 15px rgba(147, 197, 253, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .member-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .member-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .role-ar {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+            font-size: 0.75rem;
+        }
+
+        .member-social {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .social-programmer {
+            color: #fbbf24;
+            text-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+        }
+
+        .social-designer {
+            color: #93c5fd;
+            text-shadow: 0 0 16px rgba(147, 197, 253, 0.25);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .copyright-text {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background: var(--card-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 340px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay.open .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--madar-color);
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .modal-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--pill-border);
+            color: var(--text-main);
+            padding: 10px 32px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        /* SVG Color Classes */
+        .color-01 { color: #2ecc71; background: rgba(46, 204, 113, 0.1); box-shadow: 0 0 12px rgba(46, 204, 113, 0.2); }
+        .color-02 { color: #3498db; background: rgba(52, 152, 219, 0.1); box-shadow: 0 0 12px rgba(52, 152, 219, 0.2); }
+        .color-03 { color: #9b59b6; background: rgba(155, 89, 182, 0.1); box-shadow: 0 0 12px rgba(155, 89, 182, 0.2); }
+        .color-04 { color: #f39c12; background: rgba(243, 156, 18, 0.1); box-shadow: 0 0 12px rgba(243, 156, 18, 0.2); }
+        .color-05 { color: #e74c3c; background: rgba(231, 76, 60, 0.1); box-shadow: 0 0 12px rgba(231, 76, 60, 0.2); }
+        .color-06 { color: #1abc9c; background: rgba(26, 188, 156, 0.1); box-shadow: 0 0 12px rgba(26, 188, 156, 0.2); }
+        .color-07 { color: #f43f5e; background: rgba(244, 63, 94, 0.1); box-shadow: 0 0 12px rgba(244, 63, 94, 0.2); }
+        .color-08 { color: #00BFFF; background: rgba(0, 191, 255, 0.1); box-shadow: 0 0 12px rgba(0, 191, 255, 0.2); }
+        .color-09 { color: #2ecc71; background: rgba(46, 204, 113, 0.1); box-shadow: 0 0 12px rgba(46, 204, 113, 0.2); }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="top-bar">
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </header>
+
+        <section class="hero">
+            <div style="font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-secondary); margin-top: -15px; margin-bottom: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                تيم العدل اساس الملك
+            </div>
+            
+            <h1 class="brand-title"><span class="brand-letter">M</span><span class="brand-letter">A</span><span class="brand-letter">D</span><span class="brand-letter">A</span><span class="brand-letter">R</span></h1>
+            <div class="hero-divider"></div>
+            
+            <div class="subtitle-container">
+                <h2 class="subtitle"><a href="https://whatsapp.com/channel/0029VbAzdW8ADTOCIqiSD00g" style="text-decoration: none; color: inherit;" target="_blank">المنصة الرقمية</a></h2>
+            </div>
+
+            <div class="class-info">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                الفرقة الأولى · حقوق المنصورة
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-pill">إجابات نموذجية</div>
+                <div class="stat-pill">أسئلة تفاعلية</div>
+                <div class="stat-pill">دعم لجميع المواد</div>
+            </div>
+        </section>
+
+        <div class="circular-tabs" id="circularTabs">
+            <div class="circular-tab active" data-id="mcq" onclick="selectTab('mcq')">MCQ</div>
+            <div class="circular-tab next" data-id="maqali" onclick="selectTab('maqali')">مقالي</div>
+            <div class="circular-tab prev" data-id="important" onclick="selectTab('important')">حاجات تهمك</div>
+        </div>
+
+        <div class="section-title" id="dynamicSectionTitle">MCQ</div>
+
+        <div class="subjects-header">
+            SUBJECTS <div class="subjects-count">8</div>
+        </div>
+
+        <div id="list-mcq" class="subjects-list">
+
+            <!-- 01. القانون الدستوري -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">01</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTgyJUQ4JUE3JUQ5JTg2JUQ5JTg4JUQ5JTg2JTIwJUQ4JUE3JUQ5JTg0JUQ4JUFGJUQ4JUIzJUQ4JUFBJUQ5JTg4JUQ4JUIxJUQ5JThB"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">17/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_1.html" class="item-link">المفهوم الشكلي والموضوعي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_2.html" class="item-link">طبيعة القواعد ومصادرها <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_3.html" class="item-link">طرق وضع الدساتير <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_4.html" class="item-link">القيمة القانونية والقوانين الأساسية <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_5.html" class="item-link">العرف الدستوري <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_6.html" class="item-link">سمو القاعدة والرقابة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_7.html" class="item-link">تعديل الدستور وانتهاؤه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_8_10.html" class="item-link">مجلس النواب (تشكيل واختصاصات) <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/constitutional_Lecture_11_12.html" class="item-link">رئيس الجمهورية والحكومة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/Midterm%20Exam%20%2B%20Quizzes%201-5.html" class="item-link">ميدتيرم وكويزات 1-5 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/P_C_Exam2023.html" class="item-link">امتحان 2023 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 02. النظم السياسية -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">02</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg2JUQ4JUI4JUQ5JTg1JTIwJUQ4JUE3JUQ5JTg0JUQ4JUIzJUQ5JThBJUQ4JUE3JUQ4JUIzJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">17/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_1_2.html" class="item-link">أركان الدولة (الشعب والإقليم) <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_3_4.html" class="item-link">السيادة الجغرافية والمياه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_5.html" class="item-link">الشخصية المعنوية والسيادة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_6.html" class="item-link">أشكال الدول والاتحادات <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_7.html" class="item-link">نظم الحكم: أشكال الديمقراطية <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_8.html" class="item-link">النظام الملكي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_9_10.html" class="item-link">النظام المجلسي <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/political_systems_lecture_11.html" class="item-link">صور الاقتراع والانتخاب <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/const-quiz/tbbbbext.html" class="item-link">اختبار توجيهي / الباب الاول <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/PS-CL-60Q.html" class="item-link">أسئلة 2026/5/4 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03. اللغة الفرنسية -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">03</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTg0JUQ4JUJBJUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ5JTgxJUQ4JUIxJUQ5JTg2JUQ4JUIzJUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">21/05/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/const-quiz/French_legal_terms.html" class="item-link">مصطلحات قانونيه للغة الفرنسية - MCQ <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 04. الشريعة الإسلامية -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">04</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUI0JUQ4JUIxJUQ5JThBJUQ4JUI5JUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUIzJUQ5JTg0JUQ4JUE3JUQ5JTg1JUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date past">01/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <div class="item-link item-link-soon">انتظرونا قريباً ...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 05. الإجراءات والعقاب -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">05</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUFDJUQ4JUIxJUQ4JUE3JUQ5JTg1JTIwJUQ5JTg4JUQ4JUE3JUQ5JTg0JUQ4JUI5JUQ5JTgyJUQ4JUE3JUQ4JUE4"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date future">06/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/علم_العقاب-سئلة%20من%20واقع%20امتحانات%20سابقة.html" class="item-link">علم العقاب_اسالة من وقائع امتحانات سابقه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/نموذج_٢_امتحان_٢٠٢٥-4.html" class="item-link">اسأله امتحان 2025 <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/اسئلة%20علم%20الاجرام_متعددة.html" class="item-link">علم الاجرام اساله متعددة <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                        <a href="https://COFFEE595.github.io/MADAR/علم_الإجرام-اسئلة%20من%20واقع%20امتحانات%20سابقه.html" class="item-link">علم الاجرام_أساله من وقائع امتحانات سابقه <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'ثري')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07. الملكية الفكرية (زر واحد) -->
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">07</div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ5JTgyJUQ4JUI2JUQ4JUE3JUQ5JThBJUQ4JUE3JTIwJUQ4JUE3JUQ5JTg0JUQ5JTg1JUQ4JUFDJUQ4JUFBJUQ5JTg1JUQ4JUI5JUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="sc-date future">15/06/2026</div>
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://coffee595.github.io/MADAR/ipnotes.html" class="item-link">الملكية الفكرية <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="list-important" class="subjects-list" style="display: none;">
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">01</div>
+                        <div class="sc-icon-wrap color-01">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
+                        <div class="sc-title">جروبات الفرقة الأولى</div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://chat.whatsapp.com/LiNXLj2h5pJAc5L0rT9mxP" class="item-link" target="_blank">جروب شباب الفرقه الاولى <div class="item-right-content"></div></a>
+                        <a href="https://chat.whatsapp.com/DLaaB8vht1sBXhjKaQROS3" class="item-link" target="_blank">جروب بنات الفرقه الاولى <div class="item-right-content"></div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="list-maqali" class="subjects-list" style="display: none;">
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">09</div>
+                        <div class="sc-icon-wrap color-09">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUFGJUQ4JUIzJUQ4JUFBJUQ5JTg4JUQ4JUIxJUQ5JThBJTIwJUQ5JTg4JUQ5JTg2JUQ4JUI4JUQ5JTg1"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <a href="https://COFFEE595.github.io/MADAR/pol_const_law.html" class="item-link">مقالي دستوري ونظم <div class="item-right-content"><span class="src-btn" onclick="openSrc(event, 'MADAR')">ⓘ</span></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="sc-header" onclick="toggleAcc(this)">
+                    <div class="sc-right">
+                        <div class="sc-num">10</div>
+                        <div class="sc-icon-wrap color-01">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="sc-title secured-text" data-secured="JUQ4JUE3JUQ5JTg0JUQ4JUI0JUQ4JUIxJUQ5JThBJUQ4JUI5JUQ4JUE5JTIwJUQ4JUE3JUQ5JTg0JUQ4JUE1JUQ4JUIzJUQ5JTg0JUQ4JUE3JUQ5JTg1JUQ5JThBJUQ4JUE5"></div>
+                    </div>
+                    <div class="sc-left">
+                        <div class="arrow-down">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc-body">
+                    <div class="sc-body-inner">
+                        <div class="item-link item-link-soon">قريباً ...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="team-section">
+            <div class="team-title">THE TEAM</div>
+        </section>
+
+        <a href="https://whatsapp.com/channel/0029VbAzdW8ADTOCIqiSD00g" target="_blank" class="telegram-bnr">
+            <div class="t-right">
+                <div class="t-icon-circle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <div style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size:0.75rem; opacity:0.8; line-height: 1.2; margin-bottom: 2px;">تيم العدل</div>
+                    <div style="font-size: 1.05rem; line-height: 1.2;">انضم للقناة الرسمية</div>
+                </div>
+            </div>
+            <div class="t-left">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </div>
+        </a>
+
+        <footer class="footer">
+            <div>آخر تحديث: 2026/5/19 — 03:00AM</div>
+            <div><a href="https://t.me/MADAR_ACADEMIC" target="_blank" style="color: inherit; text-decoration: underline;">أبلغنا برأيك</a></div>
+            <div class="copyright-text">MADAR © 2026</div>
+            <div class="copyright-text" style="margin-top: 10px;">في حال اكتشاف أي خطأ يرجى إبلاغنا — شاكرين لتعاونك معنا</div>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="srcModal" onclick="closeModals(event)">
+        <div class="modal-container">
+            <div class="modal-title">المصدر</div>
+            <div class="modal-body" id="srcModalText"></div>
+            <button class="modal-btn" onclick="document.getElementById('srcModal').classList.remove('open')">إغلاق</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="infoModal" onclick="closeModals(event)">
+        <div class="modal-container">
+            <div class="modal-title">ⓘ معلومات</div>
+            <div class="modal-body" style="text-align: right; direction: rtl;">
+                ونود التوضيح أن المصدر الأصلي لبعض أسئلة القانون الدستوري والنظم هو مذكرة المراجعة النهائية لمادتي النظم والدستوري لعام 2026 الخاصة بـ ثري أكاديمي.<br><br>ونؤكد أنه لا توجد أي صلة رسمية بين ثري أكاديمي وهذه المنصة أو محتواها، كما أنها غير مسؤولة عن أي أخطاء قد ترد منها.
+            </div>
+            <button class="modal-btn" onclick="document.getElementById('infoModal').classList.remove('open')">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 4. حماية شاملة: منع الكليك يمين، النسخ، الاختصارات، وفك الشفرات ---
+        
+        // فك تشفير النصوص المؤمنة عند تحميل الصفحة (تشفير Base64)
+        // إضافة: لتشفير أي نص جديد مستقبلاً استخدم الكود التالي في لوحة تحكم المتصفح (Console):
+        // btoa(encodeURIComponent("النص الذي تريد تشفيره"))
+        document.addEventListener("DOMContentLoaded", () => {
+            const securedElements = document.querySelectorAll(".secured-text");
+            securedElements.forEach(el => {
+                try {
+                    const encodedText = el.getAttribute("data-secured");
+                    if(encodedText) {
+                        el.textContent = decodeURIComponent(atob(encodedText));
+                    }
+                } catch(e) {
+                    // حماية صامتة في حال التلاعب
+                }
+            });
+        });
+
+        // منع النقر الأيمن
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // منع عمليات النسخ والقص واللصق
+        ['copy', 'cut', 'paste'].forEach(eventName => {
+            document.addEventListener(eventName, event => event.preventDefault());
+        });
+
+        // منع السحب والإفلات
+        document.addEventListener('dragstart', event => event.preventDefault());
+        document.addEventListener('drop', event => event.preventDefault());
+
+        // منع اختصارات لوحة المفاتيح المخصصة للتفتيش (F12, Ctrl+U, Ctrl+S, Ctrl+C, Ctrl+Shift+I وغيرها)
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 123) { // F12
+                event.preventDefault();
+                return false;
+            }
+            if (event.ctrlKey) {
+                const key = event.key ? event.key.toLowerCase() : String.fromCharCode(event.keyCode).toLowerCase();
+                if (
+                    key === 'u' || // منع عرض المصدر
+                    key === 's' || // منع الحفظ
+                    key === 'c' || // منع النسخ
+                    key === 'a' || // منع تحديد الكل
+                    key === 'p' || // منع الطباعة
+                    (event.shiftKey && key === 'i') || // وضع المطورين
+                    (event.shiftKey && key === 'c') || // التفتيش
+                    (event.shiftKey && key === 'j')    // شاشة الأوامر
+                ) {
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        // ======================================
+        // الأكواد الأساسية للصفحة (بدون أي تعديل)
+        // ======================================
+
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        const sunIcon = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+        function setTheme(isDark) {
+            if (isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeIcon.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            setTheme(true);
+        } else if (savedTheme === 'light') {
+            setTheme(false);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme(true);
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = document.body.hasAttribute('data-theme');
+            setTheme(!isDark);
+        });
+
+        const tabItems = [
+            { id: 'mcq' },
+            { id: 'maqali' },
+            { id: 'important' }
+        ];
+        let currentActiveIndex = 0;
+
+        function applyTabPositions(direction = 'up') {
+            tabItems.forEach((tab, index) => {
+                const el = document.querySelector(`.circular-tab[data-id="${tab.id}"]`);
+                el.className = 'circular-tab';
+                
+                if (index === currentActiveIndex) {
+                    el.classList.add('active');
+                    showCategory(tab.id, direction);
+                } else if (index === (currentActiveIndex + 1) % tabItems.length) {
+                    el.classList.add('next');
+                } else {
+                    el.classList.add('prev');
+                }
+            });
+        }
+
+        let pendingAnimFrame = null;
+
+        function showCategory(cat, direction) {
+            const activeEl = document.getElementById('list-' + cat);
+            const lists = ['mcq', 'maqali', 'important'];
+
+            if (pendingAnimFrame) {
+                cancelAnimationFrame(pendingAnimFrame);
+                pendingAnimFrame = null;
+            }
+
+            lists.forEach(l => {
+                if (l === cat) return;
+                const el = document.getElementById('list-' + l);
+                el.style.display = 'none';
+                el.querySelectorAll(':scope > .subject-card').forEach(card => {
+                    card.classList.remove('animate-item-left', 'animate-item-right', 'animate-item-up');
+                    card.style.animationDelay = '';
+                });
+            });
+
+            const cards = Array.from(activeEl.querySelectorAll(':scope > .subject-card'));
+            const animClass =
+                direction === 'left'  ? 'animate-item-left'  :
+                direction === 'right' ? 'animate-item-right' :
+                                        'animate-item-up';
+
+            cards.forEach((card, i) => {
+                card.classList.remove('animate-item-left', 'animate-item-right', 'animate-item-up');
+                card.style.animationDelay = `${i * 0.07}s`;
+            });
+
+            activeEl.style.display = 'block';
+            void activeEl.offsetHeight;
+
+            pendingAnimFrame = requestAnimationFrame(() => {
+                cards.forEach(card => card.classList.add(animClass));
+                pendingAnimFrame = null;
+            });
+
+            const titleEl = document.getElementById('dynamicSectionTitle');
+            if (titleEl) {
+                titleEl.textContent =
+                    cat === 'mcq'    ? 'MCQ'       :
+                    cat === 'maqali' ? 'مقالي'     :
+                                       'حاجات تهمك';
+            }
+
+            const countEl = document.querySelector('.subjects-count');
+            if (countEl) countEl.textContent = cards.length;
+        }
+
+        function selectTab(id) {
+            const index = tabItems.findIndex(t => t.id === id);
+            if (index === currentActiveIndex) return;
+            
+            let direction = 'up';
+            if (
+                (index === currentActiveIndex + 1) ||
+                (index === 0 && currentActiveIndex === tabItems.length - 1)
+            ) {
+                direction = 'right'; 
+            } else {
+                direction = 'left';
+            }
+            
+            currentActiveIndex = index;
+            applyTabPositions(direction);
+        }
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        const SWIPE_THRESHOLD = 45;
+        const ANGLE_LOCK = 1.2;
+
+        function onTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }
+
+        function onTouchEnd(e) {
+            const dx = e.changedTouches[0].screenX - touchStartX;
+            const dy = e.changedTouches[0].screenY - touchStartY;
+            if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy) * ANGLE_LOCK) return;
+
+            if (dx < 0) {
+                currentActiveIndex = (currentActiveIndex - 1 + tabItems.length) % tabItems.length;
+                applyTabPositions('left');
+            } else {
+                currentActiveIndex = (currentActiveIndex + 1) % tabItems.length;
+                applyTabPositions('right');
+            }
+        }
+
+        const circularTabs = document.getElementById('circularTabs');
+        [circularTabs, ...['mcq','maqali','important'].map(id => document.getElementById('list-' + id))].forEach(el => {
+            if (!el) return;
+            el.addEventListener('touchstart', onTouchStart, { passive: true });
+            el.addEventListener('touchend',   onTouchEnd,   { passive: true });
+        });
+
+        function toggleAcc(header) {
+            const card = header.parentElement;
+            const body = card.querySelector('.sc-body');
+            
+            document.querySelectorAll('.subject-card').forEach(c => {
+                if (c !== card && c.classList.contains('active')) {
+                    c.classList.remove('active');
+                    c.querySelector('.sc-body').style.maxHeight = null;
+                }
+            });
+
+            if (card.classList.contains('active')) {
+                card.classList.remove('active');
+                body.style.maxHeight = null;
+            } else {
+                card.classList.add('active');
+                body.style.maxHeight = body.scrollHeight + "px";
+                
+                setTimeout(() => {
+                    if (card.classList.contains('active')) {
+                        body.style.maxHeight = (body.scrollHeight + 50) + "px";
+                    }
+                }, 400);
+            }
+        }
+
+        const srcModal = document.getElementById('srcModal');
+        const infoModal = document.getElementById('infoModal');
+        const srcModalText = document.getElementById('srcModalText');
+
+        function openSrc(e, source) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            srcModalText.textContent = "المصدر: " + (source === "ثري" ? "سنتر ثري" : "MADAR");
+            srcModal.classList.add('open');
+        }
+
+        function openInfoModal() {
+            infoModal.classList.add('open');
+        }
+
+        function closeModals(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                srcModal.classList.remove('open');
+                infoModal.classList.remove('open');
+            }
+        }
+
+    </script>
+</body>
+</html>
