@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>علم الإجرام</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+    :root {
+      --madar-color: #16a34a;
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --pill-bg: #ffffff;
+      --pill-border: #cbd5e1;
+      --hover-bg: #f8fafc;
+      --divider-color: #e2e8f0;
+      --shadow-soft: 0 4px 12px -2px rgba(0,0,0,0.09), 0 2px 6px -2px rgba(0,0,0,0.05);
+    }
+    .dark {
+      --madar-color: #f0a500;
+      --bg-color: #111827;
+      --card-bg: #1f2937;
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --pill-bg: #374151;
+      --pill-border: #4b5563;
+      --hover-bg: #374151;
+      --divider-color: #374151;
+    }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Cairo', "Segoe UI", system-ui, -apple-system, sans-serif; transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
+    html:not(.dark) .card-shadow { box-shadow: 0 2px 20px -4px rgba(15,23,42,0.12), 0 1px 4px -1px rgba(15,23,42,0.08); }
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="w-full max-w-3xl mx-auto px-4 py-6">
+
+  <header class="flex justify-between items-center mb-8">
+    <button id="theme-toggle" class="bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] w-10 h-10 rounded-full flex justify-center items-center shadow-sm hover:scale-110 transition-transform">
+      <svg id="icon-sun" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg id="icon-moon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </button>
+    <div class="bg-[var(--pill-bg)] border border-[var(--pill-border)] flex items-center gap-2 px-4 py-2 rounded-full shadow-sm text-xs font-black tracking-widest text-[var(--text-secondary)]" dir="ltr">
+      PLATFORM <span class="text-[var(--text-main)] mx-1">MADAR</span>
+      <div class="w-2 h-2 bg-[var(--madar-color)] rounded-full shadow-[0_0_8px_#f59e0b]"></div>
+    </div>
+  </header>
+
+  <main id="app-container" class="min-h-[70vh]"></main>
+
+  <footer class="text-center mt-10 pt-5 pb-5 text-sm text-[var(--text-secondary)] font-semibold border-t border-[var(--divider-color)]">
+    <div>أبلغنا برأيك <a href="https://t.me/GIX37" target="_blank" class="font-extrabold text-[var(--text-main)] hover:text-[var(--madar-color)]">@GIX37</a></div>
+    <div class="text-xs opacity-60 mt-1">MADAR © 2026</div>
+  </footer>
+
+  <script>
+    // ── البيانات ──────────────────────────────────────────────
+    const sections = [
+      { id: 0, label: "اختبار شامل",           sub: "جميع الأقسام",                         isAll: true  },
+      { id: 1, label: "المستوى الأول — التأسيس",   sub: "المفاهيم الأساسية للجريمة والإجرام"      },
+      { id: 2, label: "المستوى الثاني — النطاق",   sub: "نطاق علم الإجرام وفروعه وعلاقاته"       },
+      { id: 3, label: "المستوى الثالث — البيولوجيا", sub: "الاتجاه البيولوجي وروّاده ونظرياته"     },
+      { id: 4, label: "المستوى الرابع — النفس",    sub: "الاتجاه النفسي في تفسير السلوك الإجرامي" },
+      { id: 5, label: "المستوى الخامس — المجتمع",  sub: "الاتجاه الاجتماعي ونظرياته"             }
+    ];
+
+    const allQuestions = [
+
+      // ══════════════════════════════════════════════════════
+      // القسم 1 — المفاهيم الأساسية (تعريف الجريمة، المجرم، المفهومان القانوني والاجتماعي)
+      // ══════════════════════════════════════════════════════
+      { id:1,  sec:1, text:"الجريمة سلوك تحظره قاعدة قانونية جنائية تقرر له جزاءً جنائياً.", options:["صح","خطأ"], correct:0 },
+      { id:2,  sec:1, text:"فكرة الجزاء الجنائي هي المعيار القانوني المميِّز للجريمة عن غيرها من صور السلوك غير الاجتماعي.", options:["صح","خطأ"], correct:0 },
+      { id:3,  sec:1, text:"يقصد بالمفهوم الاجتماعي للجريمة الانحراف الاجتماعي، أي الفعل المضاد لمصالح المجتمع.", options:["صح","خطأ"], correct:0 },
+      { id:4,  sec:1, text:"يتحدد مفهوم الجريمة في علم الإجرام بنظرة المجتمع للفعل المكوِّن لها.", options:["صح","خطأ"], correct:1 },
+      { id:5,  sec:1, text:"هناك تلاقياً بين كل من المفهوم القانوني والاجتماعي للجريمة.", options:["صح","خطأ"], correct:0 },
+      { id:6,  sec:1, text:"المفهوم القانوني للجريمة أضيق من المفهوم الاجتماعي.", options:["صح","خطأ"], correct:0 },
+      { id:7,  sec:1, text:"الجريمة في التشريع الجنائي لها تحديد في ذاتها.", options:["صح","خطأ"], correct:1, rationale:"ليس لها تحديد في ذاتها، بل بحسب النص على جزاء جنائي." },
+      { id:8,  sec:1, text:"تتمثل الجريمة في قانون العقوبات في كل فعل أو امتناع يقع بالمخالفة لقاعدة جنائية منصوص عليها.", options:["صح","خطأ"], correct:0 },
+      { id:9,  sec:1, text:"يعني مبدأ الشرعية أنه لا جريمة ولا عقوبة إلا بناء على نص قانوني.", options:["صح","خطأ"], correct:0 },
+      { id:10, sec:1, text:"تنقسم الجرائم بحسب الركن المعنوي إلى جنايات وجنح ومخالفات.", options:["صح","خطأ"], correct:1, rationale:"التقسيم إلى جنايات وجنح ومخالفات يكون بحسب جسامة العقوبة وليس الركن المعنوي." },
+      { id:11, sec:1, text:"يقصد بالجريمة في علم الإجرام كل فعل أو امتناع يرد في نص قانوني يقرر له المشرع عقوبة أو تدبير احترازي.", options:["صح","خطأ"], correct:0 },
+      { id:12, sec:1, text:"لا يتغير التعريف القانوني للجريمة بتغير الزمان والمكان.", options:["صح","خطأ"], correct:1 },
+      { id:13, sec:1, text:"مناط تكييف الفعل بأنه إجرامي بكونه منصوصاً عليه في نص تشريعي.", options:["صح","خطأ"], correct:0 },
+      { id:14, sec:1, text:"قانون العقوبات يجرِّم كل الأفعال المنافية للأخلاق.", options:["صح","خطأ"], correct:1, rationale:"الكذب المجرد مثلاً منافٍ للأخلاق ولا يجرِّمه القانون." },
+      { id:15, sec:1, text:"القيم والمصالح الاجتماعية تختلف باختلاف الزمان والمكان.", options:["صح","خطأ"], correct:0 },
+      { id:16, sec:1, text:"الراجح في مفهوم الجريمة في علم الإجرام هو...", options:["المفهوم القانوني","المفهوم الاجتماعي","كلاهما معاً","لا شيء مما سبق"], correct:0 },
+      { id:17, sec:1, text:"تشكِّل اعتداءً على قيم وأخلاق المجتمع:", options:["الجرائم الطبيعية","الجرائم المصطنعة"], correct:0 },
+      { id:18, sec:1, text:"جرائم من صنع المشرع لا تشكِّل اعتداءً على قيم أخلاقية:", options:["الجرائم الطبيعية","الجرائم المصطنعة"], correct:1 },
+      { id:19, sec:1, text:"تعددت التعريفات التي قُدِّمت لعلم الإجرام.", options:["صح","خطأ"], correct:0 },
+      { id:20, sec:1, text:"الجريمة ظاهرة حديثة.", options:["صح","خطأ"], correct:1, rationale:"الجريمة ظاهرة قديمة قِدَم المجتمعات الإنسانية." },
+      { id:21, sec:1, text:"بدأت الدراسة العلمية للجريمة إلا في الثلث الأخير من القرن العشرين.", options:["صح","خطأ"], correct:1, rationale:"بدأت في الثلث الأخير من القرن التاسع عشر وليس العشرين." },
+      { id:22, sec:1, text:"بدأت دراسة الجريمة دراسةً علمية على يد:", options:["المدرسة التقليدية","المدرسة الوضعية الإيطالية","المدرسة التقليدية الجديدة","كل ما سبق"], correct:1 },
+      { id:23, sec:1, text:"المدرسة الوضعية هي التي استخدمت المنهج العلمي القائم على الملاحظة والتجربة والاستنتاج في تفسير وتحليل الجريمة.", options:["صح","خطأ"], correct:0 },
+      { id:24, sec:1, text:"الجريمة في حياة المجتمع ظاهرة عَرَضية.", options:["صح","خطأ"], correct:1, rationale:"الجريمة في حياة المجتمع ظاهرة حَتمية، أما في حياة الفرد فهي ظاهرة عَارضة." },
+      { id:25, sec:1, text:"الجريمة في حياة الفرد ظاهرة حَتمية.", options:["صح","خطأ"], correct:1, rationale:"الجريمة في حياة الفرد ظاهرة عَارضة، وفي حياة المجتمع هي الحَتمية." },
+      { id:26, sec:1, text:"المجرم طبقاً للتعريف القانوني هو مرتكب الجريمة الذي صدر ضده حكم نهائي بالإدانة بواسطة القضاء.", options:["صح","خطأ"], correct:0 },
+
+      // ══════════════════════════════════════════════════════
+      // القسم 2 — نطاق علم الإجرام وفروعه وعلاقاته
+      // ══════════════════════════════════════════════════════
+      { id:27, sec:2, text:"يتسع نطاق علم الإجرام بالبحث في أسباب النشاط المضاد للمجتمع وكيفية علاجه.", options:["صح","خطأ"], correct:0, rationale:"هذا هو التعريف الموسَّع لعلم الإجرام." },
+      { id:28, sec:2, text:"يضيق نطاق علم الإجرام بالدراسة العلمية للمذنب من الواجهة الداخلية والخارجية.", options:["صح","خطأ"], correct:0 },
+      { id:29, sec:2, text:"يقتصر اهتمام علم الإجرام على دراسة الشخص السليم الذي يرتكب الجريمة.", options:["صح","خطأ"], correct:1, rationale:"يدرس علم الإجرام المجرمين الأسوياء وغير الأسوياء على حد سواء." },
+      { id:30, sec:2, text:"يجمع الفقه على ضرورة اقتصار علم الإجرام على دراسة التكوين الإجرامي لدى المجرمين الأسوياء فقط.", options:["صح","خطأ"], correct:1 },
+      { id:31, sec:2, text:"لا يخضع المجرمون غير الأسوياء للدراسة في علم الإجرام.", options:["صح","خطأ"], correct:1, rationale:"يدرس علم الإجرام المجرمين الأسوياء وغير الأسوياء معاً." },
+      { id:32, sec:2, text:"لا يهتم علم الإجرام بدراسة دوافع ارتكاب المجنون للجريمة.", options:["صح","خطأ"], correct:1 },
+      { id:33, sec:2, text:"المجرم في علم الإجرام هو المتهم.", options:["صح","خطأ"], correct:1 },
+      { id:34, sec:2, text:"يهتم علم الإجرام بدراسة المجرم فقط.", options:["صح","خطأ"], correct:0 },
+      { id:35, sec:2, text:"يهتم علم الإجرام بالمتهم.", options:["صح","خطأ"], correct:1 },
+      { id:36, sec:2, text:"يدرس علم الإجرام البحث في أغراض العقوبة.", options:["صح","خطأ"], correct:1 },
+      { id:37, sec:2, text:"تعد العلوم التالية فروعاً لعلم الإجرام فيما عدا...", options:["علم السياسة الجنائية","علم النفس الجنائي","علم الأنثروبولوجيا الجنائية","علم الاجتماع الجنائي"], correct:0 },
+      { id:38, sec:2, text:"علم الأنثروبولوجيا هو العلم الذي يدرس العوامل النفسية التي تدفع الشخص لارتكاب الجريمة.", options:["صح","خطأ"], correct:1, rationale:"علم الأنثروبولوجيا يدرس العوامل العُضوية (البدنية)، لا النفسية." },
+      { id:39, sec:2, text:"يهتم علم النفس الجنائي بالبحث عن العوامل النفسية والاجتماعية التي تدفع الشخص إلى ارتكاب الجريمة.", options:["صح","خطأ"], correct:1 },
+      { id:40, sec:2, text:"يرجع علم النفس الجنائي وجود الجريمة إلى خلل في التكوين العضوي للمجرم.", options:["صح","خطأ"], correct:1, rationale:"يرجعه إلى خلل في التكوين النفسي لا العضوي." },
+      { id:41, sec:2, text:"يكفي الفحص البيولوجي والنفسي لاستخلاص الدوافع والعوامل المؤدية لارتكاب جريمة معينة.", options:["صح","خطأ"], correct:1, rationale:"لا يكفي؛ يجب إضافة الفحص الاجتماعي أيضاً." },
+      { id:42, sec:2, text:"يكمِّل علم الإجرام علم العقاب ويساندُه.", options:["صح","خطأ"], correct:0 },
+      { id:43, sec:2, text:"علم الإجرام يهتم بدراسة الجزاء الجنائي.", options:["صح","خطأ"], correct:1, rationale:"دراسة الجزاء الجنائي هي اختصاص علم العقاب." },
+      { id:44, sec:2, text:"يعرَّف علم الإجرام بأنه العلم الذي يدرس الانحراف بهدف البحث عن مواجهته.", options:["صح","خطأ"], correct:1, rationale:"هذا تعريف علم العقاب لا علم الإجرام." },
+      { id:45, sec:2, text:"يعد علم الإجرام من العلوم الجنائية حديثة النشأة.", options:["صح","خطأ"], correct:0 },
+      { id:46, sec:2, text:"لا يوجد اختلاف بين علم الإجرام وقانون الإجراءات الجنائية.", options:["صح","خطأ"], correct:1 },
+      { id:47, sec:2, text:"تؤدي كل التصرفات التي تقع بالمخالفة للأخلاق في المجتمع إلى تدخل المشرع الجنائي.", options:["صح","خطأ"], correct:1 },
+      { id:48, sec:2, text:"يزداد الرقم الأسود في الجرائم الخطيرة كالقتل ويقل في الجرائم الأقل خطورة كالسب.", options:["صح","خطأ"], correct:1, rationale:"العكس هو الصحيح: يزداد في الأقل خطورة ويقل في الخطيرة." },
+
+      // ══════════════════════════════════════════════════════
+      // القسم 3 — الاتجاه البيولوجي وروّاده ونظرياته
+      // ══════════════════════════════════════════════════════
+      { id:49, sec:3, text:"يرى لومبروزو أن المجرم لا يختلف عن غير المجرم بسبب وراثته.", options:["صح","خطأ"], correct:1, rationale:"يرى لومبروزو أن المجرم يختلف عن غير المجرم بسبب وراثته." },
+      { id:50, sec:3, text:"يرى لومبروزو أن المجرم يختلف عن غير المجرم بسبب وراثته.", options:["صح","خطأ"], correct:0 },
+      { id:51, sec:3, text:"يُلقَّب العالم لومبروزو بالأب الشرعي لعلم الإجرام.", options:["صح","خطأ"], correct:0 },
+      { id:52, sec:3, text:"يُلقَّب العالم فيليبو جراماتيكا بالأب الشرعي لعلم الإجرام.", options:["صح","خطأ"], correct:1, rationale:"الأب الشرعي لعلم الإجرام هو لومبروزو لا جراماتيكا." },
+      { id:53, sec:3, text:"شخصية الفرد وفقاً للاتجاه البيولوجي هي مصدر إجرامه بما تنطوي عليه من صفات حيوية وخصال نفسية.", options:["صح","خطأ"], correct:0 },
+      { id:54, sec:3, text:"المجرم بالتكوين هو الذي لديه استعداد إجرامي ثابت ومستمر ناشئ عن خلل عضوي ونفسي.", options:["صح","خطأ"], correct:0 },
+      { id:55, sec:3, text:"المجرم بالصدفة هو الذي لديه ميل طبيعي إلى الإجرام ويسعى إلى ارتكاب الجريمة.", options:["صح","خطأ"], correct:1, rationale:"المجرم بالصدفة يرتكب الجريمة نتيجة ظروف خارجية ويندفع مؤقتاً نحوها وليس لديه ميول إجرامية." },
+      { id:56, sec:3, text:"اعتمد الاتجاه البيولوجي في تفسير السلوك الإجرامي على:", options:["العوامل الاجتماعية","الاضطرابات النفسية","الخصائص البدنية والنفسية للمجرم","كل ما تقدم"], correct:2 },
+      { id:57, sec:3, text:"نادى العالم الإيطالي ......... بنظرية المجرم بالميلاد.", options:["شيرازي بكاريا","انريكو فيري","فيليبو جراماتيكا","شيزاري لومبروزو"], correct:3 },
+      { id:58, sec:3, text:"أساس الاتجاه البيولوجي أن المجرم شخص غير عادي، فالإنسان الطبيعي لا يرتكب السلوك الإجرامي.", options:["صح","خطأ"], correct:0 },
+      { id:59, sec:3, text:"يقوم الاتجاه البيولوجي في تفسير السلوك الإجرامي على سمات تتعلق بالتكوين الجسماني أو النفسي.", options:["صح","خطأ"], correct:0 },
+      { id:60, sec:3, text:"بدأ لومبروزو حياته المهنية طبيباً للأمراض العقلية بالجيش الإيطالي.", options:["صح","خطأ"], correct:0 },
+      { id:61, sec:3, text:"الطريقة التي اتبعها لومبروزو في أبحاثه هي قياس أعضاء جسم الأشخاص الذين فحصهم، وفحص ما يزيد على 3000 جندي إيطالي، وما يقرب من 383 جمجمة لمجرمين إيطاليين، وحوالي 600 مجرم حي.", options:["صح","خطأ"], correct:0, rationale:"هذه الطريقة تخص لومبروزو لا سذرلاند." },
+      { id:62, sec:3, text:"خلص لومبروزو من أبحاثه إلى أن المجرمين يتميزون بشذوذ جسماني وسمات عضوية ونفسية معينة يحملونها منذ ميلادهم.", options:["صح","خطأ"], correct:0 },
+      { id:63, sec:3, text:"أكد لومبروزو أنه لا يشترط توافر جميع الوصمات، بل يكفي فيه سبعة منها على الأقل.", options:["صح","خطأ"], correct:1, rationale:"يكفي خمس وصمات على الأقل، وليس سبع." },
+      { id:64, sec:3, text:"ربط لومبروزو في شرح نظريته بين الإنسان المجرم والحيوانات الدنيا.", options:["صح","خطأ"], correct:0 },
+      { id:65, sec:3, text:"ربط لومبروزو بين بعض السمات العضوية للمجرم وبين الميل لارتكاب نوعية معينة من الجرائم.", options:["صح","خطأ"], correct:0 },
+      { id:66, sec:3, text:"أرجع لومبروزو أسباب إجرام المجرم إلى ما ينطوي عليه تكوينه الجسماني من عيوب ترتد إلى العصور الوسطى.", options:["صح","خطأ"], correct:1 },
+      { id:67, sec:3, text:"تخضع الجريمة عند لومبروزو لعدة عوامل متعددة من بينها العوامل البيئية.", options:["صح","خطأ"], correct:1, rationale:"لومبروزو يرد الجريمة إلى العوامل البيولوجية الوراثية لا البيئية." },
+      { id:68, sec:3, text:"أثبت تشالز جورنج صحة الفروض والنتائج التي توصل إليها لومبروزو.", options:["صح","خطأ"], correct:1, rationale:"أثبتت أبحاث جورنج عدم صحة نتائج لومبروزو." },
+      { id:69, sec:3, text:"من أهم نتائج الطبيب الإنجليزي تشارلز جورنج:", options:["عدم وجود صفات عضوية أو تشريحية تميز المجرمين","نموذج الرجل المجرم الذي نادى به لومبروزو ليس له وجود","كل ما سبق"], correct:2 },
+      { id:70, sec:3, text:"اتفق جورنج مع لومبروزو في تفسيره للسلوك الإجرامي والنتائج التي توصل إليها.", options:["صح","خطأ"], correct:1, rationale:"جورنج اختلف مع لومبروزو واعترض على نتائجه." },
+      { id:71, sec:3, text:"انتهت دراسات أرنست هوتون إلى التقرير بأن المجرمين يتميزون بدونية جسمانية وأرجعها إلى عامل الوراثة.", options:["صح","خطأ"], correct:0 },
+      { id:72, sec:3, text:"انتهى هوتون في دراساته إلى أن هناك خصائص معينة تميز مرتكبي كل طائفة من الجرائم، فمرتكبو جرائم القتل يتمتعون بخصائص تميزهم عن مرتكبي جرائم الاعتداء على الأموال وعن مرتكبي الجرائم الجنسية.", options:["صح","خطأ"], correct:0 },
+      { id:73, sec:3, text:"قام هوتون بتفرقة تحكمية بين المجرمين وغير المجرمين على أساس أن المجرمين وحدهم الذين سبق وأن أدانهم القضاء.", options:["صح","خطأ"], correct:0 },
+      { id:74, sec:3, text:"من مميزات نظرية أرنست هوتون أنه حدد المجرمين الذين يرتكبون جرائم معينة بحسب صفات جسمانية ووصمات معينة.", options:["صح","خطأ"], correct:1, rationale:"هذا من عيوب نظرية هوتون لا من مميزاتها." },
+
+      // ══════════════════════════════════════════════════════
+      // القسم 4 — الاتجاه النفسي في تفسير السلوك الإجرامي
+      // ══════════════════════════════════════════════════════
+      { id:75, sec:4, text:"فسَّر سيجموند فرويد السلوك الإجرامي بـ:", options:["الاضطرابات النفسية","صراع الثقافات","التفكك الاجتماعي","المخالطة الفارقة"], correct:0 },
+      { id:76, sec:4, text:"قامت نظرية فرويد على الجانب النفسي في النفس البشرية.", options:["صح","خطأ"], correct:0 },
+      { id:77, sec:4, text:"قامت نظرية فرويد على الجانب البيولوجي في النفس البشرية.", options:["صح","خطأ"], correct:1, rationale:"نظرية فرويد قامت على الجانب النفسي لا البيولوجي." },
+      { id:78, sec:4, text:"أغفل فرويد في تفسيره السلوك الإجرامي الجانب العضوي لشخصية المجرم.", options:["صح","خطأ"], correct:1, rationale:"أغفل فرويد الجانب الاجتماعي لا العضوي." },
+      { id:79, sec:4, text:"اهتم فرويد في تفسيره للسلوك الإجرامي بدور العوامل الاجتماعية في وجود السلوك الإجرامي.", options:["صح","خطأ"], correct:1, rationale:"اهتم فرويد بالجانب النفسي وأهمل الجانب الاجتماعي." },
+      { id:80, sec:4, text:"المجرم المجنون هو من يرتكب الجريمة تحت تأثير المرض العقلي.", options:["صح","خطأ"], correct:0 },
+      { id:81, sec:4, text:"أدلر يعتبر مؤسس علم الإجرام.", options:["صح","خطأ"], correct:1, rationale:"مؤسس علم الإجرام هو لومبروزو." },
+
+      // ══════════════════════════════════════════════════════
+      // القسم 5 — الاتجاه الاجتماعي ونظرياته
+      // ══════════════════════════════════════════════════════
+      { id:82, sec:5, text:"وفقاً لنظرية التفكك الاجتماعي، كلما زاد التقدم الحضاري في المجتمعات الحديثة زادت فرص سلوك سبيل الجريمة.", options:["صح","خطأ"], correct:0 },
+      { id:83, sec:5, text:"جوهر نظرية المخالطة الفارقة هو أن السلوك الإجرامي سلوك موروث وليس مكتسب.", options:["صح","خطأ"], correct:1, rationale:"جوهر النظرية أن السلوك الإجرامي سلوك مكتسب وليس موروثاً." },
+      { id:84, sec:5, text:"رفض سذرلاند أي دور للوراثة في نقل السلوك الإجرامي.", options:["صح","خطأ"], correct:0 },
+      { id:85, sec:5, text:"يذهب سذرلاند إلى أن السلوك الإجرامي مكتسب وليس موروثاً.", options:["صح","خطأ"], correct:0 },
+      { id:86, sec:5, text:"يرى أنصار الاتجاه الاجتماعي أن السلوك الإجرامي ينتقل عن طريق الوراثة.", options:["صح","خطأ"], correct:1 },
+      { id:87, sec:5, text:"يرى أنصار الاتجاه الاجتماعي أن السلوك الإجرامي ينتقل عن طريق:", options:["الاختلاط بالآخرين","الاستعداد الإجرامي","الوراثة","كل ما سبق"], correct:0 },
+      { id:88, sec:5, text:"يرى أنصار الاتجاه البيولوجي أن السلوك الإجرامي ينتقل عن طريق:", options:["الوراثة","الاختلاط بالآخرين","الاستعداد الإجرامي","كل ما سبق"], correct:0 },
+      { id:89, sec:5, text:"جوهر الاتجاه الاجتماعي أن السلوك الإجرامي يجد تفسيره في العوامل المستمدة من البيئة المحيطة بالمجرم، أي أسباب خارجة عن شخصه، فالسلوك هنا مكتسب وليس موروثاً.", options:["صح","خطأ"], correct:0 },
+      { id:90, sec:5, text:"تنتمي النظريات التالية للاتجاه الاجتماعي في تفسير الجريمة فيما عدا:", options:["الاستعداد الإجرامي","صراع الثقافات","التفكك الاجتماعي","المخالطة الفارقة"], correct:0 },
+      { id:91, sec:5, text:"يعد العالم الإيطالي ......... أول من صاغ نظرية تكاملية في تفسير الظاهرة الإجرامية.", options:["انريكو فيري","دي توليو","دي بكتريا","فيليبو جراماتيكا"], correct:0 },
+      { id:92, sec:5, text:"وضع العالم الإيطالي ......... قانون التشبع الإجرامي.", options:["جاروفالو","لومبروزو","انريكو فيري","دي بكاريا"], correct:2 },
+      { id:93, sec:5, text:"وضع فيري قانون التشبع الإجرامي.", options:["صح","خطأ"], correct:0 },
+      { id:94, sec:5, text:"وضع لومبروزو قانون التشبع الإجرامي.", options:["صح","خطأ"], correct:1, rationale:"قانون التشبع الإجرامي وضعه انريكو فيري." },
+      { id:95, sec:5, text:"وضع جاروفالو قانون التشبع الإجرامي.", options:["صح","خطأ"], correct:1, rationale:"القانون وضعه انريكو فيري." },
+      { id:96, sec:5, text:"يساند العالم فيري لومبروزو في نظريته عن المجرم بالميلاد.", options:["صح","خطأ"], correct:1, rationale:"فيري ينتقد لومبروزو ولا يساندُه." },
+      { id:97, sec:5, text:"ارتبط التقدم العلمي الحديث بظهور جرائم جديدة وزيادة خطورة بعض الجرائم التي كانت موجودة من قبل.", options:["صح","خطأ"], correct:0 },
+      { id:98, sec:5, text:"تنسب نظرية التفكك الاجتماعي إلى العالم الأمريكي سذرلاند.", options:["صح","خطأ"], correct:1, rationale:"نظرية التفكك الاجتماعي تنسب إلى سيلين لا سذرلاند." },
+      { id:99, sec:5, text:"يقرر سيلين أن المجتمعات الريفية أو البدائية تزيد فيها معدلات ارتكاب الجريمة.", options:["صح","خطأ"], correct:1, rationale:"المجتمعات الريفية والبدائية تقل فيها معدلات الجريمة." },
+      { id:100, sec:5, text:"يرى سيلين أن المجتمعات المتحضرة ارتفاع الجريمة فيها أمر نادر الحدوث.", options:["صح","خطأ"], correct:1, rationale:"المجتمعات المتحضرة تزيد فيها معدلات الجريمة." },
+      { id:101, sec:5, text:"وضع نظرية المخالطة الفارقة عالم الاجتماع الأمريكي سيلين.", options:["صح","خطأ"], correct:1, rationale:"نظرية المخالطة الفارقة وضعها سذرلاند لا سيلين." },
+      { id:102, sec:5, text:"يتوقف أثر المخالطة عند سذرلاند على عدة عوامل:", options:["أسبقية المخالطة ومدتها فقط","طريقة المخالطة وعمق تأثيرها فقط","كل ما سبق: الأسبقية والمدة والطريقة والعمق","لا شيء مما سبق"], correct:2 },
+      { id:103, sec:5, text:"يكتسب الفرد السلوك الإجرامي بالتعلم عن طريق الاختلاط بالمجرمين وفقاً لنظرية صراع الثقافات.", options:["صح","خطأ"], correct:1, rationale:"هذا جوهر نظرية المخالطة الفارقة لسذرلاند، لا نظرية صراع الثقافات." },
+      { id:104, sec:5, text:"يقل الرقم الأسود في الجرائم الخطيرة كالقتل ويزداد في الجرائم الأقل خطورة كالسب.", options:["صح","خطأ"], correct:0 },
+      { id:105, sec:5, text:"تصدُّع الأسرة يؤدي حتماً إلى ارتكاب الجريمة.", options:["صح","خطأ"], correct:1 },
+      { id:106, sec:5, text:"السلوك السائد في الأسرة هو أول سلوك يتأثر به الفرد، فإذا كان طيباً ابتعد عن طريق الجريمة، وإن كان سيئاً دفعه إليها.", options:["صح","خطأ"], correct:0 }
+    ];
+
+    // ── الحالة ───────────────────────────────────────────────
+    let view = 'start';
+    let currentSec = null;
+    let filteredQuestions = [];
+    let currentIdx = 0;
+    let answers = {};
+
+    const container = document.getElementById('app-container');
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function render() {
+      if (view === 'start')        renderStart();
+      else if (view === 'quiz')    renderQuiz();
+      else if (view === 'results') renderResults();
+    }
+
+    // ── شاشة البداية ─────────────────────────────────────────
+    function renderStart() {
+      let html = `
+        <section class="flex flex-col items-center justify-center min-h-[50vh] text-center w-full max-w-2xl mx-auto animate-fade-in">
+          <h1 class="text-3xl font-bold mb-2 text-[var(--madar-color)]">علم الإجرام</h1>
+          <p class="text-[var(--text-secondary)] mb-8 font-semibold">اختر القسم الذي تود اختباره</p>
+          <div class="w-full flex flex-col gap-4 mb-8">
+      `;
+
+      sections.forEach(s => {
+        const count = s.isAll
+          ? allQuestions.length
+          : allQuestions.filter(q => q.sec === s.id).length;
+
+        if (s.isAll) {
+          html += `
+            <button onclick="startQuiz(0)" class="bg-[var(--madar-color)] text-white font-bold rounded-2xl p-5 transition-transform hover:-translate-y-1 shadow-md flex justify-between items-center">
+              <div class="flex flex-col items-start gap-1">
+                <span class="opacity-80 text-sm">${s.sub}</span>
+                <span class="text-lg flex items-center gap-2">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  ${s.label}
+                </span>
+              </div>
+              <span class="bg-white/20 rounded-full px-3 py-1 text-sm font-bold">${count} سؤال</span>
+            </button>
+          `;
+        } else {
+          html += `
+            <button onclick="startQuiz(${s.id})" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-2xl p-5 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex justify-between items-center">
+              <div class="flex flex-col items-start gap-1">
+                <span class="text-[var(--madar-color)] text-sm">القسم ${s.id}</span>
+                <span class="text-lg">${s.label}</span>
+                <span class="text-xs text-[var(--text-secondary)] font-normal">${s.sub}</span>
+              </div>
+              <span class="bg-[var(--pill-bg)] border border-[var(--pill-border)] rounded-full px-3 py-1 text-sm font-bold">${count} سؤال</span>
+            </button>
+          `;
+        }
+      });
+
+      html += `</div></section>`;
+      container.innerHTML = html;
+    }
+
+    // ── بدء الاختبار ─────────────────────────────────────────
+    function startQuiz(secId) {
+      currentSec = secId;
+      const pool = secId === 0
+        ? allQuestions
+        : allQuestions.filter(q => q.sec === secId);
+      filteredQuestions = shuffle(pool);
+      currentIdx = 0;
+      answers = {};
+      view = 'quiz';
+      render();
+    }
+
+    function answerQuestion(idx) {
+      const q = filteredQuestions[currentIdx];
+      if (!answers.hasOwnProperty(q.id)) {
+        answers[q.id] = idx;
+        render();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIdx < filteredQuestions.length - 1) {
+        currentIdx++;
+        render();
+      } else {
+        view = 'results';
+        render();
+      }
+    }
+
+    function goToStart() {
+      view = 'start';
+      render();
+    }
+
+    // ── عرض السؤال ───────────────────────────────────────────
+    function renderQuiz() {
+      if (filteredQuestions.length === 0) {
+        container.innerHTML = '<div class="text-center p-10 font-bold">لا توجد أسئلة.</div>';
+        return;
+      }
+
+      const q = filteredQuestions[currentIdx];
+      const isAnswered = answers.hasOwnProperty(q.id);
+      const secLabel = currentSec === 0
+        ? 'اختبار شامل'
+        : (sections.find(s => s.id === currentSec)?.label || '');
+
+      let html = `
+        <div class="flex flex-col mb-8 animate-fade-in" style="animation-delay: 0.1s">
+          <div class="flex justify-between items-center mb-6 text-sm font-bold text-[var(--text-secondary)]">
+            <span>السؤال رقم ${currentIdx + 1} من ${filteredQuestions.length}</span>
+            <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] px-3 py-1 rounded-full text-xs shadow-sm">
+              علم الإجرام
+            </div>
+          </div>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] shadow-[var(--shadow-soft)] rounded-2xl p-6 mb-4">
+            <h3 class="text-xl font-bold leading-relaxed mb-6">${q.text}</h3>
+            <div class="flex flex-col gap-3">
+      `;
+
+      q.options.forEach((opt, idx) => {
+        let btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] hover:-translate-y-0.5 shadow-sm";
+        let iconHtml = '';
+        const disabledAttr = isAnswered ? 'disabled' : '';
+        if (isAnswered) {
+          if (idx === q.correct) {
+            btnClass = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          } else if (answers[q.id] === idx) {
+            btnClass = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+          } else {
+            btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-secondary)] opacity-40 cursor-default";
+          }
+        }
+        html += `
+          <button onclick="answerQuestion(${idx})" ${disabledAttr} class="text-[0.95rem] py-3 px-5 text-right w-full flex justify-between items-center rounded-xl transition-all font-semibold ${btnClass}">
+            <span>${opt}</span>${iconHtml}
+          </button>
+        `;
+      });
+
+      html += `</div>`;
+
+      // شرح / تصحيح بعد الإجابة
+      if (isAnswered && q.rationale) {
+        html += `
+          <div class="mt-4 p-4 rounded-xl bg-blue-500/10 border border-blue-400/40 text-sm font-semibold text-blue-700 dark:text-blue-300 flex gap-2 items-start">
+            <svg class="mt-0.5 shrink-0" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>${q.rationale}</span>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+
+      html += `
+        <div class="flex justify-between items-center">
+          <button onclick="goToStart()" class="font-bold rounded-full px-6 py-3 transition-all bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] shadow-sm hover:-translate-y-0.5">
+            القائمة الرئيسية
+          </button>
+          <button onclick="nextQuestion()" ${!isAnswered ? 'disabled' : ''} class="font-bold rounded-full px-8 py-3 transition-all ${isAnswered ? 'bg-[var(--madar-color)] text-white hover:opacity-90 shadow-md active:scale-95' : 'bg-[var(--pill-border)] text-[var(--text-secondary)] cursor-not-allowed opacity-50'}">
+            ${currentIdx < filteredQuestions.length - 1 ? 'السؤال التالي' : 'إنهاء الاختبار'}
+          </button>
+        </div>
+      </div>`;
+
+      container.innerHTML = html;
+    }
+
+    // ── النتائج ───────────────────────────────────────────────
+    function renderResults() {
+      let earned = 0;
+      const total = filteredQuestions.length;
+      filteredQuestions.forEach(q => { if (answers[q.id] === q.correct) earned++; });
+      const pct = Math.round((earned / total) * 100) || 0;
+      const secLabel = currentSec === 0
+        ? 'اختبار شامل'
+        : (sections.find(s => s.id === currentSec)?.label || '');
+
+      container.innerHTML = `
+        <div class="flex flex-col items-center mb-10 animate-fade-in">
+          <h2 class="text-3xl font-black mb-2 text-[var(--madar-color)]">النتيجة النهائية</h2>
+          <p class="text-[var(--text-secondary)] font-bold mb-6">${secLabel}</p>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] rounded-3xl p-8 mb-8 text-center shadow-[var(--shadow-soft)] w-full max-w-sm">
+            <div class="text-[4.5rem] font-bold leading-none mb-1 text-[var(--text-main)] font-mono">${pct}<span class="text-3xl text-[var(--text-secondary)]">%</span></div>
+            <div class="text-lg font-bold text-[var(--text-secondary)] mb-6">معدل الإنجاز</div>
+            <div class="h-px w-full bg-[var(--divider-color)] my-6"></div>
+            <div class="flex justify-center items-center gap-3 text-[1.1rem] font-bold text-[var(--text-main)]">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              الإجابات الصحيحة: <span dir="ltr" class="font-mono font-bold">${earned} / ${total}</span>
+            </div>
+          </div>
+          <div class="flex gap-3 flex-wrap justify-center">
+            <button onclick="startQuiz(${currentSec})" class="bg-[var(--madar-color)] hover:opacity-90 text-white font-bold rounded-full px-8 py-3 text-lg transition-all shadow-md active:scale-95">إعادة القسم</button>
+            <button onclick="goToStart()" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-full px-8 py-3 text-lg transition-all shadow-sm">قسم آخر</button>
+          </div>
+        </div>
+      `;
+
+      if (pct >= 80) {
+        setTimeout(() => {
+          const end = Date.now() + 3000;
+          const colors = ['#2e7d32','#2ecc71','#f59e0b','#fcd34d'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        }, 300);
+      }
+    }
+
+    // ── الثيم ─────────────────────────────────────────────────
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun  = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function updateThemeUI() {
+      const dark = document.documentElement.classList.contains('dark');
+      iconSun.classList.toggle('hidden', !dark);
+      iconMoon.classList.toggle('hidden', dark);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeUI();
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    updateThemeUI();
+
+    render();
+  </script>
+</body>
+</html>

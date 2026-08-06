@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نموذج ٢ - امتحان ٢٠٢٥</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+    :root {
+      --madar-color: #16a34a;
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --pill-bg: #ffffff;
+      --pill-border: #cbd5e1;
+      --hover-bg: #f8fafc;
+      --divider-color: #e2e8f0;
+      --shadow-soft: 0 4px 12px -2px rgba(0,0,0,0.09), 0 2px 6px -2px rgba(0,0,0,0.05);
+    }
+    .dark {
+      --madar-color: #f0a500;
+      --bg-color: #111827;
+      --card-bg: #1f2937;
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --pill-bg: #374151;
+      --pill-border: #4b5563;
+      --hover-bg: #374151;
+      --divider-color: #374151;
+    }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Cairo', "Segoe UI", system-ui, -apple-system, sans-serif; transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
+    html:not(.dark) .card-shadow { box-shadow: 0 2px 20px -4px rgba(15,23,42,0.12), 0 1px 4px -1px rgba(15,23,42,0.08); }
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="w-full max-w-3xl mx-auto px-4 py-6">
+
+  <header class="flex justify-between items-center mb-8">
+    <button id="theme-toggle" class="bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] w-10 h-10 rounded-full flex justify-center items-center shadow-sm hover:scale-110 transition-transform">
+      <svg id="icon-sun" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg id="icon-moon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </button>
+    <div class="bg-[var(--pill-bg)] border border-[var(--pill-border)] flex items-center gap-2 px-4 py-2 rounded-full shadow-sm text-xs font-black tracking-widest text-[var(--text-secondary)]" dir="ltr">
+      PLATFORM <span class="text-[var(--text-main)] mx-1">MADAR</span>
+      <div class="w-2 h-2 bg-[var(--madar-color)] rounded-full shadow-[0_0_8px_#f59e0b]"></div>
+    </div>
+  </header>
+
+  <main id="app-container" class="min-h-[70vh]"></main>
+
+  <footer class="text-center mt-10 pt-5 pb-5 text-sm text-[var(--text-secondary)] font-semibold border-t border-[var(--divider-color)]">
+    <div>أبلغنا برأيك <a href="https://t.me/GIX37" target="_blank" class="font-extrabold text-[var(--text-main)] hover:text-[var(--madar-color)]">@GIX37</a></div>
+    <div class="text-xs opacity-60 mt-1">MADAR © 2026</div>
+  </footer>
+
+  <script>
+    const topics = {
+      "0": "علم الإجرام - مفاهيم أساسية",
+      "1": "المفهوم القانوني للجريمة والمجرم",
+      "2": "علاقة علم الإجرام بالعلوم الأخرى",
+      "3": "قياس الإجرام والرقم المظلم",
+      "4": "الإجرام كظاهرة اجتماعية",
+      "5": "العوامل الاجتماعية والاقتصادية للجريمة",
+      "6": "علم العقاب والعقوبة"
+    };
+
+    const questions = [
+      {
+        "id": 1,
+        "topicId": 0,
+        "text": "يتناول علم الإجرام بالدراسة...",
+        "options": ["الإجرام فقط.", "المجرم فقط.", "السلوك الإجرامي فقط.", "كل ما سبق (الإجرام والمجرم والسلوك الإجرامي)."],
+        "correctAnswerIndex": 3,
+        "rationale": "علم الإجرام يدرس الجريمة كظاهرة، والمجرم كشخص، والسلوك الإجرامي كفعل - وهي جميعاً محاور دراسته.",
+        "type": "regular"
+      },
+      {
+        "id": 2,
+        "topicId": 1,
+        "text": "وفق المفهوم القانوني للجريمة، لا يمكن وصف شخص بأنه مجرم إلا إذا كان محكوماً عليه.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة.",
+        "type": "regular"
+      },
+      {
+        "id": 3,
+        "topicId": 2,
+        "text": "لا يستفيد قانون الإجراءات الجنائية من علم الإجرام.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "قانون الإجراءات الجنائية يستفيد من علم الإجرام، مثال: إدخال نظام الفحص الطبي والنفسي للأحداث.",
+        "type": "regular"
+      },
+      {
+        "id": 4,
+        "topicId": 3,
+        "text": "يسهل القياس الدقيق للإجرام.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "قياس الإجرام أمر بالغ الصعوبة بسبب وجود الرقم المظلم والجرائم غير المُبلَّغ عنها.",
+        "type": "regular"
+      },
+      {
+        "id": 5,
+        "topicId": 4,
+        "text": "الإجرام ظاهرة حتمية من الناحية الاجتماعية لا يملك الفرد إزاءها حرية الاختيار.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "الإجرام ظاهرة اجتماعية لكن الفرد يملك إرادة وحرية اختيار، ولا يُسلَّم بالحتمية المطلقة.",
+        "type": "regular"
+      },
+      {
+        "id": 6,
+        "topicId": 5,
+        "text": "تفسر النظرية الاقتصادية قانون الحرارة الإجرامي.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "قانون الحرارة الإجرامي تفسره النظرية البيولوجية أو المناخية (كيتيليه وجيري)، وليس النظرية الاقتصادية.",
+        "type": "regular"
+      },
+      {
+        "id": 7,
+        "topicId": 4,
+        "text": "تختلف القرية عن المدينة من النواحي...",
+        "options": ["الكمية فقط.", "الكيفية فقط.", "الكمية والكيفية معاً.", "لا شيء مما سبق."],
+        "correctAnswerIndex": 2,
+        "rationale": "القرية والمدينة تختلفان من الناحيتين الكمية (عدد الجرائم) والكيفية (نوع الجرائم السائدة).",
+        "type": "regular"
+      },
+      {
+        "id": 8,
+        "topicId": 3,
+        "text": "يزداد الرقم المظلم في الريف عن المدينة.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. في الريف يُحجم الناس عن الإبلاغ أكثر بسبب الخوف من الوصمة الاجتماعية والعرف القبلي.",
+        "type": "regular"
+      },
+      {
+        "id": 9,
+        "topicId": 5,
+        "text": "لا يوجد نظام اقتصادي معين يسمح بالتخلص من الجريمة.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. الجريمة موجودة في كل الأنظمة الاقتصادية (رأسمالية، اشتراكية، مختلطة).",
+        "type": "regular"
+      },
+      {
+        "id": 10,
+        "topicId": 5,
+        "text": "علاقة الفقر بالجريمة علاقة...",
+        "options": ["مباشرة فقط.", "غير مباشرة فقط.", "مباشرة وغير مباشرة معاً.", "لا شيء مما سبق."],
+        "correctAnswerIndex": 2,
+        "rationale": "الفقر يرتبط بالجريمة مباشرةً (الحاجة المادية) وغير مباشرة (التفكك الأسري، الانحراف، تدني التعليم).",
+        "type": "regular"
+      },
+      {
+        "id": 11,
+        "topicId": 1,
+        "text": "يمكن لعلم الإجرام أن يعتبر فعلاً ما جريمة دون أن يعتبره قانون العقوبات كذلك.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "لا يملك علم الإجرام سلطة التجريم؛ التجريم حق حصري للمشرع وفق مبدأ الشرعية الجنائية.",
+        "type": "regular"
+      },
+      {
+        "id": 12,
+        "topicId": 5,
+        "text": "أحياناً تكون المعتقدات الدينية سبباً في ارتكاب الجريمة.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. بعض المعتقدات الدينية المتطرفة أو المغلوطة قد تدفع إلى سلوكيات إجرامية.",
+        "type": "regular"
+      },
+      {
+        "id": 13,
+        "topicId": 5,
+        "text": "يمنع التعليم من ارتكاب الفرد للجريمة تماماً.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "التعليم يُقلل من الجريمة لكنه لا يمنعها تماماً؛ جرائم ذوي المهن والمتعلمين (الجرائم الاقتصادية) دليل على ذلك.",
+        "type": "regular"
+      },
+      {
+        "id": 14,
+        "topicId": 6,
+        "text": "أدى احترام حقوق الإنسان إلى تطور علم العقاب.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. حركة حقوق الإنسان أثّرت إيجاباً في تطوير فلسفة العقوبة نحو الإصلاح والتأهيل.",
+        "type": "regular"
+      },
+      {
+        "id": 15,
+        "topicId": 6,
+        "text": "العقوبة إيلام غير مقصود.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "العقوبة إيلام مقصود يوقعه المجتمع على الجاني جزاءً له على ارتكاب الجريمة.",
+        "type": "regular"
+      },
+      {
+        "id": 16,
+        "topicId": 6,
+        "text": "العقوبة إيلام ........ على ارتكاب الجريمة.",
+        "options": ["سابق على الجريمة.", "لاحق على الجريمة.", "سابق ولاحق معاً.", "لا شيء مما سبق."],
+        "correctAnswerIndex": 1,
+        "rationale": "العقوبة إيلام لاحق بطبيعتها؛ لا يُعاقَب الشخص إلا بعد ارتكاب الفعل الإجرامي.",
+        "type": "regular"
+      },
+      {
+        "id": 17,
+        "topicId": 6,
+        "text": "تستند العدالة كوظيفة أخلاقية للعقوبة إلى أساس...",
+        "options": ["ديني فقط.", "قانوني فقط.", "ديني وقانوني معاً.", "لا شيء مما سبق."],
+        "correctAnswerIndex": 2,
+        "rationale": "العدالة كوظيفة أخلاقية للعقوبة تستند إلى الأساس الديني (الجزاء والمقابلة) والقانوني (المساواة أمام القانون).",
+        "type": "regular"
+      },
+      {
+        "id": 18,
+        "topicId": 6,
+        "text": "العقوبات البدنية عقوبات مؤبدة وموقتة.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 1,
+        "rationale": "العقوبات البدنية (كالجلد والقطع) ليست مؤبدة ولا موقتة؛ هي عقوبات جسدية آنية تُنفَّذ في الحال.",
+        "type": "regular"
+      },
+      {
+        "id": 19,
+        "topicId": 6,
+        "text": "يجب على المحكمة أخذ رأي المفتي قبل تنفيذ حكم الإعدام.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. في مصر يُشترط قانوناً عرض حكم الإعدام على المفتي للاستئناس برأيه قبل التنفيذ.",
+        "type": "regular"
+      },
+      {
+        "id": 20,
+        "topicId": 6,
+        "text": "الغرامة عقوبة قابلة للتجزئة.؟",
+        "options": ["صح", "خطأ"],
+        "correctAnswerIndex": 0,
+        "rationale": "العبارة صحيحة. الغرامة المالية يمكن تجزئتها وتقسيمها على عكس عقوبة الإعدام أو بعض العقوبات السالبة للحرية.",
+        "type": "regular"
+      }
+    ];
+
+    let view = 'quiz';
+    let selectedTopic = null;
+    let currentIdx = 0;
+    let answers = {};
+    let answered = false;
+    let filteredQuestions = [];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    const container = document.getElementById('app-container');
+
+    function render() {
+      if (view === 'start') renderStart();
+      else if (view === 'quiz') renderQuiz();
+      else if (view === 'results') renderResults();
+    }
+
+    function renderStart() {
+      let html = `
+        <section class="flex flex-col items-center justify-center min-h-[50vh] text-center w-full max-w-2xl mx-auto animate-fade-in">
+          <h1 class="text-3xl font-bold mb-2 text-[var(--madar-color)]">نموذج ٢ - امتحان ٢٠٢٥</h1>
+          <p class="text-[var(--text-secondary)] mb-8 font-semibold">من واقع الامتحانات السابقة — اختر القسم أو اختبر في الكل</p>
+          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <button onclick="startQuiz(null)" class="bg-[var(--madar-color)] text-white hover:opacity-90 font-bold rounded-2xl p-4 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex items-center justify-center gap-3 md:col-span-2">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              اختبار شامل (جميع الأقسام)
+            </button>
+      `;
+
+      for (const [id, title] of Object.entries(topics)) {
+        const numId = Number(id);
+        const qCount = questions.filter(q => q.topicId === numId).length;
+        const qLabel = qCount > 10 ? 'سؤال' : 'أسئلة';
+        html += `
+          <button onclick="startQuiz(${numId})" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-2xl p-4 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex flex-col items-start text-right gap-2">
+            <div class="flex justify-between w-full items-center">
+              <span class="text-[var(--madar-color)] text-sm opacity-80">القسم ${numId + 1}</span>
+              <span class="bg-[var(--pill-bg)] text-[var(--text-main)] border border-[var(--pill-border)] rounded-full px-2 py-0.5 text-xs">${qCount} ${qLabel}</span>
+            </div>
+            <span class="text-[0.95rem] leading-tight">${title}</span>
+          </button>
+        `;
+      }
+
+      html += `</div></section>`;
+      container.innerHTML = html;
+    }
+
+    function startQuiz(topicId) {
+      selectedTopic = topicId;
+      const pool = topicId === null ? questions : questions.filter(q => q.topicId === topicId);
+      filteredQuestions = shuffle(pool);
+      currentIdx = 0;
+      answers = {};
+      view = 'quiz';
+      render();
+    }
+
+    function answerQuestion(idx) {
+      const q = filteredQuestions[currentIdx];
+      if (!answers.hasOwnProperty(q.id)) {
+        answers[q.id] = idx;
+        render();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIdx < filteredQuestions.length - 1) {
+        currentIdx++;
+        render();
+      } else {
+        view = 'results';
+        render();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        render();
+      }
+    }
+
+    function renderQuiz() {
+      if (filteredQuestions.length === 0) {
+        container.innerHTML = '<div class="text-center p-10 font-bold">لا توجد أسئلة في هذا القسم.</div>';
+        return;
+      }
+
+      const q = filteredQuestions[currentIdx];
+      const isAnswered = answers.hasOwnProperty(q.id);
+
+      let html = `
+        <div class="flex flex-col mb-8 animate-fade-in" style="animation-delay: 0.1s">
+          <div class="flex justify-between items-center mb-6 text-sm font-bold text-[var(--text-secondary)]">
+            <div class="flex items-center gap-2">
+              <span>السؤال رقم ${currentIdx + 1} من ${filteredQuestions.length}</span>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] px-3 py-1 rounded-full text-xs shadow-sm">
+                امتحان 2025
+              </div>
+            </div>
+          </div>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] shadow-[var(--shadow-soft)] rounded-2xl p-6 mb-4 relative z-10">
+            <h3 class="text-xl font-bold leading-relaxed mb-6">${q.text}</h3>
+            <div class="flex flex-col gap-3">
+      `;
+
+      q.options.forEach((opt, idx) => {
+        let btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] hover:-translate-y-0.5 shadow-sm";
+        let iconHtml = '';
+        const disabledAttr = isAnswered ? 'disabled' : '';
+        if (isAnswered) {
+          if (idx === q.correctAnswerIndex) {
+            btnClass = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          } else if (answers[q.id] === idx) {
+            btnClass = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+          } else {
+            btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-secondary)] opacity-40 cursor-default";
+          }
+        }
+
+        html += `
+          <button onclick="answerQuestion(${idx})" ${disabledAttr} class="text-[0.95rem] py-3 px-5 text-right w-full flex justify-between items-center rounded-xl transition-all font-semibold ${btnClass}">
+            <span>${opt}</span>
+            ${iconHtml}
+          </button>
+        `;
+      });
+
+      html += '</div></div>';
+
+      html += `
+        <div class="flex justify-between items-center">
+          <button onclick="prevQuestion()" ${currentIdx === 0 ? 'disabled' : ''} class="font-bold rounded-full px-6 py-3 transition-all ${currentIdx > 0 ? 'bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] shadow-sm hover:-translate-y-0.5' : 'bg-[var(--pill-border)] text-[var(--text-secondary)] cursor-not-allowed opacity-40'}">
+            السؤال السابق
+          </button>
+          <button onclick="nextQuestion()" ${!isAnswered ? 'disabled' : ''} class="font-bold rounded-full px-8 py-3 transition-all ${isAnswered ? 'bg-[var(--madar-color)] text-white hover:opacity-90 shadow-md active:scale-95' : 'bg-[var(--pill-border)] text-[var(--text-secondary)] cursor-not-allowed opacity-50'}">
+            ${currentIdx < filteredQuestions.length - 1 ? 'السؤال التالي' : 'إنهاء الاختبار'}
+          </button>
+        </div>
+      </div>`;
+
+      container.innerHTML = html;
+    }
+    function renderResults() {
+      let earnedScore = 0;
+      let totalScore = 0;
+      const categories = {};
+
+      Object.keys(topics).forEach(tid => { categories[Number(tid)] = { correct: 0, possible: 0 }; });
+
+      filteredQuestions.forEach(q => {
+        totalScore++;
+        categories[q.topicId].possible++;
+        if (answers[q.id] === q.correctAnswerIndex) {
+          earnedScore++;
+          categories[q.topicId].correct++;
+        }
+      });
+
+      const percentage = Math.round((earnedScore / totalScore) * 100) || 0;
+
+      let html = `
+        <div class="flex flex-col items-center mb-10 animate-fade-in">
+          <h2 class="text-3xl font-black mb-6 text-[var(--madar-color)]">النتيجة النهائية</h2>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] rounded-3xl p-8 mb-8 text-center shadow-[var(--shadow-hover)] w-full max-w-sm">
+            <div class="text-[4.5rem] font-bold leading-none mb-1 text-[var(--text-main)] font-mono">${percentage}<span class="text-3xl text-[var(--text-secondary)]">%</span></div>
+            <div class="text-lg font-bold text-[var(--text-secondary)] mb-6">معدل الإنجاز</div>
+            <div class="h-px w-full bg-[var(--divider-color)] my-6"></div>
+            <div class="flex justify-center items-center gap-3 text-[1.1rem] font-bold text-[var(--text-main)]">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              الإجابات الصحيحة: <span dir="ltr" class="font-mono font-bold align-middle">${earnedScore} / ${totalScore}</span>
+            </div>
+          </div>
+          <div class="w-full max-w-md">
+            <div class="flex justify-start items-center gap-2 mb-4 font-bold text-[var(--text-secondary)] tracking-wider">
+              تفاصيل الأقسام المختبرة
+            </div>
+            <div class="flex flex-col gap-3">
+      `;
+
+      for (const [idStr, cat] of Object.entries(categories)) {
+        if (cat.possible > 0) {
+          const catPerc = Math.round((cat.correct / cat.possible) * 100) || 0;
+          const numId = Number(idStr);
+          html += `
+            <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] p-4 rounded-2xl flex justify-between items-center shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 min-w-[2.5rem] rounded-full flex justify-center items-center font-bold text-sm bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-secondary)]">
+                  ${(numId + 1).toString().padStart(2, '0')}
+                </div>
+                <div class="font-extrabold text-[0.95rem] text-[var(--text-main)] leading-tight">
+                  ${topics[numId]}
+                </div>
+              </div>
+              <div class="bg-[var(--bg-color)] border border-[var(--pill-border)] px-3 py-1.5 rounded-full font-bold text-[0.85rem] text-[var(--text-main)] font-mono">
+                ${catPerc}%
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      html += `
+            </div>
+          </div>
+          <div class="mt-10">
+            <button onclick="goToStart()" class="bg-[var(--madar-color)] hover:opacity-90 text-white font-bold rounded-full px-10 py-3 text-lg transition-all shadow-md active:scale-95">العودة للرئيسية</button>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      if (percentage >= 80) {
+        setTimeout(() => {
+          const end = Date.now() + 3000;
+          const colors = ['#2e7d32', '#2ecc71', '#f59e0b', '#fcd34d'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        }, 300);
+      }
+    }
+
+    function goToStart() {
+      filteredQuestions = shuffle(questions);
+      selectedTopic = null;
+      currentIdx = 0;
+      answers = {};
+      view = 'quiz';
+      render();
+    }
+
+    // Theme logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function updateThemeUI() {
+      if (document.documentElement.classList.contains('dark')) {
+        iconSun.classList.remove('hidden');
+        iconMoon.classList.add('hidden');
+      } else {
+        iconMoon.classList.remove('hidden');
+        iconSun.classList.add('hidden');
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeUI();
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    updateThemeUI();
+
+    // Init — start directly with all questions shuffled
+    filteredQuestions = shuffle(questions);
+    render();
+  </script>
+</body>
+</html>

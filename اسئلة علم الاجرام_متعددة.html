@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>علم الاجرام</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YE8DKCYD5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9YE8DKCYD5');</script>
+  <style>
+  body, html, .container, * { user-select: none !important; -webkit-user-select: none !important; -webkit-user-drag: none !important; }
+  img, a, svg { -webkit-user-drag: none !important; }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+    :root {
+      --madar-color: #16a34a;
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --pill-bg: #ffffff;
+      --pill-border: #cbd5e1;
+      --hover-bg: #f8fafc;
+      --divider-color: #e2e8f0;
+      --shadow-soft: 0 4px 16px -2px rgba(15,23,42,0.10), 0 2px 6px -2px rgba(15,23,42,0.06);
+      --shadow-soft: 0 4px 12px -2px rgba(0,0,0,0.09), 0 2px 6px -2px rgba(0,0,0,0.05);
+    }
+    .dark {
+      --madar-color: #f0a500;
+      --bg-color: #111827;
+      --card-bg: #1f2937;
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --pill-bg: #374151;
+      --pill-border: #4b5563;
+      --hover-bg: #374151;
+      --divider-color: #374151;
+    }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Cairo', "Segoe UI", system-ui, -apple-system, sans-serif; transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
+    html:not(.dark) .card-shadow { box-shadow: 0 2px 20px -4px rgba(15,23,42,0.12), 0 1px 4px -1px rgba(15,23,42,0.08); }
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="w-full max-w-3xl mx-auto px-4 py-6">
+
+  <header class="flex justify-between items-center mb-8">
+    <button id="theme-toggle" class="bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] w-10 h-10 rounded-full flex justify-center items-center shadow-sm hover:scale-110 transition-transform">
+      <svg id="icon-sun" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg id="icon-moon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </button>
+    <div class="bg-[var(--pill-bg)] border border-[var(--pill-border)] flex items-center gap-2 px-4 py-2 rounded-full shadow-sm text-xs font-black tracking-widest text-[var(--text-secondary)]" dir="ltr">
+      PLATFORM <span class="text-[var(--text-main)] mx-1">MADAR</span>
+      <div class="w-2 h-2 bg-[var(--madar-color)] rounded-full shadow-[0_0_8px_#f59e0b]"></div>
+    </div>
+  </header>
+
+  <main id="app-container" class="min-h-[70vh]"></main>
+
+  <footer class="text-center mt-10 pt-5 pb-5 text-sm text-[var(--text-secondary)] font-semibold border-t border-[var(--divider-color)]">
+    <div>أبلغنا برأيك <a href="https://t.me/GIX37" target="_blank" class="font-extrabold text-[var(--text-main)] hover:text-[var(--madar-color)]">@GIX37</a></div>
+    <div class="text-xs opacity-60 mt-1">MADAR © 2026</div>
+  </footer>
+
+  <script>
+    const topics = {"0":"مفهوم علم الإجرام وخصائصه وفروعه","1":"مفهوم الجريمة والمجرم في علم الإجرام","2":"شروط الجريمة والمجرم في دراسات علم الإجرام","3":"علاقة علم الإجرام بغيره من العلوم الجنائية","4":"أهمية دراسة علم الإجرام في العصر الحديث","5":"نشأة علم الإجرام وتطوره (المدرسة الوضعية والبيولوجية)","6":"تطور علم الاجتماع الجنائي وعلم النفس الجنائي","7":"مستويات الدراسة والإجرام كظاهرة اجتماعية","8":"التوسع والانحسار في مجال التجريم","9":"التحول في اتجاه التجريم","10":"صعوبة قياس الإجرام"};
+    const questions = [{"id":1,"topicId":0,"text":"ينتمي علم الإجرام إلى طائفة العلوم الإنسانية ولا ينتمي إلى العلوم الطبيعية كالكيمياء والفيزياء.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":2,"topicId":0,"text":"السلوك الإجرامي يمكن إخضاعه للتجارب المعملية بسهولة تامة كما في تفاعلات الكيمياء.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"السلوك الإجرامي ظاهرة اجتماعية يصعب إخضاعها للتجارب المعملية","type":"regular"},{"id":3,"topicId":0,"text":"يدرس علم الإجرام القواعد القانونية والنصوص بشكل أساسي مثل قانون العقوبات.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"علم الإجرام لا يدرس النصوص والقواعد القانونية، بل يدرس الجريمة كظاهرة","type":"regular"},{"id":4,"topicId":0,"text":"يقتصر علم الإجرام على فرع واحد يدرس كافة جوانب الجريمة والمجرم.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"علم الإجرام علم متعدد الفروع","type":"regular"},{"id":5,"topicId":0,"text":"يهدف علم الإجرام العام إلى مكافحة الزيادة في معدلات الجريمة ووقاية المجتمع منها.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":6,"topicId":0,"text":"يركز علم الإجرام الإكلينيكي (التطبيقي) على فحص مجرم معين بذاته فحصاً طبياً ونفسياً واجتماعياً.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":7,"topicId":0,"text":"يمكن دراسة علم الإجرام كظاهرة فردية وكظاهرة عامة في نفس الوقت.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":8,"topicId":0,"text":"يسعى علم الإجرام للإجابة عن تساؤلات متعلقة بنوعية الجرائم المرتبطة بفئات معينة كالشباب أو كبار السن.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":9,"topicId":0,"text":"يهتم فرع علم الاجتماع الجنائي بتجميع النتائج وصياغتها في نظرية عامة لتفسير الجريمة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":10,"topicId":0,"text":"مبدأ الشرعية يخاطب القاضي فقط ولا يضع قيوداً على المشرع الجنائي عند وضع القوانين.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"مبدأ الشرعية يخاطب القاضي والمشرع معاً","type":"regular"},{"id":11,"topicId":0,"text":"أي من العلوم الآتية لا يعتبر من الفروع المكونة لعلم الإجرام؟","options":["البيولوجيا الجنائية.","علم النفس الجنائي.","قانون العقوبات.","علم الاجتماع الجنائي."],"correctAnswerIndex":2,"rationale":"الخيار الصحيح هو ج","type":"regular"},{"id":12,"topicId":1,"text":"يعتمد المفهوم القانوني للجريمة على مبدأ \"لا جريمة ولا عقوبة إلا بنص\".؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":13,"topicId":1,"text":"يرى المفهوم القانوني أن الفعل يعتبر جريمة حتى لو لم ينص عليه قانون العقوبات إذا أضر بالمجتمع.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"وفقاً للمفهوم القانوني، لا جريمة إلا بنص","type":"regular"},{"id":14,"topicId":1,"text":"الجريمة في المفهوم القانوني تعتبر ظاهرة نسبية تتغير باختلاف الزمان والمكان.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":15,"topicId":1,"text":"من عيوب المفهوم الاجتماعي للجريمة اعتماده على مشاعر متغيرة يصعب قياسها وتحديدها بدقة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":16,"topicId":1,"text":"الجرائم المصطنعة عند \"جاروفالو\" هي التي تتناقض مع المشاعر الإنسانية الثابتة كالشفقة والأمانة.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الجرائم التي تتناقض مع المشاعر الإنسانية الثابتة كالشفقة والأمانة هي الجرائم الطبيعية وليست المصطنعة","type":"regular"},{"id":17,"topicId":1,"text":"المفهوم النفسي للجريمة يعبر عن صراع واضطراب نفسي بين الفرد والمجتمع المحيط به.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":18,"topicId":1,"text":"يعاب على المفهوم النفسي للجريمة أنه يوسع دائرة الأفعال المنحرفة لتشمل تصرفات لا تعد جرائم قانوناً.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":19,"topicId":1,"text":"المفهوم الاجتماعي للجريمة قد يدفع المشرع لتجريم سلوكيات كالتشرد حماية للمصلحة الجماعية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":20,"topicId":1,"text":"يرى فقهاء القانون أن المفهوم القانوني للجريمة هو الأرجح والأكثر استقراراً في علم الإجرام.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":21,"topicId":1,"text":"يحظر علم الإجرام إخضاع المتهم للفحص الطبي والنفسي قبل صدور حكم قضائي نهائي بإدانته.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"علم الإجرام لا يمنع ذلك، ولا يتعارض الفحص الطبي والنفسي مع قرينة البراءة","type":"regular"},{"id":22,"topicId":2,"text":"يُشترط لاعتبار الفعل جريمة في علم الإجرام أن يكون مجرماً ومعاقباً عليه في نصوص القانون.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":23,"topicId":2,"text":"يهتم المشرع بسلوكيات معينة كالتشرد ويضع لها تدابير احترازية رغم أنها لا تشكل عدواناً مباشراً على مصلحة جوهرية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":24,"topicId":2,"text":"يهتم علم الإجرام بدراسة الجرائم العرضية حتى لو لم تكن تعبر عن شخصية إجرامية معادية للمجتمع.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"علم الإجرام يهتم بالأفعال التي تعبر عن شخصية إجرامية كامنة، وجرائم الصدفة قد لا تعبر عن ذلك","type":"regular"},{"id":25,"topicId":2,"text":"تعتبر الجرائم العمدية أكثر دلالة على الخطورة الإجرامية من الجرائم غير العمدية كجرائم المرور.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":26,"topicId":2,"text":"مرتكب جريمة البناء المخالف أو التلويث البيئي يعتبر دائماً صاحب شخصية إجرامية خطيرة في مفهوم علم الإجرام.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"العبارة خاطئة.","type":"regular"},{"id":27,"topicId":2,"text":"من شروط دراسة المجرم في علم الإجرام ارتكابه لفعل يعاقب عليه القانون بالفعل.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":28,"topicId":2,"text":"جميع مرتكبي الجرائم العمدية يقدرون شدة العقوبة ويتجنبون الجريمة إذا كانت عقوبتها الإعدام.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"كثير من المجرمين يرتكبون جرائم الإعدام دون التفكير في العقوبة","type":"regular"},{"id":29,"topicId":2,"text":"مرحلة جمع الاستدلالات والتحقيق الابتدائي كافية لاعتبار الشخص مجرماً يجب عقابه نهائياً.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"في هذه المرحلة هو متهم فقط ولا يعد مجرماً نهائياً","type":"regular"},{"id":30,"topicId":2,"text":"إخضاع المتهم للفحص الطبي والنفسي قبل الحكم يساعد القاضي في تحديد مسؤوليته الجنائية بشكل عادل.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":31,"topicId":2,"text":"العقوبة الردعية الموحدة هي الحل الأمثل لمعالجة كافة أنواع المجرمين وتغيير سلوكهم.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"العقوبة الموحدة التلقائية غير فعالة، ويجب تفريد العقاب","type":"regular"},{"id":32,"topicId":3,"text":"توجد علاقة تبادلية وتأثير وتأثر بين علم الإجرام وقانون العقوبات.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":33,"topicId":3,"text":"يدرس علم الإجرام الجريمة من الناحية القاعدية والنصية المجردة.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"قانون العقوبات هو من يدرسها من الناحية القاعدية","type":"regular"},{"id":34,"topicId":3,"text":"قانون العقوبات هو الذي يحدد الإطار والموضوع الذي يدور حوله علم الإجرام (الجريمة والمجرم).؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":35,"topicId":3,"text":"يعتبر علم الإجرام علماً قانونياً إجرائياً يهتم بتنظيم الدعوى من وقت وقوع الجريمة وحتى الحكم.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"هذا تعريف قانون الإجراءات الجنائية","type":"regular"},{"id":36,"topicId":3,"text":"استفاد قانون الإجراءات الجنائية من علم الإجرام بإدخال نظام الفحص الطبي والنفسي والاجتماعي للأحداث.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":37,"topicId":3,"text":"علم العقاب وعلم الإجرام هما علمان قانونيان بحتان.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"هما من العلوم الجنائية المساعدة وليست علوماً قانونية بحتة","type":"regular"},{"id":38,"topicId":3,"text":"يهدف علم العقاب إلى دراسة العقوبة والتدابير الاحترازية واستخلاص الفلسفة التي يقوم عليها الجزاء.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":39,"topicId":3,"text":"يعتبر الفقه الأنجلوأمريكي علم العقاب فرعاً من فروع علم الإجرام.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":40,"topicId":3,"text":"دراسة أثر السجن على شخصية النزيل هي أحد مجالات التعاون المشترك بين علم العقاب وعلم الإجرام.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":41,"topicId":3,"text":"القاضي الجنائي يطبق النصوص بشكل تلقائي ولا يحتاج إلى نتائج علم الإجرام في عمله.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"القاضي يحتاج إلى نتائج علم الإجرام لتفريد العقوبة","type":"regular"},{"id":42,"topicId":4,"text":"تعتبر دراسة علم الإجرام ضرورية لتطوير العلوم الجنائية كقانون العقوبات وقانون الإجراءات.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":43,"topicId":4,"text":"تقتصر أهمية علم الإجرام على الجانب النظري ولا تساهم في الحد من أعداد الجرائم عملياً.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"يساهم عملياً في مكافحة الجريمة","type":"regular"},{"id":44,"topicId":4,"text":"أثبتت الإحصائيات العالمية والمحلية تناقصاً ملحوظاً في المعدل العام للإجرام في العصر الحديث.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الإحصائيات أثبتت زيادة وتصاعداً في معدلات الجريمة","type":"regular"},{"id":45,"topicId":4,"text":"أظهرت التقارير زيادة كبيرة في جرائم العنف كالقتل والضرب والسرقة بالإكراه.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":46,"topicId":4,"text":"زيادة جرائم العنف تتفق تماماً مع توقعات نظرية العالم \"فيري\" في القرن الماضي.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"نظرية فيري كانت تتوقع التحول من جرائم العنف إلى جرائم الحيلة، والواقع أثبت زيادة العنف أيضاً","type":"regular"},{"id":47,"topicId":4,"text":"التطور التكنولوجي لم يكن له أي تأثير على تنوع الجرائم أو ظهور أشكال جديدة منها.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"أدى إلى ظهور جرائم مستحدثة كجرائم الكمبيوتر","type":"regular"},{"id":48,"topicId":4,"text":"الإرهاب الدولي يعتبر من أنماط السلوك الإجرامي المستحدثة التي تلجأ للعنف كبديل للطرق السلمية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":49,"topicId":4,"text":"جرائم الأحداث زادت بشكل ملحوظ بسبب تراخي الرقابة العائلية وتعقيدات الحياة الحديثة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":50,"topicId":4,"text":"جرائم المخدرات والتهريب الجمركي من الجرائم التي زادت نوعياً بفضل تطور وسائل الاتصال.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":51,"topicId":4,"text":"تساعد نتائج علم الإجرام السلطات على التنبؤ بمعدلات الجريمة وتخطيط سياسات المكافحة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":52,"topicId":5,"text":"كان التفسير البدائي للجريمة يعتمد على فكرة سيطرة الأرواح الشريرة على جسد المجرم.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":53,"topicId":5,"text":"يعتبر التفكير العلمي المنهجي في دراسة الجريمة حديث النشأة ويرجع للقرن التاسع عشر.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":54,"topicId":5,"text":"يرجع الفضل في تأسيس علم طبائع المجرم إلى العالم الإيطالي \"لمبروزو\".؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":55,"topicId":5,"text":"العالم \"جاروفالو\" هو مؤسس علم الاجتماع الجنائي.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"إنريكو فيري هو مؤسس علم الاجتماع الجنائي","type":"regular"},{"id":56,"topicId":5,"text":"اعتمد لمبروزو في صياغة نظريته على دراسة وفحص جماجم السجناء وتحليل خصائصهم العضوية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":57,"topicId":5,"text":"يرى لمبروزو أن المجرم يمتلك خصائص جسدية منتظمة ومكتملة تميزه عن الإنسان البدائي.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"يرى أن لديه خصائص بدائية وارتدادية تشبه الإنسان البدائي","type":"regular"},{"id":58,"topicId":5,"text":"نادت المدرسة الوضعية الإيطالية بإحلال فكرة \"المسؤولية الاجتماعية\" محل المسؤولية الجنائية التقليدية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":59,"topicId":5,"text":"هدف التدابير في المدرسة الوضعية هو حماية المجتمع بالدرجة الأولى وليس مجرد عقاب المجرم.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":60,"topicId":5,"text":"أثبتت أبحاث العالم \"هوتون\" صحة نظرية لمبروزو وتأييدها بشكل كامل.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"أيّد هوتون نظرية الدونية الجسمية للمجرم، وليس النظرية كاملة","type":"regular"},{"id":61,"topicId":5,"text":"دحض العالم الإنجليزي \"جورنج\" فكرة وجود خصائص بدنية مميزة للمجرمين بعد إجراء تجارب ميدانية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":62,"topicId":6,"text":"أسس العالمان \"كيتيليه\" و\"جيري\" المدرسة الجغرافية التي ربطت الجريمة بالعوامل البيئية والمكانية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":63,"topicId":6,"text":"ينص قانون الحرارة الإجرامي على أن جرائم الأشخاص تزداد في فصل الشتاء.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"جرائم الأشخاص تزداد في فصل الصيف/الجنوب","type":"regular"},{"id":64,"topicId":6,"text":"يرى قانون التشبع الإجرامي عند \"فيري\" أن كل بيئة اجتماعية تفرز قدراً ثابتاً من الجرائم إذا تماثلت ظروفها.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":65,"topicId":6,"text":"فكرة الحتمية في تفسير السلوك الإجرامي اعتمد عليها كل من \"لمبروزو\" و\"فيري\" مع اختلاف الأساس العلمي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":66,"topicId":6,"text":"ينص قانون زيادة التشبع الإجرامي على أن الجريمة تنخفض فجأة أثناء الحروب والمجاعات.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"قانون زيادة التشبع يقرر أن الجريمة ترتفع فجأة وقت الحروب والمجاعات","type":"regular"},{"id":67,"topicId":6,"text":"ركزت جهود علماء الاجتماع الأمريكيين على دراسة \"الاختلاط الفارق\" والعصابات الإجرامية وتأثيرها على الشباب.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":68,"topicId":6,"text":"الاتجاه التفاعلي يرى أن الوصمة الإجرامية الموجهة من المجتمع قد تكون سبباً في احتراف المجرم للجريمة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":69,"topicId":6,"text":"علم النفس الجنائي يدرس شخصية المجرم بعد ارتكاب الجريمة فقط.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"يدرسه قبل وبعد ارتكاب الجريمة","type":"regular"},{"id":70,"topicId":6,"text":"كان لأبحاث \"فرويد\" دور كبير في تطور التحليل النفسي لفهم دوافع السلوك الإجرامي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":71,"topicId":6,"text":"الاتجاه الظاهري في علم النفس الجنائي يهتم بإدراك الشخص للواقع والظروف المحيطة به وقت ارتكاب الجريمة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":72,"topicId":7,"text":"يقصد بدراسة الإجرام كـ \"ظاهرة\" التركيز على شخصية المجرم الفردية ودوافعه الخاصة.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"دراسة الإجرام كظاهرة تعني المستوى العام وليس الفردي","type":"regular"},{"id":73,"topicId":7,"text":"المستوى الثالث في دراسة علم الإجرام يهتم بالجريمة كفعل يصدر عن المجرم نفسه.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":74,"topicId":7,"text":"الإجرام ظاهرة طبيعية لأنه متواجد في كافة المجتمعات البشرية ولا يوجد مجتمع يخلو منه.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":75,"topicId":7,"text":"يرى العالم \"دوركايم\" أن الجريمة ظاهرة مرضية وتدل على انهيار كامل للمجتمع.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"دوركايم يرى أن الجريمة ظاهرة طبيعية وصحية للمجتمع","type":"regular"},{"id":76,"topicId":7,"text":"من الأدلة على أن الجريمة ظاهرة طبيعية، أن الطبيعة ذاتها تحتوي على قسوة وتدمير كجزء من توازنها.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":77,"topicId":7,"text":"التسامح الاجتماعي داخل المجتمع يتزايد تجاه مرتكب الجريمة وفقاً لبعض الآراء.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"التسامح يقل والمجتمع يتحد ضد المجرم","type":"regular"},{"id":78,"topicId":7,"text":"يرى \"بونفيجلي\" أن الجريمة تعبير عن غريزة التدافع والمنافسة وهي غرائز طبيعية في الإنسان.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":79,"topicId":7,"text":"اعتبار الجريمة ظاهرة مرضية يعني أنها تعبر عن خلل وظيفي وعدم تكيف لدى الفرد.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":80,"topicId":7,"text":"الرأي القائل بأن الإجرام ظاهرة مرضية يرفض البحث عن أسباب الجريمة وعلاجها.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الرأي القائل بأنها مرضية يوجب البحث عن أسبابها لعلاجها","type":"regular"},{"id":81,"topicId":7,"text":"مجرد وجود الجريمة في كل المجتمعات يثبت أنها ظاهرة \"عامة\" ولكنه لا يثبت بالضرورة أنها \"طبيعية\".؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":82,"topicId":8,"text":"امتداد التجريم يعني إخضاع أفعال جديدة لقانون العقوبات لم تكن تعتبر جرائم في الماضي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":83,"topicId":8,"text":"الجرائم الطبيعية عند \"جاروفالو\" هي الجرائم التي استحدثها المشرع لحماية الاقتصاد والبيئة.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الجرائم الطبيعية هي التي تستنكرها المشاعر الأساسية كالشفقة والأمانة","type":"regular"},{"id":84,"topicId":8,"text":"الجرائم الطبيعية كالقتل والسرقة تستنكرها مشاعر الشفقة والأمانة لدى كل الشعوب في كل زمان.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":85,"topicId":8,"text":"الرأي العام يتفاعل دائماً بالاستنكار الشديد تجاه الجرائم الاصطناعية (مثل مخالفات البناء والضرائب).؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الرأي العام قد يقف محايداً أو مستحسناً للجرائم الاصطناعية","type":"regular"},{"id":86,"topicId":8,"text":"مخالفة قواعد المرور لا تثير حفيظة رجل الشارع ما لم ينتج عنها ضرر أو حادث فعلي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":87,"topicId":8,"text":"التفرقة بين الجرائم الطبيعية والاصطناعية مفيدة في تقييم الخطورة الإجرامية للجاني.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":88,"topicId":8,"text":"بعض الجرائم الاصطناعية قد تلاقي استحساناً من المجتمع، مثل التهريب الجمركي أو التهرب الضريبي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":89,"topicId":8,"text":"انحسار التجريم يظهر في إلغاء عقوبات بعض الأفعال التي لم تعد تشكل خطراً كبيراً كالإجهاض في بعض الدول.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":90,"topicId":8,"text":"إباحة أفعال معينة بقانون جديد يؤدي بالضرورة إلى ارتفاع حجم الإجرام الفعلي.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"إباحة أفعال معينة يؤدي لانحسار الإجرام الرقمي وليس الفعلي بالضرورة","type":"regular"},{"id":91,"topicId":8,"text":"المشرع الحديث يميل بشكل عام إلى تقليص قوانين العقوبات وإلغاء التجريم في كافة المجالات.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"المشرع الحديث يتجه لامتداد التجريم خاصة في المجال الاقتصادي","type":"regular"},{"id":92,"topicId":9,"text":"تميزت المجتمعات القديمة بتغليب الطابع الديني على التجريم، حيث اعتبرت بعض الأفعال تدنيساً للمقدسات.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":93,"topicId":9,"text":"ألغيت الجرائم الدينية في العصور الحديثة بالكامل ولم ينتقل أي منها للقوانين الوضعية.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"بعض الجرائم الدينية انتقلت إلى القانون الوضعي مثل القتل والسرقة","type":"regular"},{"id":94,"topicId":9,"text":"الجريمة السياسية قديماً كانت تستهدف حماية النظام الحاكم حتى ولو كان جائراً.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":95,"topicId":9,"text":"الجريمة السياسية الحديثة أصبحت موجهة بالأساس للاعتداء على الأفراد أكثر من كيان الدولة.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"أصبحت الجريمة السياسية الحديثة تستهدف النظام المجتمعي وكيان الدولة","type":"regular"},{"id":96,"topicId":9,"text":"التحول من الإجرام بالعنف إلى الإجرام بالحيلة يعكس تطوراً في أساليب المجرمين بالمجتمعات الحديثة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":97,"topicId":9,"text":"زيادة جرائم النصب وخيانة الأمانة في العصر الحديث يعود لتعدد الحاجات المادية وتطور الحياة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":98,"topicId":9,"text":"المجتمعات القديمة كانت تشهد هيمنة لجرائم العنف بسبب شيوع فكرة الأخذ بالثأر.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":99,"topicId":9,"text":"ينطبق مبدأ التحول للحيلة إذا تراجعت جرائم العنف بسبب كثرة حوادث القتل الخطأ بالسيارات.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"جرائم القتل الخطأ مستثناة من قاعدة التحول للحيلة","type":"regular"},{"id":100,"topicId":9,"text":"يرى \"فيري\" أن الإجرام يتحول من نظام الإجرام بالصدفة إلى إجرام العادة في المجتمعات الحديثة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":101,"topicId":9,"text":"الاعتياد على الإجرام في علم الإجرام يُقاس بالخطورة الكامنة في الجاني، بغض النظر عن صدور أحكام قضائية سابقة بحقه.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":102,"topicId":10,"text":"الإجرام الحقيقي هو المجموع الكلي للجرائم التي تُرتكب بالفعل، سواء عُرفت أو لم تُعرف للسلطات.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":103,"topicId":10,"text":"الرقم المظلم يمثل الفرق بين الإجرام الحقيقي والإجرام الظاهري.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":104,"topicId":10,"text":"نسبة الرقم المظلم في جرائم القتل تكون أعلى بكثير منها في جرائم الرشوة والمخدرات.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"الرقم المظلم في جرائم الرشوة والمخدرات أعلى بكثير من القتل","type":"regular"},{"id":105,"topicId":10,"text":"نجاح الجاني في طمس معالم الجريمة بالكامل يعد من أبرز أسباب صعوبة قياس الإجرام.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":106,"topicId":10,"text":"الجرائم التي لا يوجد فيها مجني عليه مباشر (مثل تعاطي المخدرات) تزيد من احتمالية الإبلاغ عنها.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"عدم وجود مجني عليه مباشر يقلل من احتمالية الإبلاغ","type":"regular"},{"id":107,"topicId":10,"text":"عدم ثقة المجني عليه في فاعلية جهاز الشرطة قد يمنعه من الإبلاغ عن الجريمة.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":108,"topicId":10,"text":"الإجرام الظاهري يمثل الجرائم التي تصل علم الشرطة سواء كانت بلاغات صحيحة أو كيدية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":109,"topicId":10,"text":"تقارير الأمن العام اليومية تعبر بدقة تامة عن الإجرام الحقيقي في المجتمع.؟","options":["صح","خطأ"],"correctAnswerIndex":1,"rationale":"تقارير الأمن العام تعبر عن الإجرام الظاهري فقط وقد تتضمن بلاغات كيدية","type":"regular"},{"id":110,"topicId":10,"text":"بلوغ أجهزة العدالة \"درجة التشبع\" يدفعها لحفظ بعض القضايا، مما يوسع الفجوة بين الإجرام الظاهري والرسمي.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"},{"id":111,"topicId":10,"text":"الإجرام الرسمي هو الذي تدل عليه الإحصاءات الجنائية المتمثلة في أحكام الإدانة القضائية.؟","options":["صح","خطأ"],"correctAnswerIndex":0,"rationale":"العبارة صحيحة.","type":"regular"}];
+    
+    let view = 'start';
+    let selectedTopic = null;
+    let currentIdx = 0;
+    let answers = {};
+    let answered = false;
+    let filteredQuestions = [];
+
+    const container = document.getElementById('app-container');
+
+    function render() {
+      if (view === 'start') renderStart();
+      else if (view === 'quiz') renderQuiz();
+      else if (view === 'results') renderResults();
+    }
+
+    function renderStart() {
+      let html = `
+        <section class="flex flex-col items-center justify-center min-h-[50vh] text-center w-full max-w-2xl mx-auto animate-fade-in">
+          <h1 class="text-3xl font-bold mb-2 text-[var(--madar-color)]">علم الاجرام أسئلة متعددة</h1>
+          <p class="text-[var(--text-secondary)] mb-8 font-semibold">اختر القسم الذي تود اختباره أو اختبر في جميع الأقسام</p>
+          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <button onclick="startQuiz(null)" class="bg-[var(--madar-color)] text-white hover:opacity-90 font-bold rounded-2xl p-4 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex items-center justify-center gap-3 md:col-span-2">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              اختبار شامل (جميع الأقسام)
+            </button>
+      `;
+      
+      for (const [id, title] of Object.entries(topics)) {
+        const numId = Number(id);
+        const qCount = questions.filter(q => q.topicId === numId).length;
+        const qLabel = qCount > 10 ? 'سؤال' : 'أسئلة';
+        html += `
+          <button onclick="startQuiz(${numId})" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-2xl p-4 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex flex-col items-start text-right gap-2">
+            <div class="flex justify-between w-full items-center">
+              <span class="text-[var(--madar-color)] text-sm opacity-80">القسم ${numId + 1}</span>
+              <span class="bg-[var(--pill-bg)] text-[var(--text-main)] border border-[var(--pill-border)] rounded-full px-2 py-0.5 text-xs">${qCount} ${qLabel}</span>
+            </div>
+            <span class="text-[0.95rem] leading-tight">${title}</span>
+          </button>
+        `;
+      }
+      
+      html += `</div></section>`;
+      container.innerHTML = html;
+    }
+
+    function startQuiz(topicId) {
+      selectedTopic = topicId;
+      filteredQuestions = topicId === null ? questions : questions.filter(q => q.topicId === topicId);
+      currentIdx = 0;
+      answers = {};
+      answered = false;
+      view = 'quiz';
+      render();
+    }
+
+    function answerQuestion(idx) {
+      if (!answered) {
+        answers[filteredQuestions[currentIdx].id] = idx;
+        answered = true;
+        render();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIdx < filteredQuestions.length - 1) {
+        currentIdx++;
+        answered = false;
+        render();
+      } else {
+        view = 'results';
+        render();
+      }
+    }
+
+    function renderQuiz() {
+      if (filteredQuestions.length === 0) {
+        container.innerHTML = '<div class="text-center p-10 font-bold">لا توجد أسئلة في هذا القسم.</div>';
+        return;
+      }
+      
+      const q = filteredQuestions[currentIdx];
+      const hasRealRationale = q.rationale && !["العبارة صحيحة.", "العبارة خاطئة.", "العبارة صحيحة", "العبارة خاطئة"].includes(q.rationale.trim()) && !q.rationale.trim().startsWith("الخيار الصحيح هو");
+      const isFirstSection = selectedTopic === 0 || q.topicId === 0;
+
+      let html = `
+        <div class="flex flex-col mb-8 animate-fade-in" style="animation-delay: 0.1s">
+          <div class="flex justify-between items-center mb-6 text-sm font-bold text-[var(--text-secondary)]">
+            <div class="flex items-center gap-2">
+              <span>${isFirstSection ? 'سؤال' : 'السؤال'} رقم ${currentIdx + 1} من ${filteredQuestions.length}</span>
+            </div>
+            <div class="flex gap-4 items-center">
+              <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] px-3 py-1 rounded-full text-xs shadow-sm truncate max-w-[200px]">
+                ${topics[q.topicId]}
+              </div>
+            </div>
+          </div>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] shadow-[var(--shadow-soft)] rounded-2xl p-6 mb-4 relative z-10">
+            <h3 class="text-xl font-bold leading-relaxed mb-6">${q.text}</h3>
+            <div class="flex flex-col gap-3">
+      `;
+
+      q.options.forEach((opt, idx) => {
+        let btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] hover:-translate-y-0.5 shadow-sm";
+        let iconHtml = '';
+        if (answered) {
+          if (idx === q.correctAnswerIndex) {
+            btnClass = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-400";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          } else if (answers[q.id] === idx) {
+            btnClass = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+          }
+        }
+
+        html += `
+          <button onclick="answerQuestion(${idx})" class="text-[0.95rem] py-3 px-5 text-right w-full flex justify-between items-center rounded-xl transition-all font-semibold ${btnClass}">
+            <span>${opt}</span>
+            ${iconHtml}
+          </button>
+        `;
+      });
+
+      html += '</div></div>';
+
+      if (answered && hasRealRationale) {
+        html += `
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] rounded-2xl p-5 mb-6 shadow-[var(--shadow-soft)] animate-fade-in" style="animation-delay: 0.05s">
+            <div class="flex justify-start items-center gap-2 mb-2">
+              <div class="text-[var(--madar-color)]">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </div>
+              <h4 class="font-extrabold text-[var(--madar-color)]">ملاحظة:</h4>
+            </div>
+            <p class="text-[0.9rem] leading-relaxed font-semibold text-[var(--text-main)]">${q.rationale}</p>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="flex justify-between items-center">
+          <button onclick="goToStart()" class="font-bold rounded-full px-6 py-3 transition-all text-[var(--text-secondary)] hover:text-[var(--text-main)] bg-[var(--card-bg)] border border-[var(--pill-border)] shadow-sm hover:-translate-y-0.5">القائمة الرئيسية</button>
+          <button onclick="nextQuestion()" ${!answered ? 'disabled' : ''} class="font-bold rounded-full px-8 py-3 transition-all ${answered ? 'bg-[var(--madar-color)] text-white hover:opacity-90 shadow-md active:scale-95' : 'bg-[var(--pill-border)] text-[var(--text-secondary)] cursor-not-allowed opacity-50'}">
+            ${currentIdx < filteredQuestions.length - 1 ? 'السؤال التالي' : 'إنهاء الاختبار'}
+          </button>
+        </div>
+      </div>`;
+      
+      container.innerHTML = html;
+    }
+
+    function renderResults() {
+      let earnedScore = 0;
+      let totalScore = 0;
+      const categories = {};
+      
+      Object.keys(topics).forEach(tid => { categories[Number(tid)] = { correct: 0, possible: 0 }; });
+
+      filteredQuestions.forEach(q => {
+        totalScore++;
+        categories[q.topicId].possible++;
+        if (answers[q.id] === q.correctAnswerIndex) {
+          earnedScore++;
+          categories[q.topicId].correct++;
+        }
+      });
+
+      const percentage = Math.round((earnedScore / totalScore) * 100) || 0;
+
+      let html = `
+        <div class="flex flex-col items-center mb-10 animate-fade-in">
+          <h2 class="text-3xl font-black mb-6 text-[var(--madar-color)]">النتيجة النهائية</h2>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] rounded-3xl p-8 mb-8 text-center shadow-[var(--shadow-hover)] w-full max-w-sm">
+            <div class="text-[4.5rem] font-bold leading-none mb-1 text-[var(--text-main)] font-mono">${percentage}<span class="text-3xl text-[var(--text-secondary)]">%</span></div>
+            <div class="text-lg font-bold text-[var(--text-secondary)] mb-6">معدل الإنجاز</div>
+            <div class="h-px w-full bg-[var(--divider-color)] my-6"></div>
+            <div class="flex justify-center items-center gap-3 text-[1.1rem] font-bold text-[var(--text-main)]">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              الإجابات الصحيحة: <span dir="ltr" class="font-mono font-bold align-middle">${earnedScore} / ${totalScore}</span>
+            </div>
+          </div>
+          <div class="w-full max-w-md">
+            <div class="flex justify-start items-center gap-2 mb-4 font-bold text-[var(--text-secondary)] tracking-wider">
+              تفاصيل الأقسام المختبرة
+            </div>
+            <div class="flex flex-col gap-3">
+      `;
+
+      for (const [idStr, cat] of Object.entries(categories)) {
+        if (cat.possible > 0) {
+          const catPerc = Math.round((cat.correct / cat.possible) * 100) || 0;
+          const numId = Number(idStr);
+          html += `
+            <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] p-4 rounded-2xl flex justify-between items-center shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 min-w-[2.5rem] rounded-full flex justify-center items-center font-bold text-sm bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-secondary)]">
+                  ${(numId + 1).toString().padStart(2, '0')}
+                </div>
+                <div class="font-extrabold text-[0.95rem] text-[var(--text-main)] leading-tight">
+                  ${topics[numId]}
+                </div>
+              </div>
+              <div class="bg-[var(--bg-color)] border border-[var(--pill-border)] px-3 py-1.5 rounded-full font-bold text-[0.85rem] text-[var(--text-main)] font-mono">
+                ${catPerc}%
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      html += `
+            </div>
+          </div>
+          <div class="mt-10">
+            <button onclick="goToStart()" class="bg-[var(--madar-color)] hover:opacity-90 text-white font-bold rounded-full px-10 py-3 text-lg transition-all shadow-md active:scale-95">العودة للرئيسية</button>
+          </div>
+        </div>
+      `;
+      
+      container.innerHTML = html;
+
+      if (percentage >= 80) {
+        setTimeout(() => {
+          const end = Date.now() + 3000;
+          const colors = ['#2e7d32', '#2ecc71', '#f59e0b', '#fcd34d'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        }, 300);
+      }
+    }
+
+    function goToStart() {
+      view = 'start';
+      render();
+    }
+
+    // Theme logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+    
+    function updateThemeUI() {
+      if (document.documentElement.classList.contains('dark')) {
+        iconSun.classList.remove('hidden');
+        iconMoon.classList.add('hidden');
+      } else {
+        iconMoon.classList.remove('hidden');
+        iconSun.classList.add('hidden');
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeUI();
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    updateThemeUI();
+
+    // Init
+    render();
+  </script>
+  <script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  ['copy', 'cut', 'paste', 'dragstart', 'drop'].forEach(ev => document.addEventListener(ev, e => e.preventDefault()));
+  document.addEventListener('keydown', e => {
+      const k = e.key ? e.key.toLowerCase() : '';
+      if (e.key === 'F12' || (e.ctrlKey && ['u','s','c','a','p'].includes(k)) || (e.ctrlKey && e.shiftKey && ['i','c','j'].includes(k))) {
+          e.preventDefault(); return false;
+      }
+  });
+  </script>
+  <script>
+  document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll(".secured-text").forEach(e=>{try{e.textContent=decodeURIComponent(atob(e.getAttribute("data-secured")))}catch(err){}}));
+  </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>علم العقاب</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+    :root {
+      --madar-color: #16a34a;
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --pill-bg: #ffffff;
+      --pill-border: #cbd5e1;
+      --hover-bg: #f8fafc;
+      --divider-color: #e2e8f0;
+      --shadow-soft: 0 4px 12px -2px rgba(0,0,0,0.09), 0 2px 6px -2px rgba(0,0,0,0.05);
+    }
+    .dark {
+      --madar-color: #f0a500;
+      --bg-color: #111827;
+      --card-bg: #1f2937;
+      --text-main: #f9fafb;
+      --text-secondary: #9ca3af;
+      --pill-bg: #374151;
+      --pill-border: #4b5563;
+      --hover-bg: #374151;
+      --divider-color: #374151;
+    }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Cairo', "Segoe UI", system-ui, -apple-system, sans-serif; transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
+    html:not(.dark) .card-shadow { box-shadow: 0 2px 20px -4px rgba(15,23,42,0.12), 0 1px 4px -1px rgba(15,23,42,0.08); }
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="w-full max-w-3xl mx-auto px-4 py-6">
+
+  <header class="flex justify-between items-center mb-8">
+    <button id="theme-toggle" class="bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] w-10 h-10 rounded-full flex justify-center items-center shadow-sm hover:scale-110 transition-transform">
+      <svg id="icon-sun" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg id="icon-moon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </button>
+    <div class="bg-[var(--pill-bg)] border border-[var(--pill-border)] flex items-center gap-2 px-4 py-2 rounded-full shadow-sm text-xs font-black tracking-widest text-[var(--text-secondary)]" dir="ltr">
+      PLATFORM <span class="text-[var(--text-main)] mx-1">MADAR</span>
+      <div class="w-2 h-2 bg-[var(--madar-color)] rounded-full shadow-[0_0_8px_#f59e0b]"></div>
+    </div>
+  </header>
+
+  <main id="app-container" class="min-h-[70vh]"></main>
+
+  <footer class="text-center mt-10 pt-5 pb-5 text-sm text-[var(--text-secondary)] font-semibold border-t border-[var(--divider-color)]">
+    <div>أبلغنا برأيك <a href="https://t.me/GIX37" target="_blank" class="font-extrabold text-[var(--text-main)] hover:text-[var(--madar-color)]">@GIX37</a></div>
+    <div class="text-xs opacity-60 mt-1">MADAR © 2026</div>
+  </footer>
+
+  <script>
+    // ── البيانات ──────────────────────────────────────────────
+    const stages = [
+      { id: 1, label: "المرحلة الأولى",  range: "أسئلة ١ – ٢٤"  },
+      { id: 2, label: "المرحلة الثانية", range: "أسئلة ٢٥ – ٤٨" },
+      { id: 3, label: "المرحلة الثالثة", range: "أسئلة ٤٩ – ٧١" }
+    ];
+
+    const allQuestions = [
+      // ── المرحلة الأولى (1-24) ─────────────────────────────
+      { id:1,  stage:1, text:"أيٌّ مما يلي أدى إلى تطور علم العقاب؟", options:["احترام حقوق الإنسان.","اعتبار الجريمة ذنباً يوجب التوبة.","تطور علم الإجرام.","كل ما سبق."], correct:3 },
+      { id:2,  stage:1, text:"العقوبة إيلام غير مقصود يوقع على المحكوم عليه بقصد إصلاحه.؟", options:["صح","خطأ"], correct:1, rationale:"العقوبة إيلام مقصود، عكس التدبير الاحترازي الذي لا يقصد به الإيلام." },
+      { id:3,  stage:1, text:"تتعارض الآثار غير المباشرة للعقوبة التي تلحق بأقارب المجرم مع مبدأ شخصية العقوبة.؟", options:["صح","خطأ"], correct:1 },
+      { id:4,  stage:1, text:"الإعدام أحد العقوبات السالبة للحرية.؟", options:["صح","خطأ"], correct:1, rationale:"الإعدام عقوبة بدنية وليست سالبة للحرية." },
+      { id:5,  stage:1, text:"قد تكون الغرامة...", options:["محددة فقط.","نسبية فقط.","محددة أو نسبية.","لا شيء مما سبق."], correct:2 },
+      { id:6,  stage:1, text:"علم العقاب علم قاعدي أو تشريعي.؟", options:["صح","خطأ"], correct:1, rationale:"علم العقاب علم غير قاعدي." },
+      { id:7,  stage:1, text:"علم العقاب علم تشريعي.؟", options:["صح","خطأ"], correct:1, rationale:"يبحث فيما يجب أن تكون عليه القواعد وليس تطبيقها." },
+      { id:8,  stage:1, text:"يرتبط علم العقاب بغيره من العلوم التشريعية برابطة وثيقة.؟", options:["صح","خطأ"], correct:0 },
+      { id:9,  stage:1, text:"عوامل تطور علم العقاب تشمل...", options:["احترام حقوق الإنسان فقط.","تطور علم الإجرام فقط.","احترام حقوق الإنسان واعتبار الجريمة ذنباً وتطور علم الإجرام.","لا شيء مما سبق."], correct:2 },
+      { id:10, stage:1, text:"العقوبة هي الصورة الوحيدة للجزاء الجنائي.؟", options:["صح","خطأ"], correct:1, rationale:"الجزاء الجنائي يشمل العقوبة والتدبير الاحترازي." },
+      { id:11, stage:1, text:"العقوبة هي الصورة الأهم للجزاء الجنائي.؟", options:["صح","خطأ"], correct:0 },
+      { id:12, stage:1, text:"يشكل المفهوم القانوني للعقوبة جوهرها.؟", options:["صح","خطأ"], correct:1, rationale:"المفهوم الاجتماعي هو الذي يشكل جوهر العقوبة." },
+      { id:13, stage:1, text:"توقع العقوبة بـ...", options:["قرار إداري.","مجلس عرفي.","حكم قضائي.","كل ما سبق."], correct:2 },
+      { id:14, stage:1, text:"توقع العقوبة على الورثة حال وفاة المحكوم عليه.؟", options:["صح","خطأ"], correct:1, rationale:"تطبيقاً لمبدأ شخصية العقوبة لا تنتقل إلى الورثة." },
+      { id:15, stage:1, text:"المساواة الفعلية بين المجرمين من عمل...", options:["المشرع.","القاضي.","السلطة التنفيذية.","كل ما سبق."], correct:1 },
+      { id:16, stage:1, text:"علم العقاب هو العلم الذي يبحث الظاهرة الإجرامية لتحديد أسبابها وعوامل ارتكابها.؟", options:["صح","خطأ"], correct:1, rationale:"هذا تعريف علم الإجرام وليس علم العقاب." },
+      { id:17, stage:1, text:"النظم التي تدور حولها أبحاث علم العقاب ذات طابع اجتماعي وقانوني في آنٍ واحد.؟", options:["صح","خطأ"], correct:0 },
+      { id:18, stage:1, text:"لا ترتبط دراسة علم العقاب بدولة معينة ولا بقواعد جنائية محددة.؟", options:["صح","خطأ"], correct:0 },
+      { id:19, stage:1, text:"تنصرف أبحاث علم العقاب إلى الإجراءات التي يمكن اتخاذها بعد وقوع الجريمة.؟", options:["صح","خطأ"], correct:0 },
+      { id:20, stage:1, text:"لا يعتبر علم العقاب جزءاً من السياسة الجنائية فيما يتعلق بتنفيذ الجزاء الجنائي وبيان نوع المؤسسات العقابية.؟", options:["صح","خطأ"], correct:1 },
+      { id:21, stage:1, text:"يجب أن يتضمن الحكم القضائي الصادر بالإدانة بيان نوع الجزاء المحكوم به ومقداره فقط.؟", options:["صح","خطأ"], correct:1 },
+      { id:22, stage:1, text:"الحكم الذي تقرره قواعد الإجراءات الجنائية يشكل الإطار الذي تعمل فيه قواعد التنفيذ العقابي.؟", options:["صح","خطأ"], correct:0 },
+      { id:23, stage:1, text:"تقتصر عوامل تطور علم العقاب على احترام حقوق الإنسان وتطور علم الإجرام فقط.؟", options:["صح","خطأ"], correct:1 },
+      { id:24, stage:1, text:"الألم المعتبر جوهراً للعقوبة هو ذلك الألم الناتج عن التعذيب والامتهان والاحتقار.؟", options:["صح","خطأ"], correct:1 },
+
+      // ── المرحلة الثانية (25-48) ───────────────────────────
+      { id:25, stage:2, text:"يكون إيلام العقوبة معنوياً في حالة العقوبات المقيدة والسالبة للحرية كالسجن والحبس.؟", options:["صح","خطأ"], correct:0 },
+      { id:26, stage:2, text:"يكون إيلام العقوبة مادياً كما هو الحال بالنسبة للغرامة التي تنتقص من الذمة المالية للجاني.؟", options:["صح","خطأ"], correct:0 },
+      { id:27, stage:2, text:"لا يُعطى المشرع للقاضي سلطة تقديرية في بحث ظروف كل جريمة وملابساتها وظروف الجاني الشخصية.؟", options:["صح","خطأ"], correct:1 },
+      { id:28, stage:2, text:"تتميز العقوبة عن غيرها من إجراءات القهر والإجبار في الإيلام المقصود.؟", options:["صح","خطأ"], correct:0 },
+      { id:29, stage:2, text:"السند الوحيد الذي يعتد به الدستور لتنفيذ العقوبة هو الحكم القضائي.؟", options:["صح","خطأ"], correct:0 },
+      { id:30, stage:2, text:"يحقق مبدأ الشرعية الردع المطلوب من العقوبة من خلال توافر النص السابق الذي يحدد الأفعال المعاقب عليها.؟", options:["صح","خطأ"], correct:0 },
+      { id:31, stage:2, text:"من صور تفريد العقوبة...", options:["التفريد التشريعي فقط.","التفريد القضائي فقط.","التفريد الإداري فقط.","التفريد التشريعي والقضائي والإداري."], correct:3 },
+      { id:32, stage:2, text:"من صور التفريد القضائي...", options:["العود فقط.","عذر الاستفزاز فقط.","العود وعذر الاستفزاز.","لا شيء مما سبق."], correct:2 },
+      { id:33, stage:2, text:"العود أحد أسباب تخفيف العقوبة.؟", options:["صح","خطأ"], correct:1, rationale:"العود سبب لتشديد العقوبة وليس تخفيفها." },
+      { id:34, stage:2, text:"الإفراج الشرطي أحد صور التفريد التشريعي للعقوبة تقوم به الإدارة العقابية.؟", options:["صح","خطأ"], correct:1, rationale:"الإفراج الشرطي من صور التفريد الإداري." },
+      { id:35, stage:2, text:"التفريد القضائي هو الذي يقوم به المشرع في حدود سلطته التقديرية.؟", options:["صح","خطأ"], correct:1, rationale:"التفريد القضائي يقوم به القاضي وليس المشرع." },
+      { id:36, stage:2, text:"التفريد الإداري هو الذي تقوم به الإدارة العقابية دون أن ترجع إلى السلطة القضائية.؟", options:["صح","خطأ"], correct:0 },
+      { id:37, stage:2, text:"تستند الوظيفة النفعية للعقوبة على أساس ديني وقانوني.؟", options:["صح","خطأ"], correct:1, rationale:"الوظيفة الأخلاقية هي ما تستند على الأساس الديني والقانوني." },
+      { id:38, stage:2, text:"الردع الخاص له طابع فردي يقصد به إنذار الجاني والناس كافة عن طريق التهديد بالعقاب.؟", options:["صح","خطأ"], correct:1, rationale:"الردع الخاص موجَّه للجاني فقط بهدف مواجهة خطورته الإجرامية." },
+      { id:39, stage:2, text:"الردع العام له طابع جماعي يهدف إلى مواجهة الخطورة الإجرامية لدى المجرم.؟", options:["صح","خطأ"], correct:1, rationale:"الردع العام إنذار موجَّه للناس كافة وليس للمجرم فقط." },
+      { id:40, stage:2, text:"سبل تحقيق الردع الخاص هي...", options:["الإنذار فقط.","الإصلاح فقط.","الاستبعاد فقط.","الإنذار والإصلاح والاستبعاد."], correct:3 },
+      { id:41, stage:2, text:"السجن عقوبة...", options:["أصلية.","تكميلية.","تبعية.","كل ما سبق."], correct:0 },
+      { id:42, stage:2, text:"الغرامة في الجنح والمخالفات عقوبة...", options:["أصلية.","تبعية.","تكميلية.","كل ما سبق."], correct:0 },
+      { id:43, stage:2, text:"الغرامة في الجنايات عقوبة...", options:["أصلية.","تبعية.","تكميلية.","كل ما سبق."], correct:2 },
+      { id:44, stage:2, text:"الوضع تحت مراقبة الشرطة عقوبة...", options:["سالبة للحرية.","مقيدة للحرية.","سالبة للحقوق.","كل ما سبق."], correct:1 },
+      { id:45, stage:2, text:"الحرمان من التمتع برتبة أو نيشان عقوبةٌ تبعية في الجنح والمخالفات.؟", options:["صح","خطأ"], correct:1, rationale:"هي عقوبة تبعية في الجنايات وليس الجنح والمخالفات." },
+      { id:46, stage:2, text:"الغرامة والمصادرة عقوبات أصلية سالبة للحقوق.؟", options:["صح","خطأ"], correct:1, rationale:"الغرامة والمصادرة عقوبات مالية وليست سالبة للحقوق." },
+      { id:47, stage:2, text:"العقوبات التبعية عقوبات يجب أن ينطق بها القاضي.؟", options:["صح","خطأ"], correct:1, rationale:"العقوبات التبعية تترتب بقوة القانون دون حاجة للنطق بها." },
+      { id:48, stage:2, text:"حكم الإعدام تصدره محكمة الجنايات بأغلبية الآراء.؟", options:["صح","خطأ"], correct:1, rationale:"حكم الإعدام يصدر بإجماع الآراء وليس بالأغلبية." },
+
+      // ── المرحلة الثالثة (49-71) ───────────────────────────
+      { id:49, stage:3, text:"يجب في عقوبة الإعدام أخذ رأي مفتي الجمهورية.؟", options:["صح","خطأ"], correct:0 },
+      { id:50, stage:3, text:"يوقف تنفيذ عقوبة الإعدام على المرأة الحامل إلى ما بعد سنتين من وضع الحمل.؟", options:["صح","خطأ"], correct:1, rationale:"يوقف التنفيذ إلى ما بعد شهرين من وضع الحمل لا سنتين." },
+      { id:51, stage:3, text:"السجن عقوبة تبعية لا يجوز أن تنقص مدته عن ثلاث سنوات ولا تزيد على خمس عشرة سنة.؟", options:["صح","خطأ"], correct:1, rationale:"السجن عقوبة أصلية وليست تبعية." },
+      { id:52, stage:3, text:"الحبس عقوبة أصلية مقررة للجنح والمخالفات.؟", options:["صح","خطأ"], correct:1, rationale:"الحبس عقوبة أصلية في الجنح فقط؛ عقوبة المخالفات هي الغرامة (أقل من 100 جنيه)." },
+      { id:53, stage:3, text:"الغرامة إلزام المحكوم عليه أن يدفع إلى المجني عليه المبلغ المقدر في الحكم.؟", options:["صح","خطأ"], correct:1, rationale:"الغرامة تُدفع لخزانة الدولة لا للمجني عليه، عكس التعويض المدني." },
+      { id:54, stage:3, text:"أنواع الغرامة...", options:["محددة فقط.","نسبية فقط.","محددة ونسبية.","لا شيء مما سبق."], correct:2 },
+      { id:55, stage:3, text:"الغرامة النسبية لها حد أدنى وحد أقصى.؟", options:["صح","خطأ"], correct:1, rationale:"الغرامة النسبية لها حد أدنى فقط وليس لها حد أقصى." },
+      { id:56, stage:3, text:"يجوز تنفيذ عقوبة الإعدام في أيام الأعياد الرسمية أو الأعياد الخاصة بديانة المحكوم عليه.؟", options:["صح","خطأ"], correct:1 },
+      { id:57, stage:3, text:"تنفذ عقوبة الإعدام داخل السجن أو في مكان عام.؟", options:["صح","خطأ"], correct:1, rationale:"لا يجوز تنفيذ عقوبة الإعدام في مكان عام." },
+      { id:58, stage:3, text:"يُطلق على علم العقاب مصطلح 'الجزاء الجنائي' لاستيعابه كافة طرق المعاملة العقابية بمختلف صورها.؟", options:["صح","خطأ"], correct:0 },
+      { id:59, stage:3, text:"استحدث علم العقاب أساليب معاملة عقابية لا تُطبَّق بالضرورة داخل السجون.؟", options:["صح","خطأ"], correct:0 },
+      { id:60, stage:3, text:"يتحدد نطاق علم العقاب بموضوعين أساسيين هما: صور العقاب، والرعاية اللاحقة للمحكوم عليه.؟", options:["صح","خطأ"], correct:0 },
+      { id:61, stage:3, text:"تعتبر العقوبة جزاءً فعالاً في مواجهة المجرمين الذين يحتاجون إلى إيلام أو قسوة.؟", options:["صح","خطأ"], correct:0 },
+      { id:62, stage:3, text:"تعتبر التدابير الاحترازية أفضل جزاء عندما يكون المجرم في حاجة إلى إصلاح وعلاج وتهذيب.؟", options:["صح","خطأ"], correct:0 },
+      { id:63, stage:3, text:"يولي علم العقاب العقوبات السالبة للحرية أهمية خاصة عند تنفيذها لِما لها من آثار سلبية على نفسية المحكوم عليه.؟", options:["صح","خطأ"], correct:0 },
+      { id:64, stage:3, text:"ظهرت أساليب الإفراج الشرطي ووقف التنفيذ والاختبار القضائي كنتائج لتطور أهداف العقوبة.؟", options:["صح","خطأ"], correct:0 },
+      { id:65, stage:3, text:"تمد أبحاث علم العقاب المشرعَ بأفكار جديدة يعتمد عليها في تحسين وتطوير سُبل الكفاح ضد الجريمة.؟", options:["صح","خطأ"], correct:0 },
+      { id:66, stage:3, text:"علم العقاب علم غير قاعدي يدرس ظاهرة رد الفعل الاجتماعي للجريمة دراسةً علمية تقوم على الملاحظة والتجربة.؟", options:["صح","خطأ"], correct:0 },
+      { id:67, stage:3, text:"تعتبر الظاهرة الإجرامية موضوعاً لبحث علم العقاب وعلم الإجرام معاً.؟", options:["صح","خطأ"], correct:0 },
+      { id:68, stage:3, text:"يُقصد بالعقوبة من الواجهة القانونية: إيلام مقصود من أجل الجريمة ويتناسب معها.؟", options:["صح","خطأ"], correct:1, rationale:"هذا تعريف الواجهة الاجتماعية وليس القانونية." },
+      { id:69, stage:3, text:"يُقصد بالعقوبة من الواجهة الاجتماعية: جزاء يحدده القانون ويوقعه القاضي على الجناة.؟", options:["صح","خطأ"], correct:1, rationale:"هذا تعريف الواجهة القانونية وليس الاجتماعية." },
+      { id:70, stage:3, text:"مفهوم العقوبة من الواجهة الاجتماعية يُعبِّر عن خصائصها.؟", options:["صح","خطأ"], correct:1, rationale:"المفهوم الاجتماعي يُعبِّر عن جوهر العقوبة لا خصائصها." },
+      { id:71, stage:3, text:"التعريف القانوني للعقوبة يُعبِّر عن جوهرها.؟", options:["صح","خطأ"], correct:1, rationale:"التعريف القانوني يُعبِّر عن خصائص العقوبة لا جوهرها." }
+    ];
+
+    // ── الحالة ───────────────────────────────────────────────
+    let view = 'start';       // start | quiz | results
+    let currentStage = null;  // 1 | 2 | 3
+    let filteredQuestions = [];
+    let currentIdx = 0;
+    let answers = {};
+
+    const container = document.getElementById('app-container');
+
+    // ── مساعدات ──────────────────────────────────────────────
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function render() {
+      if (view === 'start')   renderStart();
+      else if (view === 'quiz')    renderQuiz();
+      else if (view === 'results') renderResults();
+    }
+
+    // ── شاشة البداية ─────────────────────────────────────────
+    function renderStart() {
+      let html = `
+        <section class="flex flex-col items-center justify-center min-h-[50vh] text-center w-full max-w-2xl mx-auto animate-fade-in">
+          <h1 class="text-3xl font-bold mb-2 text-[var(--madar-color)]">علم العقاب</h1>
+          <p class="text-[var(--text-secondary)] mb-8 font-semibold">اختر المرحلة التي تود اختبارها</p>
+          <div class="w-full flex flex-col gap-4 mb-8">
+      `;
+
+      stages.forEach(s => {
+        const count = allQuestions.filter(q => q.stage === s.id).length;
+        html += `
+          <button onclick="startQuiz(${s.id})" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-2xl p-5 transition-transform hover:-translate-y-1 shadow-[var(--shadow-soft)] flex justify-between items-center">
+            <div class="flex flex-col items-start gap-1">
+              <span class="text-[var(--madar-color)] text-sm">${s.range}</span>
+              <span class="text-lg">${s.label}</span>
+            </div>
+            <span class="bg-[var(--pill-bg)] border border-[var(--pill-border)] rounded-full px-3 py-1 text-sm font-bold">${count} سؤال</span>
+          </button>
+        `;
+      });
+
+      html += `</div></section>`;
+      container.innerHTML = html;
+    }
+
+    // ── بدء الاختبار ─────────────────────────────────────────
+    function startQuiz(stageId) {
+      currentStage = stageId;
+      filteredQuestions = shuffle(allQuestions.filter(q => q.stage === stageId));
+      currentIdx = 0;
+      answers = {};
+      view = 'quiz';
+      render();
+    }
+
+    // ── الإجابة ───────────────────────────────────────────────
+    function answerQuestion(idx) {
+      const q = filteredQuestions[currentIdx];
+      if (!answers.hasOwnProperty(q.id)) {
+        answers[q.id] = idx;
+        render();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIdx < filteredQuestions.length - 1) {
+        currentIdx++;
+        render();
+      } else {
+        view = 'results';
+        render();
+      }
+    }
+
+    function goToStart() {
+      view = 'start';
+      render();
+    }
+
+    // ── عرض السؤال ───────────────────────────────────────────
+    function renderQuiz() {
+      if (filteredQuestions.length === 0) {
+        container.innerHTML = '<div class="text-center p-10 font-bold">لا توجد أسئلة.</div>';
+        return;
+      }
+
+      const q = filteredQuestions[currentIdx];
+      const isAnswered = answers.hasOwnProperty(q.id);
+      const stageLabel = stages.find(s => s.id === currentStage)?.label || '';
+
+      let html = `
+        <div class="flex flex-col mb-8 animate-fade-in" style="animation-delay: 0.1s">
+          <div class="flex justify-between items-center mb-6 text-sm font-bold text-[var(--text-secondary)]">
+            <span>السؤال رقم ${currentIdx + 1} من ${filteredQuestions.length}</span>
+            <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] px-3 py-1 rounded-full text-xs shadow-sm">
+              علم العقاب
+            </div>
+          </div>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] shadow-[var(--shadow-soft)] rounded-2xl p-6 mb-4">
+            <h3 class="text-xl font-bold leading-relaxed mb-6">${q.text}</h3>
+            <div class="flex flex-col gap-3">
+      `;
+
+      q.options.forEach((opt, idx) => {
+        let btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] hover:-translate-y-0.5 shadow-sm";
+        let iconHtml = '';
+        const disabledAttr = isAnswered ? 'disabled' : '';
+        if (isAnswered) {
+          if (idx === q.correct) {
+            btnClass = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          } else if (answers[q.id] === idx) {
+            btnClass = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400 cursor-default";
+            iconHtml = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+          } else {
+            btnClass = "bg-[var(--pill-bg)] border border-[var(--pill-border)] text-[var(--text-secondary)] opacity-40 cursor-default";
+          }
+        }
+        html += `
+          <button onclick="answerQuestion(${idx})" ${disabledAttr} class="text-[0.95rem] py-3 px-5 text-right w-full flex justify-between items-center rounded-xl transition-all font-semibold ${btnClass}">
+            <span>${opt}</span>${iconHtml}
+          </button>
+        `;
+      });
+
+      html += `</div></div>`;
+
+      html += `
+        <div class="flex justify-between items-center">
+          <button onclick="goToStart()" class="font-bold rounded-full px-6 py-3 transition-all bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] shadow-sm hover:-translate-y-0.5">
+            القائمة الرئيسية
+          </button>
+          <button onclick="nextQuestion()" ${!isAnswered ? 'disabled' : ''} class="font-bold rounded-full px-8 py-3 transition-all ${isAnswered ? 'bg-[var(--madar-color)] text-white hover:opacity-90 shadow-md active:scale-95' : 'bg-[var(--pill-border)] text-[var(--text-secondary)] cursor-not-allowed opacity-50'}">
+            ${currentIdx < filteredQuestions.length - 1 ? 'السؤال التالي' : 'إنهاء الاختبار'}
+          </button>
+        </div>
+      </div>`;
+
+      container.innerHTML = html;
+    }
+
+    // ── النتائج ───────────────────────────────────────────────
+    function renderResults() {
+      let earned = 0;
+      const total = filteredQuestions.length;
+      filteredQuestions.forEach(q => { if (answers[q.id] === q.correct) earned++; });
+      const pct = Math.round((earned / total) * 100) || 0;
+      const stageLabel = stages.find(s => s.id === currentStage)?.label || '';
+
+      container.innerHTML = `
+        <div class="flex flex-col items-center mb-10 animate-fade-in">
+          <h2 class="text-3xl font-black mb-2 text-[var(--madar-color)]">النتيجة النهائية</h2>
+          <p class="text-[var(--text-secondary)] font-bold mb-6">${stageLabel}</p>
+          <div class="bg-[var(--card-bg)] border border-[var(--pill-border)] rounded-3xl p-8 mb-8 text-center shadow-[var(--shadow-soft)] w-full max-w-sm">
+            <div class="text-[4.5rem] font-bold leading-none mb-1 text-[var(--text-main)] font-mono">${pct}<span class="text-3xl text-[var(--text-secondary)]">%</span></div>
+            <div class="text-lg font-bold text-[var(--text-secondary)] mb-6">معدل الإنجاز</div>
+            <div class="h-px w-full bg-[var(--divider-color)] my-6"></div>
+            <div class="flex justify-center items-center gap-3 text-[1.1rem] font-bold text-[var(--text-main)]">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              الإجابات الصحيحة: <span dir="ltr" class="font-mono font-bold">${earned} / ${total}</span>
+            </div>
+          </div>
+          <div class="flex gap-3 flex-wrap justify-center">
+            <button onclick="startQuiz(${currentStage})" class="bg-[var(--madar-color)] hover:opacity-90 text-white font-bold rounded-full px-8 py-3 text-lg transition-all shadow-md active:scale-95">إعادة المرحلة</button>
+            <button onclick="goToStart()" class="bg-[var(--card-bg)] border border-[var(--pill-border)] text-[var(--text-main)] hover:bg-[var(--hover-bg)] font-bold rounded-full px-8 py-3 text-lg transition-all shadow-sm">مرحلة أخرى</button>
+          </div>
+        </div>
+      `;
+
+      if (pct >= 80) {
+        setTimeout(() => {
+          const end = Date.now() + 3000;
+          const colors = ['#2e7d32','#2ecc71','#f59e0b','#fcd34d'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        }, 300);
+      }
+    }
+
+    // ── الثيم ─────────────────────────────────────────────────
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun  = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function updateThemeUI() {
+      const dark = document.documentElement.classList.contains('dark');
+      iconSun.classList.toggle('hidden', !dark);
+      iconMoon.classList.toggle('hidden', dark);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeUI();
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    updateThemeUI();
+
+    render();
+  </script>
+</body>
+</html>
